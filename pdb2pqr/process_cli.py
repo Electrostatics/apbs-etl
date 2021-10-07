@@ -37,24 +37,24 @@ def get_cli_args() -> Namespace:
         type=str.lower,
         help="The forcefield to use.",
     )
-    # required_options.add_argument(
-    #     "--userff",
-    #     # type=str.lower,
-    #     help=(
-    #         "The user-created forcefield file to use. Requires "
-    #         "--usernames and overrides --ff"
-    #     ),
-    # )
-    # required_options.add_argument(
-    #     "--clean",
-    #     action="store_true",
-    #     default=False,
-    #     help=(
-    #         "Do no optimization, atom addition, or parameter assignment, "
-    #         "just return the original PDB file in aligned format. Overrides "
-    #         "--ff and --userff"
-    #     ),
-    # )
+    required_options.add_argument(
+        "--userff",
+        # type=str.lower,
+        help=(
+            "The user-created forcefield file to use. Requires "
+            "--usernames and overrides --ff"
+        ),
+    )
+    required_options.add_argument(
+        "--clean",
+        action="store_true",
+        default=False,
+        help=(
+            "Do no optimization, atom addition, or parameter assignment, "
+            "just return the original PDB file in aligned format. Overrides "
+            "--ff and --userff"
+        ),
+    )
 
     # Define PROPKA arguments
 
