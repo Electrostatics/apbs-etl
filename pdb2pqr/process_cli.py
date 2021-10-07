@@ -1,8 +1,9 @@
 """This file deals with parsing command line arguments and validating them."""
 
+import sys
+import propka.lib
 from argparse import ArgumentDefaultsHelpFormatter, ArgumentParser, Namespace
 from .config import VERSION, ForceFields
-import sys
 
 
 def get_cli_args() -> Namespace:
@@ -19,13 +20,8 @@ def get_cli_args() -> Namespace:
         "input_path",
         help="Input PDB path or ID (to be retrieved from RCSB database",
     )
-    parser.add_argument(
-        "--log-level",
-        help="Logging level",
-        default="INFO",
-        choices=["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"],
-    )
 
+    # TODO: Should we bail if multiple options present, instead of override?
     required_options = parser.add_argument_group(
         title="Mandatory options",
         description="One of the following options must be used",
@@ -167,9 +163,42 @@ def get_cli_args() -> Namespace:
         ),
     )
 
-    # Define PROPKA arguments
-
+    # Define titration state arguments
+    titration_options = parser.add_argument_group(
+        title="pKa options", description="Options for titration calculations"
+    )
+    titration_options.add_argument(
+        "--titration-state-method",
+        dest="pka_method",
+        choices=(["propka"]),
+        help=(
+            "Method used to calculate titration states. If a titration state "
+            "method is selected, titratable residue charge states will be set "
+            "by the pH value supplied by --with_ph"
+        ),
+    )
+    titration_options.add_argument(
+        "--with-ph",
+        dest="ph",
+        type=float,
+        action="store",
+        default=7.0,
+        help=(
+            "pH values to use when applying the results of the selected pH "
+            "calculation method."
+        ),
+    )
+    
+    # Import PROPKA arguments into parser
+    parser = propka.lib.build_parser(parser)
+    
     # Override version flag set by PROPKA
+    parser.add_argument(
+        "--log-level",
+        help="Logging level",
+        default="INFO",
+        choices=["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"],
+    )
     parser.add_argument(
         "--version", action="version", version=f"%(prog)s {VERSION}"
     )
@@ -229,5 +258,5 @@ def process_cli() -> Namespace:
     """TODO: Add docs"""
     args: Namespace = get_cli_args()
     validate(args)
-    print(args.ff)
+    # print(args.ff)
     return args
