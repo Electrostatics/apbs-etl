@@ -88,10 +88,10 @@ def transform_arguments(args: Namespace):
         # TODO: This should check to debump or opt then Warn user and override
         args.debump = False
         args.opt = False
-    if args.userff is not None:
-        args.userff = args.userff.lower()
-    elif args.ff is not None:
-        args.ff = args.ff.lower()
+    # if args.userff is not None:
+    #     args.userff = args.userff.lower()
+    # elif args.ff is not None:
+    #     args.ff = args.ff.lower()
     if args.ffout is not None:
         args.ffout = args.ffout.lower()
     return args
