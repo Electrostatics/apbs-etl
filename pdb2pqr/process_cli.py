@@ -39,7 +39,6 @@ def get_cli_args() -> Namespace:
     )
     required_options.add_argument(
         "--userff",
-        # type=str.lower,
         help=(
             "The user-created forcefield file to use. Requires "
             "--usernames and overrides --ff"
@@ -53,6 +52,118 @@ def get_cli_args() -> Namespace:
             "Do no optimization, atom addition, or parameter assignment, "
             "just return the original PDB file in aligned format. Overrides "
             "--ff and --userff"
+        ),
+    )
+
+    # General optional arguments
+    general_options = parser.add_argument_group(title="General options")
+    general_options.add_argument(
+        "--nodebump",
+        dest="debump",
+        action="store_false",
+        default=True,
+        help="Do not perform the debumping operation",
+    )
+    general_options.add_argument(
+        "--noopt",
+        dest="opt",
+        action="store_false",
+        default=True,
+        help="Do not perform hydrogen optimization",
+    )
+    general_options.add_argument(
+        "--keep-chain",
+        action="store_true",
+        default=False,
+        help="Keep the chain ID in the output PQR file",
+    )
+    general_options.add_argument(
+        "--assign-only",
+        action="store_true",
+        default=False,
+        help=(
+            "Only assign charges and radii - do not add atoms, "
+            "debump, or optimize."
+        ),
+    )
+    general_options.add_argument(
+        "--ffout",
+        choices=ForceFields.values(),
+        default=ForceFields.PARSE.value,
+        type=str.lower,
+        help=(
+            "Instead of using the standard canonical naming scheme for "
+            "residue and atom names, use the names from the given forcefield"
+        ),
+    )
+    general_options.add_argument(
+        "--usernames",
+        help=(
+            "The user-created names file to use. Required if using --userff"
+        ),
+    )
+    general_options.add_argument(
+        "--apbs-input",
+        help=(
+            "Create a template APBS input file based on the generated PQR "
+            "file at the specified location."
+        ),
+    )
+    general_options.add_argument(
+        "--pdb-output",
+        default=None,
+        help=(
+            "Create a PDB file based on input. This will be missing charges "
+            "and radii"
+        ),
+    )
+    general_options.add_argument(
+        "--ligand",
+        help=(
+            "Calculate the parameters for the specified MOL2-format ligand at "
+            "the path specified by this option."
+        ),
+    )
+    general_options.add_argument(
+        "--whitespace",
+        action="store_true",
+        default=False,
+        help=(
+            "Insert whitespaces between atom name and residue name, between x "
+            "and y, and between y and z."
+        ),
+    )
+    general_options.add_argument(
+        "--neutraln",
+        action="store_true",
+        default=False,
+        help=(
+            "Make the N-terminus of a protein neutral (default is "
+            "charged). Requires PARSE force field."
+        ),
+    )
+    general_options.add_argument(
+        "--neutralc",
+        action="store_true",
+        default=False,
+        help=(
+            "Make the C-terminus of a protein neutral (default is "
+            "charged). Requires PARSE force field."
+        ),
+    )
+    general_options.add_argument(
+        "--drop-water",
+        action="store_true",
+        default=False,
+        help="Drop waters before processing biomolecule.",
+    )
+    general_options.add_argument(
+        "--include-header",
+        action="store_true",
+        default=False,
+        help=(
+            "Include pdb header in pqr file. WARNING: The resulting PQR file "
+            "will not work with APBS versions prior to 1.5"
         ),
     )
 
