@@ -1,9 +1,9 @@
 """This file deals with parsing command line arguments and validating them."""
 
 import sys
-import propka.lib
 from argparse import ArgumentDefaultsHelpFormatter, ArgumentParser, Namespace
-from .config import VERSION, ForceFields
+import propka.lib
+from .config import VERSION, ForceFields, LogLevels, TitrationMethods
 
 
 def get_cli_args() -> Namespace:
@@ -29,7 +29,7 @@ def get_cli_args() -> Namespace:
     required_options.add_argument(
         "--ff",
         choices=ForceFields.values(),
-        default=ForceFields.PARSE.value,
+        default=ForceFields.PARSE,
         type=str.lower,
         help="The forcefield to use.",
     )
@@ -85,7 +85,7 @@ def get_cli_args() -> Namespace:
     general_options.add_argument(
         "--ffout",
         choices=ForceFields.values(),
-        default=ForceFields.PARSE.value,
+        default=ForceFields.PARSE,
         type=str.lower,
         help=(
             "Instead of using the standard canonical naming scheme for "
@@ -170,7 +170,9 @@ def get_cli_args() -> Namespace:
     titration_options.add_argument(
         "--titration-state-method",
         dest="pka_method",
-        choices=(["propka"]),
+        choices=TitrationMethods.values(),
+        default=TitrationMethods.PROPKA,
+        type=str.lower,
         help=(
             "Method used to calculate titration states. If a titration state "
             "method is selected, titratable residue charge states will be set "
@@ -188,17 +190,19 @@ def get_cli_args() -> Namespace:
             "calculation method."
         ),
     )
-    
+
     # Import PROPKA arguments into parser
     parser = propka.lib.build_parser(parser)
-    
-    # Override version flag set by PROPKA
+
+    # Fix log flag placement
     parser.add_argument(
         "--log-level",
         help="Logging level",
-        default="INFO",
-        choices=["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"],
+        default=LogLevels.INFO,
+        choices=LogLevels.values(),
     )
+
+    # Override version flag set by PROPKA
     parser.add_argument(
         "--version", action="version", version=f"%(prog)s {VERSION}"
     )
@@ -208,8 +212,8 @@ def get_cli_args() -> Namespace:
         # TODO: Can we get parse_args to return something other than Namespace?
         args = parser.parse_args()
     except Exception as err:
-        # TODO: Added LOGGER code
-        print("ERROR in cli parsing")
+        # TODO: Add LOGGER code
+        print(f"ERROR in cli parsing: {err}")
         sys.exit(1)
     return args
 
@@ -228,12 +232,6 @@ def transform_arguments(args: Namespace):
         # TODO: This should check to debump or opt then Warn user and override
         args.debump = False
         args.opt = False
-    # if args.userff is not None:
-    #     args.userff = args.userff.lower()
-    # elif args.ff is not None:
-    #     args.ff = args.ff.lower()
-    if args.ffout is not None:
-        args.ffout = args.ffout.lower()
     return args
 
 
@@ -258,5 +256,4 @@ def process_cli() -> Namespace:
     """TODO: Add docs"""
     args: Namespace = get_cli_args()
     validate(args)
-    # print(args.ff)
     return args

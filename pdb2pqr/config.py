@@ -7,8 +7,19 @@ VERSION = __version__
 
 class BaseEnum(Enum):
     @classmethod
-    def values(self) -> list:
-        return [member.value for member in self]
+    def values(cls) -> list:
+        return [member.value for member in cls]
+
+    def __str__(self):
+        return str(self.value)
+
+
+class LogLevels(BaseEnum):
+    DEBUG = "DEBUG"
+    INFO = "INFO"
+    WARNING = "WARNING"
+    ERROR = "ERROR"
+    CRITICAL = "CRITICAL"
 
 
 class ForceFields(BaseEnum):
@@ -18,3 +29,7 @@ class ForceFields(BaseEnum):
     TYL06 = "tyl06"
     PEOEPB = "peoepb"
     SWANSON = "swanson"
+
+
+class TitrationMethods(BaseEnum):
+    PROPKA = "propka"
