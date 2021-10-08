@@ -216,7 +216,7 @@ def get_cli_args() -> Namespace:
         # TODO: Can we get parse_args to return something other than Namespace?
         args = parser.parse_args()
     except Exception as err:
-        _LOGGER.error(f"ERROR in cli parsing: {err}")
+        _LOGGER.error("ERROR in cli parsing: %s", err)
         sys.exit(1)
     return args
 

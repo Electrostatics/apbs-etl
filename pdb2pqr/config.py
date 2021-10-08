@@ -1,3 +1,4 @@
+"""Configuration information for PDB2PQR."""
 from enum import Enum
 from ._version import __version__
 
@@ -6,6 +7,7 @@ VERSION = __version__
 
 
 class BaseEnum(Enum):
+    """Base class for enumerables, defining common methods."""
     @classmethod
     def values(cls) -> list:
         return [member.value for member in cls]
@@ -15,6 +17,7 @@ class BaseEnum(Enum):
 
 
 class LogLevels(BaseEnum):
+    """Enumerate log levels for argument parser."""
     DEBUG = "DEBUG"
     INFO = "INFO"
     WARNING = "WARNING"
@@ -23,6 +26,7 @@ class LogLevels(BaseEnum):
 
 
 class ForceFields(BaseEnum):
+    """Enumerate built-in forcefield types."""
     AMBER = "amber"
     CHARMM = "charmm"
     PARSE = "parse"
@@ -32,4 +36,5 @@ class ForceFields(BaseEnum):
 
 
 class TitrationMethods(BaseEnum):
+    """Enumerate log levels for argument parser."""
     PROPKA = "propka"
