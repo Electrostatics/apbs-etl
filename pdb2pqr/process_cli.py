@@ -1,9 +1,13 @@
 """This file deals with parsing command line arguments and validating them."""
 
 import sys
+from pathlib import Path
+from logging import getLogger
 from argparse import ArgumentDefaultsHelpFormatter, ArgumentParser, Namespace
 import propka.lib
 from .config import VERSION, ForceFields, LogLevels, TitrationMethods
+
+_LOGGER = getLogger(f"PDB2PQR {VERSION}")
 
 
 def get_cli_args() -> Namespace:
@@ -212,8 +216,7 @@ def get_cli_args() -> Namespace:
         # TODO: Can we get parse_args to return something other than Namespace?
         args = parser.parse_args()
     except Exception as err:
-        # TODO: Add LOGGER code
-        print(f"ERROR in cli parsing: {err}")
+        _LOGGER.error(f"ERROR in cli parsing: {err}")
         sys.exit(1)
     return args
 
@@ -236,17 +239,63 @@ def transform_arguments(args: Namespace):
 
 
 def check_files(args: Namespace):
-    """TODO: Add docs"""
-    pass
+    """Check for other necessary files.
+
+    :param args:  command-line arguments
+    :type args:  argparse.Namespace
+    :raises FileNotFoundError:  necessary files not found
+    :raises RuntimeError:  input argument or file parsing problems
+    """
+    if args.usernames is not None:
+        usernames = Path(args.usernames)
+        if not usernames.is_file():
+            error = f"User-provided names file does not exist: {usernames}"
+            raise FileNotFoundError(error)
+
+    if args.userff is not None:
+        userff = Path(args.userff)
+        if not userff.is_file():
+            error = f"User-provided forcefield file does not exist: {userff}"
+            raise FileNotFoundError(error)
+        if args.usernames is None:
+            err = "--usernames must be specified if using --userff"
+            raise RuntimeError(err)
+    elif args.ff is not None:
+        # TODO bring back the following: io.test_dat_file(args.ff)
+        pass
+
+    if args.ligand is not None:
+        ligand = Path(args.ligand)
+        if not ligand.is_file():
+            error = f"Unable to find ligand file: {ligand}"
+            raise FileNotFoundError(error)
 
 
 def check_options(args: Namespace):
-    """TODO: Add docs"""
-    pass
+    """Sanity check options.
+
+    :param args:  command-line arguments
+    :type args:  argparse.Namespace
+    :raises RuntimeError:  silly option combinations were encountered.
+    """
+    if (args.ph < 0) or (args.ph > 14):
+        err = (
+            f"Specified pH ({args.ph}) is outside the range "
+            "[1, 14] of this program"
+        )
+        raise RuntimeError(err)
+    # TODO: Wouldn't "args.ff != PARSE" cover the "args.ff is None" case, too?
+    if args.neutraln and (args.ff is None or args.ff != ForceFields.PARSE):
+        err = "--neutraln option only works with PARSE forcefield!"
+        raise RuntimeError(err)
+    if args.neutralc and (args.ff is None or args.ff != ForceFields.PARSE):
+        err = "--neutralc option only works with PARSE forcefield!"
+        raise RuntimeError(err)
 
 
 def validate(args: Namespace):
     """TODO: Add docs"""
+    _LOGGER.info("Checking and transforming input arguments.")
     args = transform_arguments(args)
     check_files(args)
     check_options(args)
