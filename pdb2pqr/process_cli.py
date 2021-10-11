@@ -5,18 +5,28 @@ from pathlib import Path
 from logging import getLogger
 from argparse import ArgumentDefaultsHelpFormatter, ArgumentParser, Namespace
 import propka.lib
-from .config import VERSION, ForceFields, LogLevels, TitrationMethods
+from .config import (
+    TITLE_STR,
+    VERSION,
+    ForceFields,
+    LogLevels,
+    TitrationMethods,
+)
 
 _LOGGER = getLogger(f"PDB2PQR {VERSION}")
 
 
 def get_cli_args() -> Namespace:
-    """TODO: Add docs"""
+    """Define and parse command line arguments via argparse.
+
+    :return:  Parsed arguments object
+    :rtype:  argparse.Namespace
+    """
 
     # Define primary PDB2PQR arguments
     parser = ArgumentParser(
         prog="pdb2pqr",
-        description="TODO: Get global description here",
+        description=TITLE_STR,
         formatter_class=ArgumentDefaultsHelpFormatter,
         conflict_handler="resolve",
     )
@@ -231,7 +241,10 @@ def transform_arguments(args: Namespace):
     :rtype:  argparse.Namespace
     """
     if args.assign_only or args.clean:
-        # TODO: This should check to debump or opt then Warn user and override
+        _LOGGER.warn(
+            "Found option(s) '--clean' or '--assign-only'. "
+            "Disabling 'debump' and 'opt' options."
+        )
         args.debump = False
         args.opt = False
     return args
@@ -293,7 +306,11 @@ def check_options(args: Namespace):
 
 
 def validate(args: Namespace):
-    """TODO: Add docs"""
+    """Validate options from command line.
+
+    :param args:  command-line arguments
+    :type args:  argparse.Namespace
+    """
     _LOGGER.info("Checking and transforming input arguments.")
     args = transform_arguments(args)
     check_files(args)
@@ -301,7 +318,11 @@ def validate(args: Namespace):
 
 
 def process_cli() -> Namespace:
-    """TODO: Add docs"""
+    """Processes command line arguments.
+
+    :return:  Parsed arguments object
+    :rtype:  argparse.Namespace
+    """
     args: Namespace = get_cli_args()
     validate(args)
     return args

@@ -5,6 +5,9 @@ from ._version import __version__
 #: PDB2PQR version number.
 VERSION = __version__
 
+#: How to format PDB2PQR title in output
+TITLE_STR = f"PDB2PQR v{VERSION}: biomolecular structure conversion software."
+
 
 class BaseEnum(Enum):
     """Base class for enumerables, defining common methods."""
