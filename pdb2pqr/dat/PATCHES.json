@@ -1,0 +1,693 @@
+{
+    "patches": {
+        "comment": "Amino Acid Patches",
+        "patch": [
+            {
+                "name": "PEPTIDE",
+                "applyto": "*",
+                "add": {
+                    "atom": [
+                        {
+                            "name": "N+1",
+                            "x:float": -1.252,
+                            "y:float": 1.877,
+                            "z:float": 1.023,
+                            "bond": "C"
+                        },
+                        {
+                            "name": "C-1",
+                            "x:float": 2.339,
+                            "y:float": 0.216,
+                            "z:float": 0.0,
+                            "bond": "N"
+                        }
+                    ]
+                }
+            },
+            {
+                "name": "ASH",
+                "applyto": "ASP",
+                "add": {
+                    "atom": [
+                        {
+                            "name": "HD2",
+                            "altname": "2HD",
+                            "x:float": 2.105,
+                            "y:float": -3.427,
+                            "z:float": 1.93,
+                            "bond": "OD2"
+                        },
+                        {
+                            "name": "HD1",
+                            "altname": "1HD",
+                            "x:float": 2.85,
+                            "y:float": -2.463,
+                            "z:float": 0.072,
+                            "bond": "OD1"
+                        }
+                    ],
+                    "dihedral": [
+                        "CB CG OD2 HD2",
+                        "CB CG OD1 HD1"
+                    ]
+                }
+            },
+            {
+                "name": "CYM",
+                "applyto": "CYS",
+                "remove": "HG"
+            },
+            {
+                "name": "CYX",
+                "applyto": "CYS",
+                "remove": "HG"
+            },
+            {
+                "name": "GLH",
+                "applyto": "GLU",
+                "add": {
+                    "atom": [
+                        {
+                            "name": "HE2",
+                            "altname": "2HE",
+                            "x:float": 1.977,
+                            "y:float": -4.036,
+                            "z:float": 3.68,
+                            "bond": "OE2"
+                        },
+                        {
+                            "name": "HE1",
+                            "altname": "1HE",
+                            "x:float": 0.036,
+                            "y:float": -3.194,
+                            "z:float": 4.361,
+                            "bond": "OE1"
+                        }
+                    ],
+                    "dihedral": [
+                        "CG CD OE1 HE1",
+                        "CG CD OE2 HE2"
+                    ]
+                }
+            },
+            {
+                "name": "HSE",
+                "applyto": "HIS",
+                "remove": "HD1"
+            },
+            {
+                "name": "HSD",
+                "applyto": "HIS",
+                "remove": "HE2"
+            },
+            {
+                "name": "HSP",
+                "applyto": "HIS"
+            },
+            {
+                "name": "HID",
+                "applyto": "HIS",
+                "remove": "HE2"
+            },
+            {
+                "name": "HIE",
+                "applyto": "HIS",
+                "remove": "HD1"
+            },
+            {
+                "name": "HIP",
+                "applyto": "HIS"
+            },
+            {
+                "name": "AR0",
+                "applyto": "ARG",
+                "remove": "HE"
+            },
+            {
+                "name": "LYN",
+                "applyto": "LYS",
+                "remove": "HZ3"
+            },
+            {
+                "name": "TYM",
+                "applyto": "TYR",
+                "remove": "HH"
+            },
+            {
+                "name": "CTERM",
+                "applyto": "..[^35]$",
+                "newname": "C*",
+                "add": {
+                    "atom": [
+                        {
+                            "name": "OXT",
+                            "altname": [
+                                "O''",
+                                "OT2"
+                            ],
+                            "x:float": -1.529,
+                            "y:float": 1.858,
+                            "z:float": 0.695,
+                            "bond": "C"
+                        },
+                        {
+                            "name": "O",
+                            "altname": [
+                                "O'",
+                                "OT1"
+                            ],
+                            "x:float": -2.185,
+                            "y:float": 0.66,
+                            "z:float": -0.784,
+                            "bond": "C"
+                        },
+                        {
+                            "name": "C-1",
+                            "x:float": 2.339,
+                            "y:float": 0.216,
+                            "z:float": 0.0,
+                            "bond": "N"
+                        }
+                    ]
+                }
+            },
+            {
+                "name": "NEUTRAL-CTERM",
+                "applyto": "..[^35]$",
+                "newname": "NEUTRAL-C*",
+                "add": {
+                    "atom": [
+                        {
+                            "name": "OXT",
+                            "altname": [
+                                "O''",
+                                "OT2"
+                            ],
+                            "x:float": -1.529,
+                            "y:float": 1.858,
+                            "z:float": 0.695,
+                            "bond": "C"
+                        },
+                        {
+                            "name": "O",
+                            "altname": [
+                                "O'",
+                                "OT1"
+                            ],
+                            "x:float": -2.185,
+                            "y:float": 0.66,
+                            "z:float": -0.784,
+                            "bond": "C"
+                        },
+                        {
+                            "name": "HO",
+                            "x:float": -2.998,
+                            "y:float": 1.241,
+                            "z:float": -0.768,
+                            "bond": "O"
+                        },
+                        {
+                            "name": "C-1",
+                            "x:float": 2.339,
+                            "y:float": 0.216,
+                            "z:float": 0.0,
+                            "bond": "N"
+                        }
+                    ]
+                }
+            },
+            {
+                "name": "NTERM",
+                "applyto": "..[^35]$",
+                "newname": "N*",
+                "add": {
+                    "atom": [
+                        {
+                            "name": "H",
+                            "altname": [
+                                "HT1",
+                                "H1",
+                                "1H"
+                            ],
+                            "x:float": 0.934,
+                            "y:float": 1.811,
+                            "z:float": 0.0,
+                            "bond": "N"
+                        },
+                        {
+                            "name": "H2",
+                            "altname": [
+                                "HT2",
+                                "2H"
+                            ],
+                            "x:float": 1.746,
+                            "y:float": 0.653,
+                            "z:float": -0.817,
+                            "bond": "N"
+                        },
+                        {
+                            "name": "H3",
+                            "altname": [
+                                "HT3",
+                                "3H"
+                            ],
+                            "x:float": 1.746,
+                            "y:float": 0.653,
+                            "z:float": 0.817,
+                            "bond": "N"
+                        },
+                        {
+                            "name": "N+1",
+                            "x:float": -1.252,
+                            "y:float": 1.877,
+                            "z:float": 1.023,
+                            "bond": "C"
+                        }
+                    ]
+                }
+            },
+            {
+                "name": "NEUTRAL-NTERM",
+                "applyto": "..[^35]$",
+                "newname": "NEUTRAL-N*",
+                "add": {
+                    "atom": [
+                        {
+                            "name": "H",
+                            "altname": [
+                                "HT1",
+                                "H1",
+                                "1H"
+                            ],
+                            "x:float": 0.934,
+                            "y:float": 1.811,
+                            "z:float": 0.0,
+                            "bond": "N"
+                        },
+                        {
+                            "name": "H2",
+                            "altname": [
+                                "HT2",
+                                "2H"
+                            ],
+                            "x:float": 1.746,
+                            "y:float": 0.653,
+                            "z:float": -0.817,
+                            "bond": "N"
+                        },
+                        {
+                            "name": "N+1",
+                            "x:float": -1.252,
+                            "y:float": 1.877,
+                            "z:float": 1.023,
+                            "bond": "C"
+                        }
+                    ]
+                },
+                "remove": "H3"
+            },
+            {
+                "name": "HOH",
+                "applyto": "WAT"
+            },
+            {
+                "comment": "Amino Acid Patches"
+            },
+            {
+                "name": "DA",
+                "applyto": "RA",
+                "add": {
+                    "atom": [
+                        {
+                            "name": "C2'",
+                            "x:float": 5.230443,
+                            "y:float": 2.095696,
+                            "z:float": 2.779425,
+                            "bond": [
+                                "C1'",
+                                "C3'",
+                                "H2'",
+                                "H2''"
+                            ]
+                        },
+                        {
+                            "name": "H2''",
+                            "altname": [
+                                "HO'2",
+                                "H2'2"
+                            ],
+                            "x:float": 6.025106,
+                            "y:float": 2.06082,
+                            "z:float": 3.524673,
+                            "bond": "C2'"
+                        }
+                    ]
+                },
+                "remove": "O2'"
+            },
+            {
+                "name": "DA3",
+                "applyto": "DA",
+                "add": {
+                    "atom": {
+                        "name": "H3T",
+                        "x:float": 5.911984,
+                        "y:float": 4.450161,
+                        "z:float": 3.797897,
+                        "bond": "O3'"
+                    }
+                }
+            },
+            {
+                "name": "DA5",
+                "applyto": "DA",
+                "remove": [
+                    "O1P",
+                    "P",
+                    "O2P"
+                ],
+                "add": {
+                    "atom": {
+                        "name": "H5T",
+                        "x:float": 2.5858,
+                        "y:float": 1.9226,
+                        "z:float": 0.0818,
+                        "bond": "O5'"
+                    }
+                }
+            },
+            {
+                "name": "RA3",
+                "applyto": "RA",
+                "add": {
+                    "atom": {
+                        "name": "H3T",
+                        "x:float": 5.911984,
+                        "y:float": 4.450161,
+                        "z:float": 3.797897,
+                        "bond": "O3'"
+                    }
+                }
+            },
+            {
+                "name": "RA5",
+                "applyto": "RA",
+                "remove": [
+                    "O1P",
+                    "P",
+                    "O2P"
+                ],
+                "add": {
+                    "atom": {
+                        "name": "H5T",
+                        "x:float": 2.5858,
+                        "y:float": 1.9226,
+                        "z:float": 0.0818,
+                        "bond": "O5'"
+                    }
+                }
+            },
+            {
+                "name": "DC",
+                "applyto": "RC",
+                "add": {
+                    "atom": [
+                        {
+                            "name": "C2'",
+                            "x:float": 5.230443,
+                            "y:float": 2.095696,
+                            "z:float": 2.779425,
+                            "bond": [
+                                "C1'",
+                                "C3'",
+                                "H2'",
+                                "H2''"
+                            ]
+                        },
+                        {
+                            "name": "H2''",
+                            "altname": [
+                                "HO'2",
+                                "H2'2"
+                            ],
+                            "x:float": 6.025106,
+                            "y:float": 2.06082,
+                            "z:float": 3.524673,
+                            "bond": "C2'"
+                        }
+                    ]
+                },
+                "remove": "O2'"
+            },
+            {
+                "name": "DC3",
+                "applyto": "DC",
+                "add": {
+                    "atom": {
+                        "name": "H3T",
+                        "x:float": 5.911984,
+                        "y:float": 4.450161,
+                        "z:float": 3.797897,
+                        "bond": "O3'"
+                    }
+                }
+            },
+            {
+                "name": "DC5",
+                "applyto": "DC",
+                "remove": [
+                    "O1P",
+                    "P",
+                    "O2P"
+                ],
+                "add": {
+                    "atom": {
+                        "name": "H5T",
+                        "x:float": 2.5858,
+                        "y:float": 1.9226,
+                        "z:float": 0.0818,
+                        "bond": "O5'"
+                    }
+                }
+            },
+            {
+                "name": "RC3",
+                "applyto": "RC",
+                "add": {
+                    "atom": {
+                        "name": "H3T",
+                        "x:float": 5.911984,
+                        "y:float": 4.450161,
+                        "z:float": 3.797897,
+                        "bond": "O3'"
+                    }
+                }
+            },
+            {
+                "name": "RC5",
+                "applyto": "RC",
+                "remove": [
+                    "O1P",
+                    "P",
+                    "O2P"
+                ],
+                "add": {
+                    "atom": {
+                        "name": "H5T",
+                        "x:float": 2.5858,
+                        "y:float": 1.9226,
+                        "z:float": 0.0818,
+                        "bond": "O5'"
+                    }
+                }
+            },
+            {
+                "name": "DG",
+                "applyto": "RG",
+                "add": {
+                    "atom": [
+                        {
+                            "name": "C2'",
+                            "x:float": 5.230443,
+                            "y:float": 2.095696,
+                            "z:float": 2.779425,
+                            "bond": [
+                                "C1'",
+                                "C3'",
+                                "H2'",
+                                "H2''"
+                            ]
+                        },
+                        {
+                            "name": "H2''",
+                            "altname": [
+                                "HO'2",
+                                "H2'2"
+                            ],
+                            "x:float": 6.025106,
+                            "y:float": 2.06082,
+                            "z:float": 3.524673,
+                            "bond": "C2'"
+                        }
+                    ]
+                },
+                "remove": "O2'"
+            },
+            {
+                "name": "DG3",
+                "applyto": "DG",
+                "add": {
+                    "atom": {
+                        "name": "H3T",
+                        "x:float": 5.911984,
+                        "y:float": 4.450161,
+                        "z:float": 3.797897,
+                        "bond": "O3'"
+                    }
+                }
+            },
+            {
+                "name": "DG5",
+                "applyto": "DG",
+                "remove": [
+                    "O1P",
+                    "P",
+                    "O2P"
+                ],
+                "add": {
+                    "atom": {
+                        "name": "H5T",
+                        "x:float": 2.5858,
+                        "y:float": 1.9226,
+                        "z:float": 0.0818,
+                        "bond": "O5'"
+                    }
+                }
+            },
+            {
+                "name": "RG3",
+                "applyto": "RG",
+                "add": {
+                    "atom": {
+                        "name": "H3T",
+                        "x:float": 5.911984,
+                        "y:float": 4.450161,
+                        "z:float": 3.797897,
+                        "bond": "O3'"
+                    }
+                }
+            },
+            {
+                "name": "RG5",
+                "applyto": "RG",
+                "remove": [
+                    "O1P",
+                    "P",
+                    "O2P"
+                ],
+                "add": {
+                    "atom": {
+                        "name": "H5T",
+                        "x:float": 2.5858,
+                        "y:float": 1.9226,
+                        "z:float": 0.0818,
+                        "bond": "O5'"
+                    }
+                }
+            },
+            {
+                "name": "DT3",
+                "applyto": "DT",
+                "add": {
+                    "atom": {
+                        "name": "H3T",
+                        "x:float": 5.911984,
+                        "y:float": 4.450161,
+                        "z:float": 3.797897,
+                        "bond": "O3'"
+                    }
+                }
+            },
+            {
+                "name": "DT5",
+                "applyto": "T",
+                "remove": [
+                    "O1P",
+                    "P",
+                    "O2P"
+                ],
+                "add": {
+                    "atom": {
+                        "name": "H5T",
+                        "x:float": 2.5858,
+                        "y:float": 1.9226,
+                        "z:float": 0.0818,
+                        "bond": "O5'"
+                    }
+                }
+            },
+            {
+                "name": "RU3",
+                "applyto": "RU",
+                "add": {
+                    "atom": {
+                        "name": "H3T",
+                        "x:float": 5.911984,
+                        "y:float": 4.450161,
+                        "z:float": 3.797897,
+                        "bond": "O3'"
+                    }
+                }
+            },
+            {
+                "name": "RU5",
+                "applyto": "RU",
+                "remove": [
+                    "O1P",
+                    "P",
+                    "O2P"
+                ],
+                "add": {
+                    "atom": {
+                        "name": "H5T",
+                        "x:float": 2.5858,
+                        "y:float": 1.9226,
+                        "z:float": 0.0818,
+                        "bond": "O5'"
+                    }
+                }
+            },
+            {
+                "name": "5TERM",
+                "applyto": "*",
+                "remove": [
+                    "O1P",
+                    "P",
+                    "O2P"
+                ],
+                "add": {
+                    "atom": {
+                        "name": "H5T",
+                        "x:float": 2.5858,
+                        "y:float": 1.9226,
+                        "z:float": 0.0818,
+                        "bond": "O5'"
+                    }
+                }
+            },
+            {
+                "name": "3TERM",
+                "applyto": "*",
+                "add": {
+                    "atom": {
+                        "name": "H3T",
+                        "x:float": 5.911984,
+                        "y:float": 4.450161,
+                        "z:float": 3.797897,
+                        "bond": "O3'"
+                    }
+                }
+            }
+        ]
+    }
+}

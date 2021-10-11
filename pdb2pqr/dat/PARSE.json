@@ -1,0 +1,254 @@
+{
+    "parse": {
+        "residue": [
+            {
+                "name": "WAT",
+                "useresname": "H2O",
+                "atom": [
+                    {
+                        "name": "O",
+                        "useatomname": "OH"
+                    },
+                    {
+                        "name": "H1",
+                        "useatomname": "HH1"
+                    },
+                    {
+                        "name": "H2",
+                        "useatomname": "HH2"
+                    }
+                ]
+            },
+            {
+                "name": "[NC]?...$",
+                "atom": [
+                    {
+                        "name": "H",
+                        "useatomname": "HN"
+                    },
+                    {
+                        "name": "HA3",
+                        "useatomname": "HA1"
+                    }
+                ]
+            },
+            {
+                "name": "[NC]?(?!ALA$)...$",
+                "comment": "ALA has HB1, HB2, HB3",
+                "atom": {
+                    "name": "HB3",
+                    "useatomname": "HB1"
+                }
+            },
+            {
+                "name": "[NC]?(?!ILE$|VAL$)...$",
+                "comment": "ILE has HD11, HD12, HD13",
+                "atom": {
+                    "name": "HG3",
+                    "useatomname": "HG1"
+                }
+            },
+            {
+                "name": "[NC]?(?!ILE$|LEU$)...$",
+                "comment": "ILE, LEU have HD1{123}",
+                "atom": {
+                    "name": "HD3",
+                    "useatomname": "HD1"
+                }
+            },
+            {
+                "name": "[NC]?(?!MET$|TRP$)...$",
+                "comment": "MET and TRP have HE1, HE3",
+                "atom": {
+                    "name": "HE3",
+                    "useatomname": "HE1"
+                }
+            },
+            {
+                "name": "ASH",
+                "useresname": "AS0",
+                "atom": {
+                    "name": "HD1",
+                    "useatomname": "HD2"
+                }
+            },
+            {
+                "name": "CYX",
+                "useresname": "CSS"
+            },
+            {
+                "name": "CYM",
+                "useresname": "CY-"
+            },
+            {
+                "name": "GLH",
+                "useresname": "GL0",
+                "atom": {
+                    "name": "HE1",
+                    "useatomname": "HE2"
+                }
+            },
+            {
+                "name": "HIE",
+                "useresname": "HIS"
+            },
+            {
+                "name": "HIP",
+                "useresname": "HI+"
+            },
+            {
+                "name": "ILE",
+                "atom": {
+                    "name": "HG13",
+                    "useatomname": "HG11"
+                }
+            },
+            {
+                "name": "LYN",
+                "useresname": "LY0"
+            },
+            {
+                "name": "TYM",
+                "useresname": "TY-"
+            },
+            {
+                "name": "C(...)$",
+                "useresname": "$group"
+            },
+            {
+                "name": "C(?!PRO$)...$",
+                "comment": "See CPRO",
+                "useresname": "BK-",
+                "atom": [
+                    {
+                        "name": "O",
+                        "useatomname": "O1"
+                    },
+                    {
+                        "name": "OXT",
+                        "useatomname": "O2"
+                    }
+                ]
+            },
+            {
+                "name": "N(...)$",
+                "useresname": "$group"
+            },
+            {
+                "name": "N(?!PRO$)...$",
+                "comment": "See NPRO",
+                "useresname": "BK+",
+                "atom": {
+                    "name": "H",
+                    "useatomname": "H1"
+                }
+            },
+            {
+                "name": "NEUTRAL-C(...)$",
+                "useresname": "$group"
+            },
+            {
+                "name": "NEUTRAL-C(...)$",
+                "useresname": "BKC",
+                "atom": [
+                    {
+                        "name": "O",
+                        "useatomname": "O2"
+                    },
+                    {
+                        "name": "HO",
+                        "useatomname": "H2"
+                    },
+                    {
+                        "name": "OXT",
+                        "useatomname": "O1"
+                    }
+                ]
+            },
+            {
+                "name": "NEUTRAL-N(...)$",
+                "useresname": "$group"
+            },
+            {
+                "name": "NEUTRAL-N(...)$",
+                "useresname": "BKN",
+                "atom": {
+                    "name": "H",
+                    "useatomname": "H1"
+                }
+            },
+            {
+                "name": "NPRO",
+                "useresname": "PR+",
+                "atom": [
+                    {
+                        "name": "H",
+                        "useatomname": "HN1"
+                    },
+                    {
+                        "name": "H2",
+                        "useatomname": "HN2"
+                    }
+                ]
+            },
+            {
+                "name": "CPRO",
+                "useresname": "PR-"
+            },
+            {
+                "comment": "Nucleic Acid Substitutions"
+            },
+            {
+                "name": "[RD][ACGTU][35]?$",
+                "atom": [
+                    {
+                        "name": "H5'",
+                        "useatomname": "H5'1"
+                    },
+                    {
+                        "name": "H5''",
+                        "useatomname": "H5'2"
+                    },
+                    {
+                        "name": "H2'",
+                        "useatomname": "H2'1"
+                    }
+                ]
+            },
+            {
+                "name": "D[ACGT][35]?$",
+                "atom": [
+                    {
+                        "name": "H2''",
+                        "useatomname": "H2'2"
+                    },
+                    {
+                        "name": "OP1",
+                        "useatomname": "O1P"
+                    },
+                    {
+                        "name": "OP2",
+                        "useatomname": "O2P"
+                    }
+                ]
+            },
+            {
+                "name": "R[ACGU][35]?$",
+                "atom": [
+                    {
+                        "name": "H2''",
+                        "useatomname": "HO'2"
+                    },
+                    {
+                        "name": "OP1",
+                        "useatomname": "O1P"
+                    },
+                    {
+                        "name": "OP2",
+                        "useatomname": "O2P"
+                    }
+                ]
+            }
+        ]
+    }
+}
