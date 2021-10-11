@@ -24,6 +24,7 @@ def get_cli_args() -> Namespace:
         "input_path",
         help="Input PDB path or ID (to be retrieved from RCSB database",
     )
+    parser.add_argument("output_pqr", help="Output PQR path")
 
     # TODO: Should we bail if multiple options present, instead of override?
     required_options = parser.add_argument_group(
@@ -89,7 +90,6 @@ def get_cli_args() -> Namespace:
     general_options.add_argument(
         "--ffout",
         choices=ForceFields.values(),
-        default=ForceFields.PARSE,
         type=str.lower,
         help=(
             "Instead of using the standard canonical naming scheme for "
@@ -175,7 +175,6 @@ def get_cli_args() -> Namespace:
         "--titration-state-method",
         dest="pka_method",
         choices=TitrationMethods.values(),
-        default=TitrationMethods.PROPKA,
         type=str.lower,
         help=(
             "Method used to calculate titration states. If a titration state "
