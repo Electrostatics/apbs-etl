@@ -1,0 +1,129 @@
+{
+    "hydrogens": {
+        "class": [
+            {
+                "name": "HIS",
+                "opttype": "Flip",
+                "optangle": "CA CB CG ND1",
+                "atom": [
+                    {
+                        "name": "HD1"
+                    },
+                    {
+                        "name": "HD2"
+                    },
+                    {
+                        "name": "HE1"
+                    },
+                    {
+                        "name": "HE2"
+                    }
+                ]
+            },
+            {
+                "name": "ASN",
+                "opttype": "Flip",
+                "optangle": "CA CB CG OD1",
+                "atom": [
+                    {
+                        "name": "HD21"
+                    },
+                    {
+                        "name": "HD22"
+                    }
+                ]
+            },
+            {
+                "name": "GLN",
+                "opttype": "Flip",
+                "optangle": "CB CG CD OE1",
+                "atom": [
+                    {
+                        "name": "HE21"
+                    },
+                    {
+                        "name": "HE22"
+                    }
+                ]
+            },
+            {
+                "name": "ASH",
+                "opttype": "Carboxylic",
+                "optangle": "CA CB CG OD1",
+                "atom": [
+                    {
+                        "name": "HD2",
+                        "bond": "OD2"
+                    },
+                    {
+                        "name": "HD1",
+                        "bond": "OD1"
+                    }
+                ]
+            },
+            {
+                "name": "GLH",
+                "opttype": "Carboxylic",
+                "optangle": "CB CG CD OE1",
+                "atom": [
+                    {
+                        "name": "HE2",
+                        "bond": "OE2"
+                    },
+                    {
+                        "name": "HE1",
+                        "bond": "OE1"
+                    }
+                ]
+            },
+            {
+                "name": "CYS",
+                "opttype": "Alcoholic",
+                "atom": {
+                    "name": "HG"
+                }
+            },
+            {
+                "name": "SER",
+                "opttype": "Alcoholic",
+                "atom": {
+                    "name": "HG"
+                }
+            },
+            {
+                "name": "THR",
+                "opttype": "Alcoholic",
+                "atom": {
+                    "name": "HG1"
+                }
+            },
+            {
+                "name": "TYR",
+                "opttype": "Alcoholic",
+                "atom": {
+                    "name": "HH"
+                }
+            },
+            {
+                "name": "WAT",
+                "opttype": "Water"
+            },
+            {
+                "name": "ARG",
+                "opttype": "Generic"
+            },
+            {
+                "name": "LYS",
+                "opttype": "Generic"
+            },
+            {
+                "name": "NTR",
+                "opttype": "Generic"
+            },
+            {
+                "name": "CTR",
+                "opttype": "Carboxylic"
+            }
+        ]
+    }
+}

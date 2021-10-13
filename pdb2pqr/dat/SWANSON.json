@@ -1,0 +1,65 @@
+{
+    "patches": {
+        "residue": [
+            {
+                "name": "WAT",
+                "atom": [
+                    {
+                        "name": "O",
+                        "useatomname": "OW"
+                    },
+                    {
+                        "name": "H1",
+                        "useatomname": "HW"
+                    },
+                    {
+                        "name": "H2",
+                        "useatomname": "HW"
+                    }
+                ]
+            },
+            {
+                "name": "CYM",
+                "atom": {
+                    "name": "H",
+                    "useatomname": "HN"
+                }
+            },
+            {
+                "name": "LYN",
+                "atom": {
+                    "name": "HZ1",
+                    "useatomname": "HZ3"
+                }
+            },
+            {
+                "name": "N...$",
+                "atom": {
+                    "name": "H",
+                    "useatomname": "H1"
+                }
+            },
+            {
+                "name": "NCYS",
+                "atom": {
+                    "name": "HG",
+                    "useatomname": "HSG"
+                }
+            },
+            {
+                "name": "CCYS",
+                "atom": {
+                    "name": "HG",
+                    "useatomname": "HSG"
+                }
+            },
+            {
+                "name": "NPRO",
+                "atom": {
+                    "name": "H",
+                    "useatomname": "H3"
+                }
+            }
+        ]
+    }
+}

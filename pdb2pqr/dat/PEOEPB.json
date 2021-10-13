@@ -1,0 +1,76 @@
+{
+    "peoepb": {
+        "residue": [
+            {
+                "name": "WAT",
+                "atom": [
+                    {
+                        "name": "O",
+                        "useatomname": "OW"
+                    },
+                    {
+                        "name": "H1",
+                        "useatomname": "HW"
+                    },
+                    {
+                        "name": "H2",
+                        "useatomname": "HW"
+                    }
+                ]
+            },
+            {
+                "name": "[NC]?...$",
+                "atom": [
+                    {
+                        "name": "H",
+                        "useatomname": "HN"
+                    },
+                    {
+                        "name": "HA3",
+                        "useatomname": "HA1"
+                    },
+                    {
+                        "name": "HG3",
+                        "useatomname": "HG1"
+                    },
+                    {
+                        "name": "HG",
+                        "useatomname": "HG1"
+                    }
+                ]
+            },
+            {
+                "name": "[NC]?(?!ALA$)...$",
+                "comment": "ALA has HB1, HB2, HB3",
+                "exclud": "ALA",
+                "atom": {
+                    "name": "HB3",
+                    "useatomname": "HB1"
+                }
+            },
+            {
+                "name": "[NC]?(?!ILE$)...$",
+                "comment": "ILE has HD11, HD12, HD13",
+                "atom": {
+                    "name": "HD3",
+                    "useatomname": "HD1"
+                }
+            },
+            {
+                "name": "[NC]?(?!MET$|TRP$)...$",
+                "comment": "both have HE1/HE3",
+                "atom": {
+                    "name": "HE3",
+                    "useatomname": "HE1"
+                }
+            },
+            {
+                "name": "N...$",
+                "atom": {
+                    "name": "H",
+                    "useatomname": "H1"
+                }
+            }
+        ]
+    }
+}
