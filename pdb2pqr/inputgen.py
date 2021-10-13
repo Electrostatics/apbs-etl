@@ -8,7 +8,7 @@ import logging
 import argparse
 from pathlib import Path
 from . import psize
-from .config import TITLE_STR
+from .config import LogLevels, TITLE_STR
 
 
 _LOGGER = logging.getLogger(__name__)
@@ -283,6 +283,12 @@ def build_parser():
     parse = argparse.ArgumentParser(
         description=desc,
         formatter_class=argparse.ArgumentDefaultsHelpFormatter,
+    )
+    parse.add_argument(
+        "--log-level",
+        help="Set logging level",
+        default=LogLevels.INFO,
+        choices=LogLevels.values(),
     )
     parse.add_argument(
         "--asynch",
