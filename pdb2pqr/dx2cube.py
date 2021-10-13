@@ -48,6 +48,7 @@ def main():
     _LOGGER.debug(f"Got arguments: {args}", args)
     _LOGGER.info(f"Reading PQR from {args.pqr_input}...")
 
+    # TODO: use try/except to catch/log permission-based exceptions
     with open(args.pqr_input, "rt") as pqr_file:
         # atom_list = io.read_pqr(pqr_file)
         pass
