@@ -462,7 +462,7 @@ def get_cli_args() -> Namespace:
     """Build argument parser.
 
     :return:  argument parser
-    :rtype:  argparse.ArgumentParser
+    :rtype:  Namespace
     """
     desc = f"{TITLE_STR}\npsize: figuring out the size of electrostatics "
     desc += "calculations since (at least) 2002."
