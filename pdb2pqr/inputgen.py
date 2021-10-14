@@ -49,9 +49,9 @@ class Input:
         self.pqrname = self.pqrpath.name
         self.asyncflag = asyncflag
         # Initialize variables to default elec values
-        elec1 = Elec(pqrpath, size, method, asyncflag, istrng, potdx)
+        elec1 = Elec(self.pqrname, size, method, asyncflag, istrng, potdx)
         if not potdx:
-            elec2 = Elec(pqrpath, size, method, asyncflag, istrng, potdx)
+            elec2 = Elec(self.pqrname, size, method, asyncflag, istrng, potdx)
             setattr(elec2, "sdie", 2.0)
             setattr(elec2, "write", [])
         else:
@@ -170,7 +170,7 @@ def build_parser():
     parse.add_argument(
         "--method",
         help=("force output file to write a specific APBS ELEC method."),
-        choices=["para", "auto", "manual", "async"],
+        choices=["para", "auto", "manual", "async"],  # TODO: make into enum
     )
     parse.add_argument(
         "--cfac",

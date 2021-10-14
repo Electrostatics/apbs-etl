@@ -3,7 +3,7 @@
 from logging import getLogger
 from pathlib import Path
 from pytest import mark
-from pdb2pqr.pdb2pqr import get_cli_args
+from pdb2pqr.process_cli import get_cli_args
 
 _LOGGER = getLogger(__name__)
 

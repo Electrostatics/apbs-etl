@@ -1,10 +1,13 @@
 """This is used to create the ELEC section of an APBS input file."""
 
 
+from pdb2pqr.psize import Psize
+
+
 class Elec:
     """Holds the data and creates ASCII representation of APBS input file"""
     def __init__(
-        self, pqrpath, size, method, asyncflag, istrng=0, potdx=False
+        self, pqrpath: str, size: Psize, method: str, asyncflag: bool, istrng: float=0.0, potdx: bool=False
     ):
         """Initialize object.
 
