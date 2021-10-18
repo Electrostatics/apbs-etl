@@ -20,6 +20,11 @@ class BaseEnum(Enum):
         return str(self.value)
 
 
+class FilePermission(BaseEnum):
+    READ = 1
+    WRITE = 2
+
+
 class LogLevels(BaseEnum):
     """Enumerate log levels for argument parser."""
 

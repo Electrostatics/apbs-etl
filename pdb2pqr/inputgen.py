@@ -4,10 +4,12 @@
 .. codeauthor::  Nathan Baker
 """
 import logging
-import argparse
+from argparse import ArgumentDefaultsHelpFormatter, ArgumentParser
 from pathlib import Path
+
+from pdb2pqr.process_cli import check_file
 from . import psize
-from .config import ApbsCalcType, LogLevels, TITLE_STR
+from .config import ApbsCalcType, FilePermission, LogLevels, TITLE_STR
 from .elec import Elec
 
 _LOGGER = logging.getLogger(__name__)
@@ -140,9 +142,9 @@ def build_parser():
     """Build argument parser."""
     desc = f"{TITLE_STR}\ninputgen: generating APBS input files since "
     desc += "(at least) 2004"
-    parse = argparse.ArgumentParser(
+    parse = ArgumentParser(
         description=desc,
-        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
+        formatter_class=ArgumentDefaultsHelpFormatter,
     )
     parse.add_argument(
         "--log-level",
@@ -171,7 +173,6 @@ def build_parser():
     parse.add_argument(
         "--method",
         help=("force output file to write a specific APBS ELEC method."),
-        # choices=["para", "auto", "manual", "async"],  # TODO: make into enum
         choices=ApbsCalcType.values(),
         default=ApbsCalcType.MG_AUTO,
         type=str.lower,
@@ -248,17 +249,25 @@ def main():
     """Main driver"""
     parser = build_parser()
     args = parser.parse_args()
+
     size = psize.Psize()
-    filename = args.filename
+    filename = Path(args.filename)
+    output_path = filename.parent / Path(f"{filename.stem}.in")
+    check_file(args.filename)
+    check_file(output_path, permission=FilePermission.WRITE, overwrite=False)
+
     if args.split:
-        split_input(filename)
+        split_input(args.filename)
     else:
-        size.run_psize(filename)
+        size.run_psize(args.filename)
         input_ = Input(
-            filename, size, args.method, args.asynch, args.istrng, args.potdx
+            args.filename,
+            size,
+            args.method,
+            args.asynch,
+            args.istrng,
+            args.potdx,
         )
-        path = Path(filename)
-        output_path = path.parent / Path(f"{path.stem}.in")
         input_.print_input_files(output_path)
 
 

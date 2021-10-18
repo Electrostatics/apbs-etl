@@ -1,6 +1,7 @@
 """This file deals with parsing command line arguments and validating them."""
 
 import sys
+from os import R_OK, access, W_OK
 from pathlib import Path
 from logging import getLogger
 from argparse import ArgumentDefaultsHelpFormatter, ArgumentParser, Namespace
@@ -8,12 +9,18 @@ import propka.lib
 from .config import (
     TITLE_STR,
     VERSION,
+    FilePermission,
     ForceFields,
     LogLevels,
     TitrationMethods,
 )
 
 _LOGGER = getLogger(f"PDB2PQR {VERSION}")
+
+
+class EmptyFileError(Exception):
+    def __init__(self, message):
+        super().__init__(message)
 
 
 def get_cli_args() -> Namespace:
@@ -281,6 +288,47 @@ def check_files(args: Namespace):
         if not ligand.is_file():
             error = f"Unable to find ligand file: {ligand}"
             raise FileNotFoundError(error)
+
+
+def check_file(
+    file_name: str,
+    permission: FilePermission = FilePermission.READ,
+    overwrite: bool = True,
+):
+    file_path = Path(file_name)
+
+    # READ
+    if permission == FilePermission.READ:
+        # file must exist
+        if not file_path.exists():
+            raise FileNotFoundError(file_name)
+
+        # file must be readable
+        if not access(file_path, R_OK):
+            raise PermissionError(f"Cannot read file, {file_path.absolute()}")
+
+        # file must be nonzero
+        size: int = file_path.stat().st_size
+        if size == 0:
+            raise EmptyFileError(f"File, '{file_name}', has {size} bytes.")
+
+    # WRITE
+    elif permission == FilePermission.WRITE:
+        # Check if we have write access to directory:
+        if not access(file_path.parent, W_OK):
+            raise PermissionError(
+                f"Cannot write to directory, {file_path.parent.absolute()}"
+            )
+
+        # File must not exist unless overwrite
+        if not overwrite and file_path.exists():
+            raise FileExistsError(f"File, '{file_name}', already exists.")
+
+        # Must have write access if attempting to overwrite
+        if overwrite and file_path.exists() and not access(file_path, W_OK):
+            raise PermissionError(
+                f"Cannot write to file, {file_path.absolute()}"
+            )
 
 
 def check_options(args: Namespace):

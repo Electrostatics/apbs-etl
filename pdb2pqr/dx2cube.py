@@ -1,11 +1,13 @@
 from argparse import ArgumentDefaultsHelpFormatter, ArgumentParser, Namespace
 import logging
-from .config import TITLE_STR, VERSION, LogLevels
+
+from pdb2pqr.process_cli import check_file
+from .config import TITLE_STR, VERSION, FilePermission, LogLevels
 
 _LOGGER = logging.getLogger(f"PDB2PQR {VERSION}")
 
 
-def get_cli_args() -> Namespace:
+def get_cli_args(args_str: str = None) -> Namespace:
     """Define and parse command line arguments via argparse.
 
     :return:  Parsed arguments object
@@ -27,7 +29,11 @@ def get_cli_args() -> Namespace:
         help="Set logging level",
         default=LogLevels.INFO,
         choices=LogLevels.values(),
+        type=str,
     )
+
+    if args_str:
+        return parser.parse_args(args_str.split())
     return parser.parse_args()
 
 
@@ -42,8 +48,11 @@ def main():
     .. todo:: This function should be moved into the APBS code base.
     """
     args: Namespace = get_cli_args()
-    log_level = getattr(logging, args.log_level)
+    check_file(args.pqr_input)
+    check_file(args.dx_input)
+    check_file(args.output, permission=FilePermission.WRITE, overwrite=False)
 
+    log_level = getattr(logging, args.log_level.name)
     logging.basicConfig(level=log_level)
     _LOGGER.debug(f"Got arguments: {args}", args)
     _LOGGER.info(f"Reading PQR from {args.pqr_input}...")
