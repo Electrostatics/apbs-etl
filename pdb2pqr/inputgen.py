@@ -7,7 +7,7 @@ import logging
 import argparse
 from pathlib import Path
 from . import psize
-from .config import LogLevels, TITLE_STR
+from .config import ApbsCalcType, LogLevels, TITLE_STR
 from .elec import Elec
 
 _LOGGER = logging.getLogger(__name__)
@@ -47,11 +47,12 @@ class Input:
         """
         self.pqrpath = Path(pqrpath)
         self.pqrname = self.pqrpath.name
+        pqr_stem: str = self.pqrpath.stem
         self.asyncflag = asyncflag
         # Initialize variables to default elec values
-        elec1 = Elec(self.pqrname, size, method, asyncflag, istrng, potdx)
+        elec1 = Elec(pqr_stem, size, method, asyncflag, istrng, potdx)
         if not potdx:
-            elec2 = Elec(self.pqrname, size, method, asyncflag, istrng, potdx)
+            elec2 = Elec(pqr_stem, size, method, asyncflag, istrng, potdx)
             setattr(elec2, "sdie", 2.0)
             setattr(elec2, "write", [])
         else:
@@ -170,7 +171,10 @@ def build_parser():
     parse.add_argument(
         "--method",
         help=("force output file to write a specific APBS ELEC method."),
-        choices=["para", "auto", "manual", "async"],  # TODO: make into enum
+        # choices=["para", "auto", "manual", "async"],  # TODO: make into enum
+        choices=ApbsCalcType.values(),
+        default=ApbsCalcType.MG_AUTO,
+        type=str.lower,
     )
     parse.add_argument(
         "--cfac",
@@ -231,7 +235,10 @@ def build_parser():
         ),
     )
     parse.add_argument(
-        "--istrng", help="Ionic strength (M); Na+ and Cl- ions will be used"
+        "--istrng",
+        type=float,
+        default=0.0,
+        help="Ionic strength (M); Na+ and Cl- ions will be used",
     )
     parse.add_argument("filename")
     return parse
@@ -251,7 +258,7 @@ def main():
             filename, size, args.method, args.asynch, args.istrng, args.potdx
         )
         path = Path(filename)
-        output_path = path.parent + path.stem + Path(".in")
+        output_path = path.parent / Path(f"{path.stem}.in")
         input_.print_input_files(output_path)
 
 

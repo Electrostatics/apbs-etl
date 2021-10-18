@@ -1,13 +1,21 @@
 """This is used to create the ELEC section of an APBS input file."""
 
 
+from pdb2pqr.config import ApbsCalcType
 from pdb2pqr.psize import Psize
 
 
 class Elec:
     """Holds the data and creates ASCII representation of APBS input file"""
+
     def __init__(
-        self, pqrpath: str, size: Psize, method: str, asyncflag: bool, istrng: float=0.0, potdx: bool=False
+        self,
+        pqrpath: str,
+        size: Psize,
+        method: str = ApbsCalcType.MG_AUTO,
+        asyncflag: bool = False,
+        istrng: float = 0.0,
+        potdx: bool = False,
     ):
         """Initialize object.
 
@@ -27,20 +35,16 @@ class Elec:
         :param potdx:  whether to write out potential information in DX format
         :type potdx:  bool
         """
+
+        if method not in ApbsCalcType.values():
+            raise ValueError(
+                f"Method, '{method}', must be one of {ApbsCalcType.values()}."
+            )
+
         # If this is an async or parallel calc, we want to use
         # the per-grid dime rather than the global dime.
         self.dime = size.ngrid
-
-        # Derived from:
-        #   (200 * (dime[0] * dime[1] * dime[2])) / 1024 / 1024
-        memory_estimation = 0.00019073486
-
-        gmem = memory_estimation * self.dime[0] * self.dime[1] * self.dime[2]
-        if method == "":  # method not named - use ceiling
-            method = "mg-auto"
-            if gmem > size.gmemceil:
-                method = "mg-para"
-        if method == "mg-para":
+        if method == ApbsCalcType.MG_PARA:
             self.dime = size.getSmallest()
         self.method = method
         self.istrng = istrng
@@ -74,8 +78,10 @@ class Elec:
         self.calcenergy = "total"
         self.calcforce = "no"
         if potdx:
+            # NOTE: pqrpath will end up being something like filename.pqr
             self.write = [["pot", "dx", pqrpath]]
         else:
+            # TODO: is this valid output? Ends up writing "write pot dx pot"
             # Multiple write statements possible
             self.write = [["pot", "dx", "pot"]]
 
@@ -84,18 +90,18 @@ class Elec:
         text += f"    {self.method}\n"
         text += f"    dime {int(self.dime[0])} {int(self.dime[1])} "
         text += f"{int(self.dime[2])}\n"
-        if self.method == "mg-auto":
+        if self.method == str(ApbsCalcType.MG_AUTO):
             text += f"    cglen {self.cglen[0]:.4f} {self.cglen[1]:.4f} "
             text += f"{self.cglen[2]:.4f}\n"
             text += f"    fglen {self.fglen[0]:.4f} {self.fglen[1]:.4f} "
             text += f"{self.fglen[2]:.4f}\n"
             text += f"    cgcent {self.cgcent}\n"
             text += f"    fgcent {self.fgcent}\n"
-        elif self.method == "mg-manual":
+        elif self.method == str(ApbsCalcType.MG_MANUAL):
             text += f"    glen {self.glen[0]:.3f} {self.glen[1]:.3f} "
             text += f"{self.glen[2]:.3f}\n"
             text += f"    gcent {self.gcent}\n"
-        elif self.method == "mg-para":
+        elif self.method == str(ApbsCalcType.MG_PARA):
             text += f"    pdime {int(self.pdime[0])} {int(self.pdime[1])} "
             text += f"{int(self.pdime[2])}\n"
             text += f"    ofrac {self.ofrac:.1f}\n"

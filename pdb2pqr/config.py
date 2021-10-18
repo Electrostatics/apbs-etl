@@ -11,6 +11,7 @@ TITLE_STR = f"PDB2PQR v{VERSION}: biomolecular structure conversion software."
 
 class BaseEnum(Enum):
     """Base class for enumerables, defining common methods."""
+
     @classmethod
     def values(cls) -> list:
         return [member.value for member in cls]
@@ -21,6 +22,7 @@ class BaseEnum(Enum):
 
 class LogLevels(BaseEnum):
     """Enumerate log levels for argument parser."""
+
     DEBUG = "DEBUG"
     INFO = "INFO"
     WARNING = "WARNING"
@@ -30,6 +32,7 @@ class LogLevels(BaseEnum):
 
 class ForceFields(BaseEnum):
     """Enumerate built-in forcefield types."""
+
     AMBER = "amber"
     CHARMM = "charmm"
     PARSE = "parse"
@@ -40,4 +43,11 @@ class ForceFields(BaseEnum):
 
 class TitrationMethods(BaseEnum):
     """Enumerate log levels for argument parser."""
+
     PROPKA = "propka"
+
+
+class ApbsCalcType(BaseEnum):
+    MG_AUTO = "mg-auto"
+    MG_PARA = "mg-para"
+    MG_MANUAL = "mg-manual"
