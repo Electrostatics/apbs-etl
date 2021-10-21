@@ -23,8 +23,11 @@ class EmptyFileError(Exception):
         super().__init__(message)
 
 
-def get_cli_args() -> Namespace:
+def get_cli_args(args_str: str = None) -> Namespace:
     """Define and parse command line arguments via argparse.
+
+    :param args_str: String representation of command line arguments
+    :type args_str: str
 
     :return:  Parsed arguments object
     :rtype:  argparse.Namespace
@@ -229,7 +232,8 @@ def get_cli_args() -> Namespace:
 
     args = None
     try:
-        # TODO: Can we get parse_args to return something other than Namespace?
+        if args_str:
+            return parser.parse_args(args_str.split())
         args = parser.parse_args()
     except Exception as err:
         _LOGGER.error("ERROR in cli parsing: %s", err)

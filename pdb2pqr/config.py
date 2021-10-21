@@ -1,9 +1,6 @@
 """Configuration information for PDB2PQR."""
 from enum import Enum
-from ._version import __version__
-
-#: PDB2PQR version number.
-VERSION = __version__
+from ._version import VERSION
 
 #: How to format PDB2PQR title in output
 TITLE_STR = f"PDB2PQR v{VERSION}: biomolecular structure conversion software."

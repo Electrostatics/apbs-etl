@@ -12,6 +12,7 @@
 """
 from math import log
 import logging
+import sys
 
 # import argparse
 from argparse import ArgumentDefaultsHelpFormatter, ArgumentParser, Namespace
@@ -98,25 +99,25 @@ class Psize:
         self.nsmall = [0, 0, 0]
         self.nfocus = 0
 
-    def parse_string(self, structure):
+    def _parse_string(self, structure):
         """Parse the input structure as a string in PDB or PQR format.
 
         :param structure:  input structure as string in PDB or PQR format.
         :type structure:  str
         """
         lines = structure.split("\n")
-        self.parse_lines(lines)
+        self._parse_lines(lines)
 
-    def parse_input(self, filename):
+    def _parse_input(self, filename):
         """Parse input structure file in PDB or PQR format.
 
         :param filename:  string with path to PDB- or PQR-format file.
         :type filename:  str
         """
         with open(filename, "rt", encoding="utf-8") as file_:
-            self.parse_lines(file_.readlines())
+            self._parse_lines(file_.readlines())
 
-    def parse_lines(self, lines):
+    def _parse_lines(self, lines):
         """Parse the PQR/PDB lines.
 
         .. todo::
@@ -172,7 +173,7 @@ class Psize:
                         ):
                             self.maxlen[i] = center[i] + rad
 
-    def set_length(self, maxlen, minlen):
+    def _set_length(self, maxlen, minlen):
         """Compute molecular dimensions, adjusting for zero-length values.
 
         .. todo:: Replace hard-coded values in this function.
@@ -190,7 +191,7 @@ class Psize:
                 self.mol_length[i] = 0.1
         return self.mol_length
 
-    def set_coarse_grid_dims(self, mol_length):
+    def _set_coarse_grid_dims(self, mol_length):
         """Compute coarse mesh lengths.
 
         :param mol_length:  input molecule lengths
@@ -202,7 +203,7 @@ class Psize:
             self.coarse_length[i] = self.cfac * mol_length[i]
         return self.coarse_length
 
-    def set_fine_grid_dims(self, mol_length, coarse_length):
+    def _set_fine_grid_dims(self, mol_length, coarse_length):
         """Compute fine mesh lengths.
 
         :param mol_length:  input molecule lengths
@@ -218,7 +219,7 @@ class Psize:
                 self.fine_length[i] = coarse_length[i]
         return self.fine_length
 
-    def set_center(self, maxlen, minlen):
+    def _set_center(self, maxlen, minlen):
         """Compute molecular center.
 
         :param maxlen:  maximum molecule lengths
@@ -232,7 +233,7 @@ class Psize:
             self.center[i] = (maxlen[i] + minlen[i]) / 2
         return self.center
 
-    def set_fine_grid_points(self, fine_length):
+    def _set_fine_grid_points(self, fine_length):
         """Compute mesh grid points, assuming 4 levels in multigrid hierarchy.
 
         .. todo:: remove hard-coded values from this function.
@@ -250,7 +251,7 @@ class Psize:
                 self.ngrid[i] = 33
         return self.ngrid
 
-    def set_smallest(self, ngrid):
+    def _set_smallest(self, ngrid):
         """Set smallest dimensions.
 
         Compute parallel division of domain in case the memory requirements
@@ -283,7 +284,7 @@ class Psize:
         self.nsmall = nsmall
         return nsmall
 
-    def set_proc_grid(self, ngrid, nsmall):
+    def _set_proc_grid(self, ngrid, nsmall):
         """Calculate the number of processors required in a parallel focusing
         calculation to span each dimension of the grid given the grid size
         suitable for memory constraints.
@@ -302,7 +303,7 @@ class Psize:
                 self.proc_grid[i] = int(zofac * ngrid[i] / nsmall[i] + 1.0)
         return self.proc_grid
 
-    def set_focus(self, fine_length, nproc, coarse_length):
+    def _set_focus(self, fine_length, nproc, coarse_length):
         """Calculate the number of levels of focusing required for each
         processor subdomain.
 
@@ -329,24 +330,24 @@ class Psize:
             nfocus = nfocus + 1
         self.nfocus = nfocus
 
-    def set_all(self):
+    def _set_all(self):
         """Set up all of the things calculated individually above."""
         maxlen = self.maxlen
         minlen = self.minlen
-        self.set_length(maxlen, minlen)
+        self._set_length(maxlen, minlen)
         mol_length = self.mol_length
-        self.set_coarse_grid_dims(mol_length)
+        self._set_coarse_grid_dims(mol_length)
         coarse_length = self.coarse_length
-        self.set_fine_grid_dims(mol_length, coarse_length)
+        self._set_fine_grid_dims(mol_length, coarse_length)
         fine_length = self.fine_length
-        self.set_center(maxlen, minlen)
-        self.set_fine_grid_points(fine_length)
+        self._set_center(maxlen, minlen)
+        self._set_fine_grid_points(fine_length)
         ngrid = self.ngrid
-        self.set_smallest(ngrid)
+        self._set_smallest(ngrid)
         nsmall = self.nsmall
-        self.set_proc_grid(ngrid, nsmall)
+        self._set_proc_grid(ngrid, nsmall)
         nproc = self.proc_grid
-        self.set_focus(fine_length, nproc, coarse_length)
+        self._set_focus(fine_length, nproc, coarse_length)
 
     def run_psize(self, filename):
         """Parse input PQR file and set parameters.
@@ -354,8 +355,8 @@ class Psize:
         :param filename:  path of PQR file
         :type filename:  str
         """
-        self.parse_input(filename)
-        self.set_all()
+        self._parse_input(filename)
+        self._set_all()
 
     def __str__(self):
         """Return a string with the formatted results.
@@ -459,8 +460,11 @@ class Psize:
         return str_
 
 
-def get_cli_args() -> Namespace:
+def get_cli_args(args_str: str = None) -> Namespace:
     """Build argument parser.
+
+    :param args_str: String representation of command line arguments
+    :type args_str: str
 
     :return:  argument parser
     :rtype:  Namespace
@@ -535,7 +539,16 @@ def get_cli_args() -> Namespace:
         ),
     )
     parser.add_argument("mol_path", help="Path to PQR file.")
-    return parser.parse_args()
+
+    args = None
+    try:
+        if args_str:
+            return parser.parse_args(args_str.split())
+        args = parser.parse_args()
+    except Exception as err:
+        _LOGGER.error("ERROR in cli parsing: %s", err)
+        sys.exit(1)
+    return args
 
 
 def main():

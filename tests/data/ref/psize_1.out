@@ -1,0 +1,23 @@
+
+######## MOLECULE INFO ########
+Number of ATOM entries = 913
+Number of HETATM entries (ignored) = 0
+Total charge = 4.000 e
+Dimensions = 37.124 Å x 26.900 Å x 36.153 Å
+Center = 36.383 Å x 20.145 Å x 7.382 Å
+Lower corner = 17.821 Å x 6.695 Å x -10.694 Å
+Upper corner = 54.945 Å x 33.595 Å x 25.459 Å
+
+######## GENERAL CALCULATION INFO ########
+Course grid dims = 63.111 Å x 45.730 Å x 61.460 Å
+Fine grid dims = 57.124 Å x 45.730 Å x 56.153 Å
+Num. fine grid pts. = 129 Å x 97 Å x 97 Å
+
+Fine mesh spacing = 0.446281 x 0.476354 x 0.584927 A
+Estimated mem. required for sequential solve = 231.507 MB
+Number of focusing operations = 2
+
+######## ESTIMATED REQUIREMENTS ########
+Memory per processor = 231.507 MB
+Grid storage requirements (ASCII) = 111.123 MB
+

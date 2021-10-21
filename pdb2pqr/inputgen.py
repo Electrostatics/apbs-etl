@@ -4,7 +4,8 @@
 .. codeauthor::  Nathan Baker
 """
 import logging
-from argparse import ArgumentDefaultsHelpFormatter, ArgumentParser
+import sys
+from argparse import ArgumentDefaultsHelpFormatter, ArgumentParser, Namespace
 from pathlib import Path
 
 from pdb2pqr.process_cli import check_file
@@ -131,33 +132,40 @@ def split_input(filename):
         )
         raise RuntimeError(errstr)
     base_pqr_name = Path(filename).stem
-    for iproc in int(range(nproc)):
+    for iproc in range(nproc):
         outname = base_pqr_name + f"-PE{iproc}.in"
         outtext = text.replace("mg-para\n", f"mg-para\n    async {iproc}\n")
         with open(outname, "w") as outfile:
             outfile.write(outtext)
 
 
-def build_parser():
-    """Build argument parser."""
+def get_cli_args(args_str: str = None) -> Namespace:
+    """Define and parse command line arguments via argparse.
+
+    :param args_str: String representation of command line arguments
+    :type args_str: str
+
+    :return:  Parsed arguments object
+    :rtype:  argparse.Namespace
+    """
     desc = f"{TITLE_STR}\ninputgen: generating APBS input files since "
     desc += "(at least) 2004"
-    parse = ArgumentParser(
+    parser = ArgumentParser(
         description=desc,
         formatter_class=ArgumentDefaultsHelpFormatter,
     )
-    parse.add_argument(
+    parser.add_argument(
         "--log-level",
         help="Set logging level",
         default=LogLevels.INFO,
         choices=LogLevels.values(),
     )
-    parse.add_argument(
+    parser.add_argument(
         "--asynch",
         action="store_true",
         help="perform an asynchronous parallel calculation.",
     )
-    parse.add_argument(
+    parser.add_argument(
         "--split",
         action="store_true",
         help=(
@@ -165,19 +173,19 @@ def build_parser():
             "async input files."
         ),
     )
-    parse.add_argument(
+    parser.add_argument(
         "--potdx",
         action="store_true",
         help=("create an input to compute an electrostatic potential map."),
     )
-    parse.add_argument(
+    parser.add_argument(
         "--method",
         help=("force output file to write a specific APBS ELEC method."),
         choices=ApbsCalcType.values(),
         default=ApbsCalcType.MG_AUTO,
         type=str.lower,
     )
-    parse.add_argument(
+    parser.add_argument(
         "--cfac",
         type=float,
         default=psize.CFAC,
@@ -186,7 +194,7 @@ def build_parser():
             "get coarse grid dimensions."
         ),
     )
-    parse.add_argument(
+    parser.add_argument(
         "--fadd",
         type=float,
         default=psize.FADD,
@@ -195,13 +203,13 @@ def build_parser():
             "grid dimensions."
         ),
     )
-    parse.add_argument(
+    parser.add_argument(
         "--space",
         type=float,
         default=psize.SPACE,
         help="desired fine mesh resolution",
     )
-    parse.add_argument(
+    parser.add_argument(
         "--gmemfac",
         type=int,
         default=psize.GMEMFAC,
@@ -210,7 +218,7 @@ def build_parser():
             "MG calculation"
         ),
     )
-    parse.add_argument(
+    parser.add_argument(
         "--gmemceil",
         type=int,
         default=psize.GMEMCEIL,
@@ -220,13 +228,13 @@ def build_parser():
             "(which require more parallelism)"
         ),
     )
-    parse.add_argument(
+    parser.add_argument(
         "--ofrac",
         type=float,
         default=psize.OFRAC,
         help="overlap factor between mesh partitions (parallel)",
     )
-    parse.add_argument(
+    parser.add_argument(
         "--redfac",
         type=float,
         default=psize.REDFAC,
@@ -235,30 +243,38 @@ def build_parser():
             "be reduced during focusing"
         ),
     )
-    parse.add_argument(
+    parser.add_argument(
         "--istrng",
         type=float,
         default=0.0,
         help="Ionic strength (M); Na+ and Cl- ions will be used",
     )
-    parse.add_argument("filename")
-    return parse
+    parser.add_argument("filename")
+
+    args = None
+    try:
+        if args_str:
+            return parser.parse_args(args_str.split())
+        args = parser.parse_args()
+    except Exception as err:
+        _LOGGER.error("ERROR in cli parsing: %s", err)
+        sys.exit(1)
+    return args
 
 
 def main():
     """Main driver"""
-    parser = build_parser()
-    args = parser.parse_args()
+    args = get_cli_args()
 
     size = psize.Psize()
     filename = Path(args.filename)
     output_path = filename.parent / Path(f"{filename.stem}.in")
     check_file(args.filename)
-    check_file(output_path, permission=FilePermission.WRITE, overwrite=False)
 
     if args.split:
         split_input(args.filename)
     else:
+        check_file(output_path, permission=FilePermission.WRITE, overwrite=False)
         size.run_psize(args.filename)
         input_ = Input(
             args.filename,

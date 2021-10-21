@@ -1,5 +1,6 @@
 from argparse import ArgumentDefaultsHelpFormatter, ArgumentParser, Namespace
 import logging
+import sys
 
 from pdb2pqr.process_cli import check_file
 from .config import TITLE_STR, VERSION, FilePermission, LogLevels
@@ -9,6 +10,9 @@ _LOGGER = logging.getLogger(f"PDB2PQR {VERSION}")
 
 def get_cli_args(args_str: str = None) -> Namespace:
     """Define and parse command line arguments via argparse.
+
+    :param args_str: String representation of command line arguments
+    :type args_str: str
 
     :return:  Parsed arguments object
     :rtype:  argparse.Namespace
@@ -32,9 +36,15 @@ def get_cli_args(args_str: str = None) -> Namespace:
         type=str,
     )
 
-    if args_str:
-        return parser.parse_args(args_str.split())
-    return parser.parse_args()
+    args = None
+    try:
+        if args_str:
+            return parser.parse_args(args_str.split())
+        args = parser.parse_args()
+    except Exception as err:
+        _LOGGER.error("ERROR in cli parsing: %s", err)
+        sys.exit(1)
+    return args
 
 
 def main():
