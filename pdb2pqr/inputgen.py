@@ -274,7 +274,9 @@ def main():
     if args.split:
         split_input(args.filename)
     else:
-        check_file(output_path, permission=FilePermission.WRITE, overwrite=False)
+        check_file(
+            output_path, permission=FilePermission.WRITE, overwrite=False
+        )
         size.run_psize(args.filename)
         input_ = Input(
             args.filename,

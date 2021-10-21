@@ -1,6 +1,11 @@
+"""
+This tests the dx entrypoint executable.
+"""
+
 from logging import getLogger
 from difflib import Differ
 from .common import DATA_DIR
+
 # from pdb2pqr.io import read_pqr, read_dx, write_cube, read_qcd
 
 _LOGGER = getLogger(__name__)
