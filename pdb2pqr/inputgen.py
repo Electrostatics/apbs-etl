@@ -5,7 +5,12 @@
 """
 import logging
 import sys
-from argparse import ArgumentDefaultsHelpFormatter, ArgumentParser, Namespace
+from argparse import (
+    ArgumentDefaultsHelpFormatter,
+    ArgumentError,
+    ArgumentParser,
+    Namespace,
+)
 from pathlib import Path
 
 from pdb2pqr.process_cli import check_file
@@ -256,7 +261,7 @@ def get_cli_args(args_str: str = None) -> Namespace:
         if args_str:
             return parser.parse_args(args_str.split())
         args = parser.parse_args()
-    except Exception as err:
+    except ArgumentError as err:
         _LOGGER.error("ERROR in cli parsing: %s", err)
         sys.exit(1)
     return args

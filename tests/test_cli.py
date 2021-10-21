@@ -1,9 +1,14 @@
-"""Test parsing command line options"""
+"""Test processing command line options for pdb2pqr executable.
+
+    - test invalid combinations
+    - test file permissions
+    - test argument tranformations
+"""
 
 from logging import getLogger
-from pathlib import Path
-from pytest import mark
-from pdb2pqr.process_cli import get_cli_args
+# from pathlib import Path
+# from pytest import mark
+# from pdb2pqr.process_cli import get_cli_args
 
 _LOGGER = getLogger(__name__)
 

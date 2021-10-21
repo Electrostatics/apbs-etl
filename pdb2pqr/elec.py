@@ -12,7 +12,7 @@ class Elec:
         self,
         pqrpath: str,
         size: Psize,
-        method: str = ApbsCalcType.MG_AUTO.value,
+        method: str = str(ApbsCalcType.MG_AUTO),
         asyncflag: bool = False,
         istrng: float = 0.0,
         potdx: bool = False,
@@ -44,7 +44,7 @@ class Elec:
         # If this is an async or parallel calc, we want to use
         # the per-grid dime rather than the global dime.
         self.dime = size.ngrid
-        if method == ApbsCalcType.MG_PARA.value:
+        if method == str(ApbsCalcType.MG_PARA):
             self.dime = size.getSmallest()
         self.method = method
         self.istrng = istrng
@@ -90,18 +90,18 @@ class Elec:
         text += f"    {self.method}\n"
         text += f"    dime {int(self.dime[0])} {int(self.dime[1])} "
         text += f"{int(self.dime[2])}\n"
-        if self.method == ApbsCalcType.MG_AUTO.value:
+        if self.method == str(ApbsCalcType.MG_AUTO):
             text += f"    cglen {self.cglen[0]:.4f} {self.cglen[1]:.4f} "
             text += f"{self.cglen[2]:.4f}\n"
             text += f"    fglen {self.fglen[0]:.4f} {self.fglen[1]:.4f} "
             text += f"{self.fglen[2]:.4f}\n"
             text += f"    cgcent {self.cgcent}\n"
             text += f"    fgcent {self.fgcent}\n"
-        elif self.method == ApbsCalcType.MG_MANUAL.value:
+        elif self.method == str(ApbsCalcType.MG_MANUAL):
             text += f"    glen {self.glen[0]:.3f} {self.glen[1]:.3f} "
             text += f"{self.glen[2]:.3f}\n"
             text += f"    gcent {self.gcent}\n"
-        elif self.method == ApbsCalcType.MG_PARA.value:
+        elif self.method == str(ApbsCalcType.MG_PARA):
             text += f"    pdime {int(self.pdime[0])} {int(self.pdime[1])} "
             text += f"{int(self.pdime[2])}\n"
             text += f"    ofrac {self.ofrac:.1f}\n"

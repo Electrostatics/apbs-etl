@@ -15,7 +15,12 @@ import logging
 import sys
 
 # import argparse
-from argparse import ArgumentDefaultsHelpFormatter, ArgumentParser, Namespace
+from argparse import (
+    ArgumentDefaultsHelpFormatter,
+    ArgumentError,
+    ArgumentParser,
+    Namespace,
+)
 from .config import TITLE_STR, LogLevels
 
 
@@ -273,14 +278,11 @@ class Psize:
             nsmem = 200.0 * nsmall[0] * nsmall[1] * nsmall[2] / 1024 / 1024
             if nsmem < self.gmemceil:
                 break
-            else:
-                i = nsmall.index(max(nsmall))
-                nsmall[i] = 32 * ((nsmall[i] - 1) / 32 - 1) + 1
-                if nsmall[i] <= 0:
-                    _LOGGER.error(
-                        "You picked a memory ceiling that is too small"
-                    )
-                    raise ValueError(nsmall[i])
+            i = nsmall.index(max(nsmall))
+            nsmall[i] = 32 * ((nsmall[i] - 1) / 32 - 1) + 1
+            if nsmall[i] <= 0:
+                _LOGGER.error("You picked a memory ceiling that is too small")
+                raise ValueError(nsmall[i])
         self.nsmall = nsmall
         return nsmall
 
@@ -545,7 +547,7 @@ def get_cli_args(args_str: str = None) -> Namespace:
         if args_str:
             return parser.parse_args(args_str.split())
         args = parser.parse_args()
-    except Exception as err:
+    except ArgumentError as err:
         _LOGGER.error("ERROR in cli parsing: %s", err)
         sys.exit(1)
     return args

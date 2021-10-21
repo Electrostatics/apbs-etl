@@ -4,7 +4,12 @@ import sys
 from os import R_OK, access, W_OK
 from pathlib import Path
 from logging import getLogger
-from argparse import ArgumentDefaultsHelpFormatter, ArgumentParser, Namespace
+from argparse import (
+    ArgumentDefaultsHelpFormatter,
+    ArgumentError,
+    ArgumentParser,
+    Namespace,
+)
 import propka.lib
 from .config import (
     TITLE_STR,
@@ -19,8 +24,15 @@ _LOGGER = getLogger(f"PDB2PQR {VERSION}")
 
 
 class EmptyFileError(Exception):
-    def __init__(self, message):
-        super().__init__(message)
+    """Exception raised if file is empty (0 bytes).
+
+    :param message: Error message for exception
+    :type message: str
+    """
+
+    # Based on:
+    #   https://pycodequ.al/docs/pylint-messages/w0235-useless-super-delegation.html
+    ...
 
 
 def get_cli_args(args_str: str = None) -> Namespace:
@@ -46,7 +58,6 @@ def get_cli_args(args_str: str = None) -> Namespace:
     )
     parser.add_argument("output_pqr", help="Output PQR path")
 
-    # TODO: Should we bail if multiple options present, instead of override?
     required_options = parser.add_argument_group(
         title="Mandatory options",
         description="One of the following options must be used",
@@ -235,7 +246,7 @@ def get_cli_args(args_str: str = None) -> Namespace:
         if args_str:
             return parser.parse_args(args_str.split())
         args = parser.parse_args()
-    except Exception as err:
+    except ArgumentError as err:
         _LOGGER.error("ERROR in cli parsing: %s", err)
         sys.exit(1)
     return args
@@ -252,7 +263,7 @@ def transform_arguments(args: Namespace):
     :rtype:  argparse.Namespace
     """
     if args.assign_only or args.clean:
-        _LOGGER.warn(
+        _LOGGER.warning(
             "Found option(s) '--clean' or '--assign-only'. "
             "Disabling 'debump' and 'opt' options."
         )
@@ -270,24 +281,29 @@ def check_files(args: Namespace):
     :raises RuntimeError:  input argument or file parsing problems
     """
     if args.usernames is not None:
+        check_file(args.usernames)
         usernames = Path(args.usernames)
         if not usernames.is_file():
             error = f"User-provided names file does not exist: {usernames}"
             raise FileNotFoundError(error)
 
     if args.userff is not None:
+        check_file(args.userff)
         userff = Path(args.userff)
         if not userff.is_file():
             error = f"User-provided forcefield file does not exist: {userff}"
             raise FileNotFoundError(error)
+
         if args.usernames is None:
             err = "--usernames must be specified if using --userff"
             raise RuntimeError(err)
+
     elif args.ff is not None:
         # TODO bring back the following: io.test_dat_file(args.ff)
         pass
 
     if args.ligand is not None:
+        check_file(args.ligand)
         ligand = Path(args.ligand)
         if not ligand.is_file():
             error = f"Unable to find ligand file: {ligand}"
@@ -299,12 +315,21 @@ def check_file(
     permission: FilePermission = FilePermission.READ,
     overwrite: bool = True,
 ):
+    """Preliminary checks before running algorithm.
+
+    :param file_name:  The path to a file
+    :type file_name:  str
+    :param permission:  The permissions to check against
+    :type permission:  FilePermission
+    :param overwrite:  Is it ok to overwrite file
+    :type overwrite:  bool
+    """
     file_path = Path(file_name)
 
     # READ
     if permission == FilePermission.READ:
         # file must exist
-        if not file_path.exists():
+        if not file_path.is_file():
             raise FileNotFoundError(file_name)
 
         # file must be readable
@@ -325,11 +350,11 @@ def check_file(
             )
 
         # File must not exist unless overwrite
-        if not overwrite and file_path.exists():
+        if not overwrite and file_path.is_file():
             raise FileExistsError(f"File, '{file_name}', already exists.")
 
         # Must have write access if attempting to overwrite
-        if overwrite and file_path.exists() and not access(file_path, W_OK):
+        if overwrite and file_path.is_file() and not access(file_path, W_OK):
             raise PermissionError(
                 f"Cannot write to file, {file_path.absolute()}"
             )
@@ -348,11 +373,10 @@ def check_options(args: Namespace):
             "[1, 14] of this program"
         )
         raise RuntimeError(err)
-    # TODO: Wouldn't "args.ff != PARSE" cover the "args.ff is None" case, too?
-    if args.neutraln and (args.ff is None or args.ff != ForceFields.PARSE):
+    if args.neutraln and args.ff != ForceFields.PARSE:
         err = "--neutraln option only works with PARSE forcefield!"
         raise RuntimeError(err)
-    if args.neutralc and (args.ff is None or args.ff != ForceFields.PARSE):
+    if args.neutralc and args.ff != ForceFields.PARSE:
         err = "--neutralc option only works with PARSE forcefield!"
         raise RuntimeError(err)
 

@@ -11,6 +11,11 @@ class BaseEnum(Enum):
 
     @classmethod
     def values(cls) -> list:
+        """Generates list of the Enum values
+
+        :return:  List of enum values
+        :rtype:  List[T]
+        """
         return [member.value for member in cls]
 
     def __str__(self):
@@ -18,12 +23,14 @@ class BaseEnum(Enum):
 
 
 class FilePermission(BaseEnum):
+    """Enumerate file permissions operations."""
+
     READ = 1
     WRITE = 2
 
 
 class LogLevels(BaseEnum):
-    """Enumerate log levels for argument parser."""
+    """Enumerate log levels."""
 
     DEBUG = "DEBUG"
     INFO = "INFO"
@@ -44,12 +51,14 @@ class ForceFields(BaseEnum):
 
 
 class TitrationMethods(BaseEnum):
-    """Enumerate log levels for argument parser."""
+    """Enumerate titration-state methods."""
 
     PROPKA = "propka"
 
 
 class ApbsCalcType(BaseEnum):
+    """Enumerate APBS Elec calcuation types."""
+
     MG_AUTO = "mg-auto"
     MG_PARA = "mg-para"
     MG_MANUAL = "mg-manual"

@@ -1,11 +1,18 @@
-from argparse import ArgumentDefaultsHelpFormatter, ArgumentParser, Namespace
+"""Convert DX file format to Cube file format."""
+
+from argparse import (
+    ArgumentDefaultsHelpFormatter,
+    ArgumentError,
+    ArgumentParser,
+    Namespace,
+)
 import logging
 import sys
 
 from pdb2pqr.process_cli import check_file
 from .config import TITLE_STR, VERSION, FilePermission, LogLevels
 
-_LOGGER = logging.getLogger(f"PDB2PQR {VERSION}")
+_LOGGER = logging.getLogger(f"dx2cube {VERSION}")
 
 
 def get_cli_args(args_str: str = None) -> Namespace:
@@ -41,7 +48,7 @@ def get_cli_args(args_str: str = None) -> Namespace:
         if args_str:
             return parser.parse_args(args_str.split())
         args = parser.parse_args()
-    except Exception as err:
+    except ArgumentError as err:
         _LOGGER.error("ERROR in cli parsing: %s", err)
         sys.exit(1)
     return args
@@ -64,20 +71,20 @@ def main():
 
     log_level = getattr(logging, args.log_level.name)
     logging.basicConfig(level=log_level)
-    _LOGGER.debug(f"Got arguments: {args}", args)
-    _LOGGER.info(f"Reading PQR from {args.pqr_input}...")
+    _LOGGER.debug("Got arguments: %s", args)
+    _LOGGER.info("Reading PQR from %s...", args.pqr_input)
 
     # TODO: use try/except to catch/log permission-based exceptions
     with open(args.pqr_input, "rt") as pqr_file:
         # atom_list = io.read_pqr(pqr_file)
         pass
 
-    _LOGGER.info(f"Reading DX from {args.dx_input}...")
+    _LOGGER.info("Reading DX from %s...", args.dx_input)
     with open(args.dx_input, "rt") as dx_file:
         # dx_dict = io.read_dx(dx_file)
         pass
 
-    _LOGGER.info(f"Writing Cube to {args.output}...")
+    _LOGGER.info("Writing Cube to %s...", args.output)
     with open(args.output, "wt") as cube_file:
         # io.write_cube(cube_file, dx_dict, atom_list)
         pass
