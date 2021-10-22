@@ -9,7 +9,7 @@ from .common import DATA_DIR, get_ref_output
 
 
 @pytest.mark.parametrize(
-    "arguments, out_file",
+    "arguments, output_file",
     [
         pytest.param(f"{DATA_DIR}/dx2cube.pqr", "psize_1.out", id="1"),
     ],

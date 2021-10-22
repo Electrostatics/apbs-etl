@@ -3,7 +3,7 @@
 
 from pdb2pqr.config import ApbsCalcType
 from pdb2pqr.psize import Psize
-
+from pathlib import Path
 
 class Elec:
     """Holds the data and creates ASCII representation of APBS input file"""
@@ -11,8 +11,8 @@ class Elec:
     def __init__(
         self,
         pqrpath: str,
-        size: Psize,
         method: str = str(ApbsCalcType.MG_AUTO),
+        size: Psize = Psize(),
         asyncflag: bool = False,
         istrng: float = 0.0,
         potdx: bool = False,
@@ -45,13 +45,14 @@ class Elec:
         # the per-grid dime rather than the global dime.
         self.dime = size.ngrid
         if method == str(ApbsCalcType.MG_PARA):
-            self.dime = size.getSmallest()
+            self.dime = size.get_smallest()
         self.method = method
         self.istrng = istrng
         self.glen = size.coarse_length
         self.cglen = size.coarse_length
         self.fglen = size.fine_length
         self.pdime = size.proc_grid
+        # TODO: self.label can never be set. Should it be deleted?
         self.label = ""
         self.nlev = 4
         self.ofrac = 0.1
@@ -78,14 +79,15 @@ class Elec:
         self.calcenergy = "total"
         self.calcforce = "no"
         if potdx:
-            # NOTE: pqrpath will end up being something like filename.pqr
-            self.write = [["pot", "dx", pqrpath]]
+            self.write = [["pot", "dx", Path(pqrpath).stem]]
         else:
             # TODO: is this valid output? Ends up writing "write pot dx pot"
             # Multiple write statements possible
             self.write = [["pot", "dx", "pot"]]
 
     def __str__(self):
+        # TODO: Should Elec be allowed to print dimensions and lengths of 0?
+        #       Right now, code succeeds, but with 0-dimensions implies no data
         text = f"elec {self.label}\n"
         text += f"    {self.method}\n"
         text += f"    dime {int(self.dime[0])} {int(self.dime[1])} "

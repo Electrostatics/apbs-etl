@@ -351,6 +351,10 @@ class Psize:
         nproc = self.proc_grid
         self._set_focus(fine_length, nproc, coarse_length)
 
+    def get_smallest(self):
+        """Get Smallest"""
+        return self.nsmall
+
     def run_psize(self, filename):
         """Parse input PQR file and set parameters.
 

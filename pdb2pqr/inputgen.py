@@ -58,9 +58,9 @@ class Input:
         pqr_stem: str = self.pqrpath.stem
         self.asyncflag = asyncflag
         # Initialize variables to default elec values
-        elec1 = Elec(pqr_stem, size, method, asyncflag, istrng, potdx)
+        elec1 = Elec(pqr_stem, method, size, asyncflag, istrng, potdx)
         if not potdx:
-            elec2 = Elec(pqr_stem, size, method, asyncflag, istrng, potdx)
+            elec2 = Elec(pqr_stem, method, size, asyncflag, istrng, potdx)
             setattr(elec2, "sdie", 2.0)
             setattr(elec2, "write", [])
         else:
