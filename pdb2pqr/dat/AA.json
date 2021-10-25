@@ -1,0 +1,3334 @@
+{
+    "aminoacids": {
+        "residue": [
+            {
+                "name": "ALA",
+                "atom": [
+                    {
+                        "name": "N",
+                        "x:float": 1.201,
+                        "y:float": 0.847,
+                        "z:float": 0.0,
+                        "bond": [
+                            "CA",
+                            "H"
+                        ]
+                    },
+                    {
+                        "name": "CA",
+                        "x:float": 0.0,
+                        "y:float": 0.0,
+                        "z:float": 0.0,
+                        "bond": [
+                            "N",
+                            "C",
+                            "CB",
+                            "HA"
+                        ]
+                    },
+                    {
+                        "name": "C",
+                        "x:float": -1.25,
+                        "y:float": 0.881,
+                        "z:float": 0.0,
+                        "bond": [
+                            "CA",
+                            "O"
+                        ]
+                    },
+                    {
+                        "name": "O",
+                        "x:float": -2.185,
+                        "y:float": 0.66,
+                        "z:float": -0.784,
+                        "bond": "C"
+                    },
+                    {
+                        "name": "CB",
+                        "x:float": 0.02,
+                        "y:float": -0.927,
+                        "z:float": 1.209,
+                        "bond": [
+                            "CA",
+                            "HB1",
+                            "HB2",
+                            "HB3"
+                        ]
+                    },
+                    {
+                        "name": "H",
+                        "altname": "HN",
+                        "x:float": 1.201,
+                        "y:float": 1.847,
+                        "z:float": 0.0,
+                        "bond": "N"
+                    },
+                    {
+                        "name": "HA",
+                        "x:float": 0.0,
+                        "y:float": -0.557,
+                        "z:float": -0.831,
+                        "bond": "CA"
+                    },
+                    {
+                        "name": "HB1",
+                        "altname": "1HB",
+                        "x:float": 0.833,
+                        "y:float": -1.507,
+                        "z:float": 1.171,
+                        "bond": "CB"
+                    },
+                    {
+                        "name": "HB2",
+                        "altname": "2HB",
+                        "x:float": 0.04,
+                        "y:float": -0.381,
+                        "z:float": 2.047,
+                        "bond": "CB"
+                    },
+                    {
+                        "name": "HB3",
+                        "altname": "3HB",
+                        "x:float": -0.799,
+                        "y:float": -1.5,
+                        "z:float": 1.204,
+                        "bond": "CB"
+                    }
+                ]
+            },
+            {
+                "name": "ARG",
+                "atom": [
+                    {
+                        "name": "N",
+                        "x:float": 1.201,
+                        "y:float": 0.847,
+                        "z:float": 0.0,
+                        "bond": [
+                            "CA",
+                            "H"
+                        ]
+                    },
+                    {
+                        "name": "CA",
+                        "x:float": 0.0,
+                        "y:float": 0.0,
+                        "z:float": 0.0,
+                        "bond": [
+                            "N",
+                            "C",
+                            "CB",
+                            "HA"
+                        ]
+                    },
+                    {
+                        "name": "C",
+                        "x:float": -1.25,
+                        "y:float": 0.881,
+                        "z:float": 0.0,
+                        "bond": [
+                            "CA",
+                            "O"
+                        ]
+                    },
+                    {
+                        "name": "O",
+                        "x:float": -2.185,
+                        "y:float": 0.66,
+                        "z:float": -0.784,
+                        "bond": "C"
+                    },
+                    {
+                        "name": "CB",
+                        "x:float": -0.019,
+                        "y:float": -0.932,
+                        "z:float": 1.222,
+                        "bond": [
+                            "CA",
+                            "CG",
+                            "HB2",
+                            "HB3"
+                        ]
+                    },
+                    {
+                        "name": "CG",
+                        "x:float": 1.158,
+                        "y:float": -1.892,
+                        "z:float": 1.324,
+                        "bond": [
+                            "CB",
+                            "CD",
+                            "HG2",
+                            "HG3"
+                        ]
+                    },
+                    {
+                        "name": "CD",
+                        "x:float": 1.06,
+                        "y:float": -2.755,
+                        "z:float": 2.534,
+                        "bond": [
+                            "CG",
+                            "NE",
+                            "HD2",
+                            "HD3"
+                        ]
+                    },
+                    {
+                        "name": "NE",
+                        "x:float": 2.184,
+                        "y:float": -3.677,
+                        "z:float": 2.638,
+                        "bond": [
+                            "CD",
+                            "CZ",
+                            "HE"
+                        ]
+                    },
+                    {
+                        "name": "CZ",
+                        "x:float": 2.321,
+                        "y:float": -4.549,
+                        "z:float": 3.631,
+                        "bond": [
+                            "NE",
+                            "NH1",
+                            "NH2"
+                        ]
+                    },
+                    {
+                        "name": "NH1",
+                        "x:float": 1.541,
+                        "y:float": -4.507,
+                        "z:float": 4.705,
+                        "bond": [
+                            "CZ",
+                            "HH11",
+                            "HH12"
+                        ]
+                    },
+                    {
+                        "name": "NH2",
+                        "x:float": 3.296,
+                        "y:float": -5.454,
+                        "z:float": 3.573,
+                        "bond": [
+                            "CZ",
+                            "HH21",
+                            "HH22"
+                        ]
+                    },
+                    {
+                        "name": "H",
+                        "altname": "HN",
+                        "x:float": 1.201,
+                        "y:float": 1.847,
+                        "z:float": 0.0,
+                        "bond": "N"
+                    },
+                    {
+                        "name": "HA",
+                        "x:float": 0.0,
+                        "y:float": -0.558,
+                        "z:float": -0.83,
+                        "bond": "CA"
+                    },
+                    {
+                        "name": "HB2",
+                        "altname": "2HB",
+                        "x:float": -0.027,
+                        "y:float": -0.363,
+                        "z:float": 2.044,
+                        "bond": "CB"
+                    },
+                    {
+                        "name": "HB3",
+                        "altname": [
+                            "1HB",
+                            "HB1",
+                            "3HB"
+                        ],
+                        "x:float": -0.858,
+                        "y:float": -1.474,
+                        "z:float": 1.184,
+                        "bond": "CB"
+                    },
+                    {
+                        "name": "HG2",
+                        "altname": "2HG",
+                        "x:float": 1.174,
+                        "y:float": -2.473,
+                        "z:float": 0.51,
+                        "bond": "CG"
+                    },
+                    {
+                        "name": "HG3",
+                        "altname": [
+                            "1HG",
+                            "HG1",
+                            "3HG"
+                        ],
+                        "x:float": 2.005,
+                        "y:float": -1.362,
+                        "z:float": 1.371,
+                        "bond": "CG"
+                    },
+                    {
+                        "name": "HD2",
+                        "altname": "2HD",
+                        "x:float": 1.044,
+                        "y:float": -2.172,
+                        "z:float": 3.346,
+                        "bond": "CD"
+                    },
+                    {
+                        "name": "HD3",
+                        "altname": [
+                            "1HD",
+                            "HD1",
+                            "3HD"
+                        ],
+                        "x:float": 0.212,
+                        "y:float": -3.283,
+                        "z:float": 2.485,
+                        "bond": "CD"
+                    },
+                    {
+                        "name": "HE",
+                        "x:float": 2.887,
+                        "y:float": -3.652,
+                        "z:float": 1.927,
+                        "bond": "NE"
+                    },
+                    {
+                        "name": "HH11",
+                        "altname": "1HH1",
+                        "x:float": 0.817,
+                        "y:float": -3.82,
+                        "z:float": 4.771,
+                        "bond": "NH1"
+                    },
+                    {
+                        "name": "HH12",
+                        "altname": "2HH1",
+                        "x:float": 1.676,
+                        "y:float": -5.163,
+                        "z:float": 5.448,
+                        "bond": "NH1"
+                    },
+                    {
+                        "name": "HH21",
+                        "altname": "1HH2",
+                        "x:float": 3.903,
+                        "y:float": -5.485,
+                        "z:float": 2.779,
+                        "bond": "NH2"
+                    },
+                    {
+                        "name": "HH22",
+                        "altname": "2HH2",
+                        "x:float": 3.42,
+                        "y:float": -6.103,
+                        "z:float": 4.323,
+                        "bond": "NH2"
+                    }
+                ],
+                "dihedral": [
+                    "N CA CB CG",
+                    "CA CB CG CD",
+                    "CB CG CD NE",
+                    "CG CD NE CZ",
+                    "CD NE CZ NH1"
+                ]
+            },
+            {
+                "name": "ASN",
+                "atom": [
+                    {
+                        "name": "N",
+                        "x:float": 1.201,
+                        "y:float": 0.847,
+                        "z:float": 0.0,
+                        "bond": [
+                            "CA",
+                            "H"
+                        ]
+                    },
+                    {
+                        "name": "CA",
+                        "x:float": 0.0,
+                        "y:float": 0.0,
+                        "z:float": 0.0,
+                        "bond": [
+                            "N",
+                            "C",
+                            "CB",
+                            "HA"
+                        ]
+                    },
+                    {
+                        "name": "C",
+                        "x:float": -1.25,
+                        "y:float": 0.881,
+                        "z:float": 0.0,
+                        "bond": [
+                            "CA",
+                            "O"
+                        ]
+                    },
+                    {
+                        "name": "O",
+                        "x:float": -2.185,
+                        "y:float": 0.66,
+                        "z:float": -0.784,
+                        "bond": "C"
+                    },
+                    {
+                        "name": "CB",
+                        "x:float": 0.05,
+                        "y:float": -1.025,
+                        "z:float": 1.129,
+                        "bond": [
+                            "CA",
+                            "CG",
+                            "HB2",
+                            "HB3"
+                        ]
+                    },
+                    {
+                        "name": "CG",
+                        "x:float": 1.239,
+                        "y:float": -1.965,
+                        "z:float": 1.044,
+                        "bond": [
+                            "CB",
+                            "OD1",
+                            "ND2"
+                        ]
+                    },
+                    {
+                        "name": "OD1",
+                        "x:float": 2.06,
+                        "y:float": -1.867,
+                        "z:float": 0.126,
+                        "bond": "CG"
+                    },
+                    {
+                        "name": "ND2",
+                        "x:float": 1.344,
+                        "y:float": -2.87,
+                        "z:float": 2.015,
+                        "bond": [
+                            "CG",
+                            "HD21",
+                            "HD22"
+                        ]
+                    },
+                    {
+                        "name": "H",
+                        "altname": "HN",
+                        "x:float": 1.201,
+                        "y:float": 1.847,
+                        "z:float": 0.0,
+                        "bond": "N"
+                    },
+                    {
+                        "name": "HA",
+                        "x:float": 0.0,
+                        "y:float": -0.51,
+                        "z:float": -0.86,
+                        "bond": "CA"
+                    },
+                    {
+                        "name": "HB2",
+                        "altname": "2HB",
+                        "x:float": 0.096,
+                        "y:float": -0.535,
+                        "z:float": 2.0,
+                        "bond": "CB"
+                    },
+                    {
+                        "name": "HB3",
+                        "altname": [
+                            "1HB",
+                            "HB1",
+                            "3HB"
+                        ],
+                        "x:float": -0.788,
+                        "y:float": -1.571,
+                        "z:float": 1.098,
+                        "bond": "CB"
+                    },
+                    {
+                        "name": "HD21",
+                        "altname": "1HD2",
+                        "x:float": 0.657,
+                        "y:float": -2.905,
+                        "z:float": 2.741,
+                        "bond": "ND2"
+                    },
+                    {
+                        "name": "HD22",
+                        "altname": "2HD2",
+                        "x:float": 2.108,
+                        "y:float": -3.514,
+                        "z:float": 2.018,
+                        "bond": "ND2"
+                    }
+                ],
+                "dihedral": [
+                    "N CA CB CG",
+                    "CA CB CG OD1"
+                ]
+            },
+            {
+                "name": "ASP",
+                "atom": [
+                    {
+                        "name": "N",
+                        "x:float": 1.201,
+                        "y:float": 0.847,
+                        "z:float": 0.0,
+                        "bond": [
+                            "CA",
+                            "H"
+                        ]
+                    },
+                    {
+                        "name": "CA",
+                        "x:float": 0.0,
+                        "y:float": 0.0,
+                        "z:float": 0.0,
+                        "bond": [
+                            "N",
+                            "C",
+                            "CB",
+                            "HA"
+                        ]
+                    },
+                    {
+                        "name": "C",
+                        "x:float": -1.25,
+                        "y:float": 0.881,
+                        "z:float": 0.0,
+                        "bond": [
+                            "CA",
+                            "O"
+                        ]
+                    },
+                    {
+                        "name": "O",
+                        "x:float": -2.185,
+                        "y:float": 0.66,
+                        "z:float": -0.784,
+                        "bond": "C"
+                    },
+                    {
+                        "name": "CB",
+                        "x:float": 0.043,
+                        "y:float": -1.017,
+                        "z:float": 1.123,
+                        "bond": [
+                            "CA",
+                            "CG",
+                            "HB2",
+                            "HB3"
+                        ]
+                    },
+                    {
+                        "name": "CG",
+                        "x:float": 1.229,
+                        "y:float": -1.966,
+                        "z:float": 1.053,
+                        "bond": [
+                            "CB",
+                            "OD1",
+                            "OD2"
+                        ]
+                    },
+                    {
+                        "name": "OD1",
+                        "x:float": 2.058,
+                        "y:float": -1.864,
+                        "z:float": 0.127,
+                        "bond": "CG"
+                    },
+                    {
+                        "name": "OD2",
+                        "x:float": 1.319,
+                        "y:float": -2.81,
+                        "z:float": 1.959,
+                        "bond": "CG"
+                    },
+                    {
+                        "name": "H",
+                        "altname": "HN",
+                        "x:float": 1.201,
+                        "y:float": 1.847,
+                        "z:float": 0.0,
+                        "bond": "N"
+                    },
+                    {
+                        "name": "HA",
+                        "x:float": 0.0,
+                        "y:float": -0.511,
+                        "z:float": -0.86,
+                        "bond": "CA"
+                    },
+                    {
+                        "name": "HB2",
+                        "altname": "2HB",
+                        "x:float": 0.086,
+                        "y:float": -0.524,
+                        "z:float": 1.992,
+                        "bond": "CB"
+                    },
+                    {
+                        "name": "HB3",
+                        "altname": [
+                            "1HB",
+                            "HB1",
+                            "3HB"
+                        ],
+                        "x:float": -0.796,
+                        "y:float": -1.559,
+                        "z:float": 1.089,
+                        "bond": "CB"
+                    }
+                ],
+                "dihedral": [
+                    "N CA CB CG",
+                    "CA CB CG OD1"
+                ]
+            },
+            {
+                "name": "CYS",
+                "atom": [
+                    {
+                        "name": "N",
+                        "x:float": 1.201,
+                        "y:float": 0.847,
+                        "z:float": 0.0,
+                        "bond": [
+                            "CA",
+                            "H"
+                        ]
+                    },
+                    {
+                        "name": "CA",
+                        "x:float": 0.0,
+                        "y:float": 0.0,
+                        "z:float": 0.0,
+                        "bond": [
+                            "N",
+                            "C",
+                            "CB",
+                            "HA"
+                        ]
+                    },
+                    {
+                        "name": "C",
+                        "x:float": -1.25,
+                        "y:float": 0.881,
+                        "z:float": 0.0,
+                        "bond": [
+                            "CA",
+                            "O"
+                        ]
+                    },
+                    {
+                        "name": "O",
+                        "x:float": -2.185,
+                        "y:float": 0.66,
+                        "z:float": -0.784,
+                        "bond": "C"
+                    },
+                    {
+                        "name": "CB",
+                        "x:float": 0.018,
+                        "y:float": -0.958,
+                        "z:float": 1.184,
+                        "bond": [
+                            "CA",
+                            "SG",
+                            "HB2",
+                            "HB3"
+                        ]
+                    },
+                    {
+                        "name": "SG",
+                        "x:float": 1.431,
+                        "y:float": -2.085,
+                        "z:float": 1.212,
+                        "bond": [
+                            "CB",
+                            "HG"
+                        ]
+                    },
+                    {
+                        "name": "H",
+                        "altname": "HN",
+                        "x:float": 1.201,
+                        "y:float": 1.847,
+                        "z:float": 0.0,
+                        "bond": "N"
+                    },
+                    {
+                        "name": "HA",
+                        "x:float": 0.0,
+                        "y:float": -0.542,
+                        "z:float": -0.84,
+                        "bond": "CA"
+                    },
+                    {
+                        "name": "HB2",
+                        "altname": "2HB",
+                        "x:float": 0.033,
+                        "y:float": -0.417,
+                        "z:float": 2.024,
+                        "bond": "CB"
+                    },
+                    {
+                        "name": "HB3",
+                        "altname": [
+                            "1HB",
+                            "HB1",
+                            "3HB"
+                        ],
+                        "x:float": -0.818,
+                        "y:float": -1.506,
+                        "z:float": 1.155,
+                        "bond": "CB"
+                    },
+                    {
+                        "name": "HG",
+                        "altname": [
+                            "1HG",
+                            "HG1"
+                        ],
+                        "x:float": 2.014,
+                        "y:float": -1.908,
+                        "z:float": 0.419,
+                        "bond": "SG"
+                    }
+                ],
+                "dihedral": "N CA CB SG"
+            },
+            {
+                "name": "GLN",
+                "atom": [
+                    {
+                        "name": "N",
+                        "x:float": 1.201,
+                        "y:float": 0.847,
+                        "z:float": 0.0,
+                        "bond": [
+                            "CA",
+                            "H"
+                        ]
+                    },
+                    {
+                        "name": "CA",
+                        "x:float": 0.0,
+                        "y:float": 0.0,
+                        "z:float": 0.0,
+                        "bond": [
+                            "N",
+                            "C",
+                            "CB",
+                            "HA"
+                        ]
+                    },
+                    {
+                        "name": "C",
+                        "x:float": -1.25,
+                        "y:float": 0.881,
+                        "z:float": 0.0,
+                        "bond": [
+                            "CA",
+                            "O"
+                        ]
+                    },
+                    {
+                        "name": "O",
+                        "x:float": -2.185,
+                        "y:float": 0.66,
+                        "z:float": -0.784,
+                        "bond": "C"
+                    },
+                    {
+                        "name": "CB",
+                        "x:float": -0.018,
+                        "y:float": -0.986,
+                        "z:float": 1.179,
+                        "bond": [
+                            "CA",
+                            "CG",
+                            "HB2",
+                            "HB3"
+                        ]
+                    },
+                    {
+                        "name": "CG",
+                        "x:float": 1.159,
+                        "y:float": -1.939,
+                        "z:float": 1.188,
+                        "bond": [
+                            "CB",
+                            "CD",
+                            "HG2",
+                            "HG3"
+                        ]
+                    },
+                    {
+                        "name": "CD",
+                        "x:float": 1.117,
+                        "y:float": -2.896,
+                        "z:float": 2.354,
+                        "bond": [
+                            "CG",
+                            "OE1",
+                            "NE2"
+                        ]
+                    },
+                    {
+                        "name": "OE1",
+                        "x:float": 0.214,
+                        "y:float": -2.882,
+                        "z:float": 3.191,
+                        "bond": "CD"
+                    },
+                    {
+                        "name": "NE2",
+                        "x:float": 2.144,
+                        "y:float": -3.752,
+                        "z:float": 2.427,
+                        "bond": [
+                            "CD",
+                            "HE21",
+                            "HE22"
+                        ]
+                    },
+                    {
+                        "name": "H",
+                        "altname": "HN",
+                        "x:float": 1.201,
+                        "y:float": 1.847,
+                        "z:float": 0.0,
+                        "bond": "N"
+                    },
+                    {
+                        "name": "HA",
+                        "x:float": 0.0,
+                        "y:float": -0.533,
+                        "z:float": -0.846,
+                        "bond": "CA"
+                    },
+                    {
+                        "name": "HB2",
+                        "altname": "2HB",
+                        "x:float": -0.007,
+                        "y:float": -0.462,
+                        "z:float": 2.03,
+                        "bond": "CB"
+                    },
+                    {
+                        "name": "HB3",
+                        "altname": [
+                            "1HB",
+                            "HB1",
+                            "3HB"
+                        ],
+                        "x:float": -0.86,
+                        "y:float": -1.524,
+                        "z:float": 1.129,
+                        "bond": "CB"
+                    },
+                    {
+                        "name": "HG2",
+                        "altname": "2HG",
+                        "x:float": 1.151,
+                        "y:float": -2.468,
+                        "z:float": 0.339,
+                        "bond": "CG"
+                    },
+                    {
+                        "name": "HG3",
+                        "altname": [
+                            "1HG",
+                            "HG1",
+                            "3HG"
+                        ],
+                        "x:float": 2.004,
+                        "y:float": -1.406,
+                        "z:float": 1.24,
+                        "bond": "CG"
+                    },
+                    {
+                        "name": "HE21",
+                        "altname": "1HE2",
+                        "x:float": 2.198,
+                        "y:float": -4.425,
+                        "z:float": 3.196,
+                        "bond": "NE2"
+                    },
+                    {
+                        "name": "HE22",
+                        "altname": "2HE2",
+                        "x:float": 2.86,
+                        "y:float": -3.722,
+                        "z:float": 1.713,
+                        "bond": "NE2"
+                    }
+                ],
+                "dihedral": [
+                    "N CA CB CG",
+                    "CA CB CG CD",
+                    "CB CG CD OE1"
+                ]
+            },
+            {
+                "name": "GLU",
+                "atom": [
+                    {
+                        "name": "N",
+                        "x:float": 1.201,
+                        "y:float": 0.847,
+                        "z:float": 0.0,
+                        "bond": [
+                            "CA",
+                            "H"
+                        ]
+                    },
+                    {
+                        "name": "CA",
+                        "x:float": 0.0,
+                        "y:float": 0.0,
+                        "z:float": 0.0,
+                        "bond": [
+                            "N",
+                            "C",
+                            "CB",
+                            "HA"
+                        ]
+                    },
+                    {
+                        "name": "C",
+                        "x:float": -1.25,
+                        "y:float": 0.881,
+                        "z:float": 0.0,
+                        "bond": [
+                            "CA",
+                            "O"
+                        ]
+                    },
+                    {
+                        "name": "O",
+                        "x:float": -2.185,
+                        "y:float": 0.66,
+                        "z:float": -0.784,
+                        "bond": "C"
+                    },
+                    {
+                        "name": "CB",
+                        "x:float": -0.059,
+                        "y:float": -0.875,
+                        "z:float": 1.258,
+                        "bond": [
+                            "CA",
+                            "CG",
+                            "HB2",
+                            "HB3"
+                        ]
+                    },
+                    {
+                        "name": "CG",
+                        "x:float": 1.082,
+                        "y:float": -1.85,
+                        "z:float": 1.501,
+                        "bond": [
+                            "CB",
+                            "CD",
+                            "HG2",
+                            "HG3"
+                        ]
+                    },
+                    {
+                        "name": "CD",
+                        "x:float": 0.99,
+                        "y:float": -2.687,
+                        "z:float": 2.74,
+                        "bond": [
+                            "CG",
+                            "OE1",
+                            "OE2"
+                        ]
+                    },
+                    {
+                        "name": "OE1",
+                        "x:float": 0.067,
+                        "y:float": -2.624,
+                        "z:float": 3.539,
+                        "bond": "CD"
+                    },
+                    {
+                        "name": "OE2",
+                        "x:float": 1.97,
+                        "y:float": -3.449,
+                        "z:float": 2.871,
+                        "bond": "CD"
+                    },
+                    {
+                        "name": "H",
+                        "altname": "HN",
+                        "x:float": 1.201,
+                        "y:float": 1.847,
+                        "z:float": 0.0,
+                        "bond": "N"
+                    },
+                    {
+                        "name": "HA",
+                        "x:float": 0.0,
+                        "y:float": -0.582,
+                        "z:float": -0.813,
+                        "bond": "CA"
+                    },
+                    {
+                        "name": "HB2",
+                        "altname": "2HB",
+                        "x:float": -0.099,
+                        "y:float": -0.26,
+                        "z:float": 2.046,
+                        "bond": "CB"
+                    },
+                    {
+                        "name": "HB3",
+                        "altname": [
+                            "1HB",
+                            "HB1",
+                            "3HB"
+                        ],
+                        "x:float": -0.903,
+                        "y:float": -1.409,
+                        "z:float": 1.21,
+                        "bond": "CB"
+                    },
+                    {
+                        "name": "HG2",
+                        "altname": "2HG",
+                        "x:float": 1.124,
+                        "y:float": -2.469,
+                        "z:float": 0.717,
+                        "bond": "CG"
+                    },
+                    {
+                        "name": "HG3",
+                        "altname": [
+                            "1HG",
+                            "HG1",
+                            "3HG"
+                        ],
+                        "x:float": 1.929,
+                        "y:float": -1.321,
+                        "z:float": 1.553,
+                        "bond": "CG"
+                    }
+                ],
+                "dihedral": [
+                    "N CA CB CG",
+                    "CA CB CG CD",
+                    "CB CG CD OE1"
+                ]
+            },
+            {
+                "name": "GLY",
+                "atom": [
+                    {
+                        "name": "N",
+                        "x:float": 1.201,
+                        "y:float": 0.847,
+                        "z:float": 0.0,
+                        "bond": [
+                            "CA",
+                            "H"
+                        ]
+                    },
+                    {
+                        "name": "CA",
+                        "x:float": 0.0,
+                        "y:float": 0.0,
+                        "z:float": 0.0,
+                        "bond": [
+                            "N",
+                            "C",
+                            "HA2",
+                            "HA3"
+                        ]
+                    },
+                    {
+                        "name": "C",
+                        "x:float": -1.25,
+                        "y:float": 0.881,
+                        "z:float": 0.0,
+                        "bond": [
+                            "CA",
+                            "O"
+                        ]
+                    },
+                    {
+                        "name": "O",
+                        "x:float": -2.185,
+                        "y:float": 0.66,
+                        "z:float": -0.784,
+                        "bond": "C"
+                    },
+                    {
+                        "name": "H",
+                        "altname": "HN",
+                        "x:float": 1.201,
+                        "y:float": 1.847,
+                        "z:float": 0.0,
+                        "bond": "N"
+                    },
+                    {
+                        "name": "HA2",
+                        "altname": "2HA",
+                        "x:float": 0.0,
+                        "y:float": -0.577,
+                        "z:float": -0.816,
+                        "bond": "CA"
+                    },
+                    {
+                        "name": "HA3",
+                        "altname": [
+                            "1HA",
+                            "HA1",
+                            "3HA"
+                        ],
+                        "x:float": 0.0,
+                        "y:float": -0.577,
+                        "z:float": 0.816,
+                        "bond": "CA"
+                    }
+                ]
+            },
+            {
+                "name": "HIS",
+                "atom": [
+                    {
+                        "name": "N",
+                        "x:float": 1.201,
+                        "y:float": 0.847,
+                        "z:float": 0.0,
+                        "bond": [
+                            "CA",
+                            "H"
+                        ]
+                    },
+                    {
+                        "name": "CA",
+                        "x:float": 0.0,
+                        "y:float": 0.0,
+                        "z:float": 0.0,
+                        "bond": [
+                            "N",
+                            "C",
+                            "CB",
+                            "HA"
+                        ]
+                    },
+                    {
+                        "name": "C",
+                        "x:float": -1.25,
+                        "y:float": 0.881,
+                        "z:float": 0.0,
+                        "bond": [
+                            "CA",
+                            "O"
+                        ]
+                    },
+                    {
+                        "name": "O",
+                        "x:float": -2.185,
+                        "y:float": 0.66,
+                        "z:float": -0.784,
+                        "bond": "C"
+                    },
+                    {
+                        "name": "CB",
+                        "x:float": -0.062,
+                        "y:float": -0.963,
+                        "z:float": 1.211,
+                        "bond": [
+                            "CA",
+                            "CG",
+                            "HB2",
+                            "HB3"
+                        ]
+                    },
+                    {
+                        "name": "CG",
+                        "x:float": 1.102,
+                        "y:float": -1.908,
+                        "z:float": 1.266,
+                        "bond": [
+                            "CB",
+                            "ND1",
+                            "CD2"
+                        ]
+                    },
+                    {
+                        "name": "ND1",
+                        "x:float": 2.279,
+                        "y:float": -1.643,
+                        "z:float": 1.921,
+                        "bond": [
+                            "CG",
+                            "CE1",
+                            "HD1"
+                        ]
+                    },
+                    {
+                        "name": "CD2",
+                        "x:float": 1.195,
+                        "y:float": -3.189,
+                        "z:float": 0.838,
+                        "bond": [
+                            "CG",
+                            "NE2",
+                            "HD2"
+                        ]
+                    },
+                    {
+                        "name": "CE1",
+                        "x:float": 3.044,
+                        "y:float": -2.718,
+                        "z:float": 1.891,
+                        "bond": [
+                            "ND1",
+                            "NE2",
+                            "HE1"
+                        ]
+                    },
+                    {
+                        "name": "NE2",
+                        "x:float": 2.411,
+                        "y:float": -3.674,
+                        "z:float": 1.242,
+                        "bond": [
+                            "CD2",
+                            "CE1",
+                            "HE2"
+                        ]
+                    },
+                    {
+                        "name": "H",
+                        "altname": "HN",
+                        "x:float": 1.201,
+                        "y:float": 1.847,
+                        "z:float": 0.0,
+                        "bond": "N"
+                    },
+                    {
+                        "name": "HA",
+                        "x:float": 0.0,
+                        "y:float": -0.547,
+                        "z:float": -0.837,
+                        "bond": "CA"
+                    },
+                    {
+                        "name": "HB2",
+                        "altname": "2HB",
+                        "x:float": -0.073,
+                        "y:float": -0.42,
+                        "z:float": 2.051,
+                        "bond": "CB"
+                    },
+                    {
+                        "name": "HB3",
+                        "altname": [
+                            "1HB",
+                            "HB1",
+                            "3HB"
+                        ],
+                        "x:float": -0.905,
+                        "y:float": -1.498,
+                        "z:float": 1.15,
+                        "bond": "CB"
+                    },
+                    {
+                        "name": "HD1",
+                        "x:float": 2.518,
+                        "y:float": -0.773,
+                        "z:float": 2.353,
+                        "bond": "ND1"
+                    },
+                    {
+                        "name": "HD2",
+                        "x:float": 0.502,
+                        "y:float": -3.69,
+                        "z:float": 0.32,
+                        "bond": "CD2"
+                    },
+                    {
+                        "name": "HE1",
+                        "x:float": 3.956,
+                        "y:float": -2.794,
+                        "z:float": 2.294,
+                        "bond": "CE1"
+                    },
+                    {
+                        "name": "HE2",
+                        "x:float": 2.758,
+                        "y:float": -4.596,
+                        "z:float": 1.074,
+                        "bond": "NE2"
+                    }
+                ],
+                "dihedral": [
+                    "N CA CB CG",
+                    "CA CB CG ND1"
+                ]
+            },
+            {
+                "name": "ILE",
+                "atom": [
+                    {
+                        "name": "N",
+                        "x:float": 1.201,
+                        "y:float": 0.847,
+                        "z:float": 0.0,
+                        "bond": [
+                            "CA",
+                            "H"
+                        ]
+                    },
+                    {
+                        "name": "CA",
+                        "x:float": 0.0,
+                        "y:float": 0.0,
+                        "z:float": 0.0,
+                        "bond": [
+                            "N",
+                            "C",
+                            "CB",
+                            "HA"
+                        ]
+                    },
+                    {
+                        "name": "C",
+                        "x:float": -1.25,
+                        "y:float": 0.881,
+                        "z:float": 0.0,
+                        "bond": [
+                            "CA",
+                            "O"
+                        ]
+                    },
+                    {
+                        "name": "O",
+                        "x:float": -2.185,
+                        "y:float": 0.66,
+                        "z:float": -0.784,
+                        "bond": "C"
+                    },
+                    {
+                        "name": "CB",
+                        "x:float": -0.007,
+                        "y:float": -1.019,
+                        "z:float": 1.136,
+                        "bond": [
+                            "CA",
+                            "CG1",
+                            "CG2",
+                            "HB"
+                        ]
+                    },
+                    {
+                        "name": "CG1",
+                        "x:float": 1.225,
+                        "y:float": -1.901,
+                        "z:float": 1.072,
+                        "bond": [
+                            "CB",
+                            "CD1",
+                            "HG12",
+                            "HG13"
+                        ]
+                    },
+                    {
+                        "name": "CG2",
+                        "x:float": -1.27,
+                        "y:float": -1.85,
+                        "z:float": 1.097,
+                        "bond": [
+                            "CB",
+                            "HG21",
+                            "HG22",
+                            "HG23"
+                        ]
+                    },
+                    {
+                        "name": "CD1",
+                        "altname": "CD",
+                        "x:float": 1.52,
+                        "y:float": -2.61,
+                        "z:float": 2.373,
+                        "bond": [
+                            "CG1",
+                            "HD11",
+                            "HD12",
+                            "HD13"
+                        ]
+                    },
+                    {
+                        "name": "H",
+                        "altname": "HN",
+                        "x:float": 1.201,
+                        "y:float": 1.847,
+                        "z:float": 0.0,
+                        "bond": "N",
+                        "comment": {
+                            "description": "Originally",
+                            "x": "2.100",
+                            "y": "0.413",
+                            "z": "0.012"
+                        }
+                    },
+                    {
+                        "name": "HA",
+                        "x:float": 0.005,
+                        "y:float": -0.49,
+                        "z:float": -0.87,
+                        "bond": "CA"
+                    },
+                    {
+                        "name": "HB",
+                        "x:float": 0.012,
+                        "y:float": -0.52,
+                        "z:float": 2.0,
+                        "bond": "CB"
+                    },
+                    {
+                        "name": "HG12",
+                        "altname": "2HG1",
+                        "x:float": 1.095,
+                        "y:float": -2.583,
+                        "z:float": 0.355,
+                        "bond": "CG1"
+                    },
+                    {
+                        "name": "HG13",
+                        "altname": [
+                            "1HG1",
+                            "HG11",
+                            "3HG1"
+                        ],
+                        "x:float": 2.011,
+                        "y:float": -1.332,
+                        "z:float": 0.834,
+                        "bond": "CG1"
+                    },
+                    {
+                        "name": "HG21",
+                        "altname": "1HG2",
+                        "x:float": -1.315,
+                        "y:float": -2.357,
+                        "z:float": 0.236,
+                        "bond": "CG2"
+                    },
+                    {
+                        "name": "HG22",
+                        "altname": "2HG2",
+                        "x:float": -1.266,
+                        "y:float": -2.49,
+                        "z:float": 1.865,
+                        "bond": "CG2"
+                    },
+                    {
+                        "name": "HG23",
+                        "altname": "3HG2",
+                        "x:float": -2.063,
+                        "y:float": -1.247,
+                        "z:float": 1.174,
+                        "bond": "CG2"
+                    },
+                    {
+                        "name": "HD11",
+                        "altname": [
+                            "1HD1",
+                            "HD1"
+                        ],
+                        "x:float": 0.76,
+                        "y:float": -3.218,
+                        "z:float": 2.6,
+                        "bond": "CD1"
+                    },
+                    {
+                        "name": "HD12",
+                        "altname": [
+                            "2HD1",
+                            "HD2"
+                        ],
+                        "x:float": 2.36,
+                        "y:float": -3.145,
+                        "z:float": 2.28,
+                        "bond": "CD1"
+                    },
+                    {
+                        "name": "HD13",
+                        "altname": [
+                            "3HD1",
+                            "HD3"
+                        ],
+                        "x:float": 1.634,
+                        "y:float": -1.935,
+                        "z:float": 3.101,
+                        "bond": "CD1"
+                    }
+                ],
+                "dihedral": [
+                    "N CA CB CG1",
+                    "CA CB CG1 CD1"
+                ]
+            },
+            {
+                "name": "LEU",
+                "atom": [
+                    {
+                        "name": "N",
+                        "x:float": 1.201,
+                        "y:float": 0.847,
+                        "z:float": 0.0,
+                        "bond": [
+                            "CA",
+                            "H"
+                        ]
+                    },
+                    {
+                        "name": "CA",
+                        "x:float": 0.0,
+                        "y:float": 0.0,
+                        "z:float": 0.0,
+                        "bond": [
+                            "N",
+                            "C",
+                            "CB",
+                            "HA"
+                        ]
+                    },
+                    {
+                        "name": "C",
+                        "x:float": -1.25,
+                        "y:float": 0.881,
+                        "z:float": 0.0,
+                        "bond": [
+                            "CA",
+                            "O"
+                        ]
+                    },
+                    {
+                        "name": "O",
+                        "x:float": -2.185,
+                        "y:float": 0.66,
+                        "z:float": -0.784,
+                        "bond": "C"
+                    },
+                    {
+                        "name": "CB",
+                        "x:float": 0.099,
+                        "y:float": -0.942,
+                        "z:float": 1.206,
+                        "bond": [
+                            "CA",
+                            "CG",
+                            "HB2",
+                            "HB3"
+                        ]
+                    },
+                    {
+                        "name": "CG",
+                        "x:float": 1.297,
+                        "y:float": -1.879,
+                        "z:float": 1.254,
+                        "bond": [
+                            "CB",
+                            "CD1",
+                            "CD2",
+                            "HG"
+                        ]
+                    },
+                    {
+                        "name": "CD1",
+                        "x:float": 1.249,
+                        "y:float": -2.745,
+                        "z:float": 2.508,
+                        "bond": [
+                            "CG",
+                            "HD11",
+                            "HD12",
+                            "HD13"
+                        ]
+                    },
+                    {
+                        "name": "CD2",
+                        "x:float": 1.275,
+                        "y:float": -2.755,
+                        "z:float": 0.006,
+                        "bond": [
+                            "CG",
+                            "HD21",
+                            "HD22",
+                            "HD23"
+                        ]
+                    },
+                    {
+                        "name": "H",
+                        "altname": "HN",
+                        "x:float": 1.201,
+                        "y:float": 1.847,
+                        "z:float": 0.0,
+                        "bond": "N"
+                    },
+                    {
+                        "name": "HA",
+                        "x:float": 0.0,
+                        "y:float": -0.551,
+                        "z:float": -0.834,
+                        "bond": "CA"
+                    },
+                    {
+                        "name": "HB2",
+                        "altname": "2HB",
+                        "x:float": 0.127,
+                        "y:float": -0.375,
+                        "z:float": 2.03,
+                        "bond": "CB"
+                    },
+                    {
+                        "name": "HB3",
+                        "altname": [
+                            "1HB",
+                            "HB1",
+                            "3HB"
+                        ],
+                        "x:float": -0.726,
+                        "y:float": -1.506,
+                        "z:float": 1.217,
+                        "bond": "CB"
+                    },
+                    {
+                        "name": "HG",
+                        "x:float": 2.138,
+                        "y:float": -1.338,
+                        "z:float": 1.26,
+                        "bond": "CG"
+                    },
+                    {
+                        "name": "HD11",
+                        "altname": "1HD1",
+                        "x:float": 1.263,
+                        "y:float": -2.159,
+                        "z:float": 3.318,
+                        "bond": "CD1"
+                    },
+                    {
+                        "name": "HD12",
+                        "altname": "2HD1",
+                        "x:float": 0.41,
+                        "y:float": -3.289,
+                        "z:float": 2.505,
+                        "bond": "CD1"
+                    },
+                    {
+                        "name": "HD13",
+                        "altname": "3HD1",
+                        "x:float": 2.042,
+                        "y:float": -3.354,
+                        "z:float": 2.523,
+                        "bond": "CD1"
+                    },
+                    {
+                        "name": "HD21",
+                        "altname": "1HD2",
+                        "x:float": 0.427,
+                        "y:float": -3.285,
+                        "z:float": -0.014,
+                        "bond": "CD2"
+                    },
+                    {
+                        "name": "HD22",
+                        "altname": "2HD2",
+                        "x:float": 1.326,
+                        "y:float": -2.177,
+                        "z:float": -0.808,
+                        "bond": "CD2"
+                    },
+                    {
+                        "name": "HD23",
+                        "altname": "3HD2",
+                        "x:float": 2.057,
+                        "y:float": -3.378,
+                        "z:float": 0.022,
+                        "bond": "CD2"
+                    }
+                ],
+                "dihedral": [
+                    "N CA CB CG",
+                    "CA CB CG CD1"
+                ]
+            },
+            {
+                "name": "LYS",
+                "atom": [
+                    {
+                        "name": "N",
+                        "x:float": 1.201,
+                        "y:float": 0.847,
+                        "z:float": 0.0,
+                        "bond": [
+                            "CA",
+                            "H"
+                        ]
+                    },
+                    {
+                        "name": "CA",
+                        "x:float": 0.0,
+                        "y:float": 0.0,
+                        "z:float": 0.0,
+                        "bond": [
+                            "N",
+                            "C",
+                            "CB",
+                            "HA"
+                        ]
+                    },
+                    {
+                        "name": "C",
+                        "x:float": -1.25,
+                        "y:float": 0.881,
+                        "z:float": 0.0,
+                        "bond": [
+                            "CA",
+                            "O"
+                        ]
+                    },
+                    {
+                        "name": "O",
+                        "x:float": -2.185,
+                        "y:float": 0.66,
+                        "z:float": -0.784,
+                        "bond": "C"
+                    },
+                    {
+                        "name": "CB",
+                        "x:float": -0.03,
+                        "y:float": -0.922,
+                        "z:float": 1.219,
+                        "bond": [
+                            "CA",
+                            "CG",
+                            "HB2",
+                            "HB3"
+                        ]
+                    },
+                    {
+                        "name": "CG",
+                        "x:float": 1.154,
+                        "y:float": -1.877,
+                        "z:float": 1.315,
+                        "bond": [
+                            "CB",
+                            "CD",
+                            "HG2",
+                            "HG3"
+                        ]
+                    },
+                    {
+                        "name": "CD",
+                        "x:float": 1.06,
+                        "y:float": -2.763,
+                        "z:float": 2.546,
+                        "bond": [
+                            "CG",
+                            "CE",
+                            "HD2",
+                            "HD3"
+                        ]
+                    },
+                    {
+                        "name": "CE",
+                        "x:float": 2.224,
+                        "y:float": -3.719,
+                        "z:float": 2.663,
+                        "bond": [
+                            "CD",
+                            "NZ",
+                            "HE2",
+                            "HE3"
+                        ]
+                    },
+                    {
+                        "name": "NZ",
+                        "x:float": 2.09,
+                        "y:float": -4.562,
+                        "z:float": 3.878,
+                        "bond": [
+                            "CE",
+                            "HZ1",
+                            "HZ2",
+                            "HZ3"
+                        ]
+                    },
+                    {
+                        "name": "H",
+                        "altname": "HN",
+                        "x:float": 1.201,
+                        "y:float": 1.847,
+                        "z:float": 0.0,
+                        "bond": "N"
+                    },
+                    {
+                        "name": "HA",
+                        "x:float": 0.0,
+                        "y:float": -0.56,
+                        "z:float": -0.829,
+                        "bond": "CA"
+                    },
+                    {
+                        "name": "HB2",
+                        "altname": "2HB",
+                        "x:float": -0.04,
+                        "y:float": -0.354,
+                        "z:float": 2.041,
+                        "bond": "CB"
+                    },
+                    {
+                        "name": "HB3",
+                        "altname": [
+                            "1HB",
+                            "HB1",
+                            "3HB"
+                        ],
+                        "x:float": -0.868,
+                        "y:float": -1.466,
+                        "z:float": 1.179,
+                        "bond": "CB"
+                    },
+                    {
+                        "name": "HG2",
+                        "altname": "2HG",
+                        "x:float": 1.171,
+                        "y:float": -2.456,
+                        "z:float": 0.499,
+                        "bond": "CG"
+                    },
+                    {
+                        "name": "HG3",
+                        "altname": [
+                            "1HG",
+                            "HG1",
+                            "3HG"
+                        ],
+                        "x:float": 1.999,
+                        "y:float": -1.344,
+                        "z:float": 1.362,
+                        "bond": "CG"
+                    },
+                    {
+                        "name": "HD2",
+                        "altname": "2HD",
+                        "x:float": 1.04,
+                        "y:float": -2.18,
+                        "z:float": 3.359,
+                        "bond": "CD"
+                    },
+                    {
+                        "name": "HD3",
+                        "altname": [
+                            "1HD",
+                            "HD1",
+                            "3HD"
+                        ],
+                        "x:float": 0.213,
+                        "y:float": -3.293,
+                        "z:float": 2.496,
+                        "bond": "CD"
+                    },
+                    {
+                        "name": "HE2",
+                        "altname": "2HE",
+                        "x:float": 2.248,
+                        "y:float": -4.308,
+                        "z:float": 1.855,
+                        "bond": "CE"
+                    },
+                    {
+                        "name": "HE3",
+                        "altname": [
+                            "1HE",
+                            "HE1",
+                            "3HE"
+                        ],
+                        "x:float": 3.075,
+                        "y:float": -3.196,
+                        "z:float": 2.718,
+                        "bond": "CE"
+                    },
+                    {
+                        "name": "HZ1",
+                        "altname": "1HZ",
+                        "x:float": 2.07,
+                        "y:float": -3.977,
+                        "z:float": 4.689,
+                        "bond": "NZ"
+                    },
+                    {
+                        "name": "HZ2",
+                        "altname": "2HZ",
+                        "x:float": 1.242,
+                        "y:float": -5.089,
+                        "z:float": 3.826,
+                        "bond": "NZ"
+                    },
+                    {
+                        "name": "HZ3",
+                        "altname": "3HZ",
+                        "x:float": 2.868,
+                        "y:float": -5.187,
+                        "z:float": 3.938,
+                        "bond": "NZ"
+                    }
+                ],
+                "dihedral": [
+                    "N CA CB CG",
+                    "CA CB CG CD",
+                    "CB CG CD CE",
+                    "CG CD CE NZ",
+                    "CD CE NZ HZ1"
+                ]
+            },
+            {
+                "name": "MET",
+                "atom": [
+                    {
+                        "name": "N",
+                        "x:float": 1.201,
+                        "y:float": 0.847,
+                        "z:float": 0.0,
+                        "bond": [
+                            "CA",
+                            "H"
+                        ]
+                    },
+                    {
+                        "name": "CA",
+                        "x:float": 0.0,
+                        "y:float": 0.0,
+                        "z:float": 0.0,
+                        "bond": [
+                            "N",
+                            "C",
+                            "CB",
+                            "HA"
+                        ]
+                    },
+                    {
+                        "name": "C",
+                        "x:float": -1.25,
+                        "y:float": 0.881,
+                        "z:float": 0.0,
+                        "bond": [
+                            "CA",
+                            "O"
+                        ]
+                    },
+                    {
+                        "name": "O",
+                        "x:float": -2.185,
+                        "y:float": 0.66,
+                        "z:float": -0.784,
+                        "bond": "C"
+                    },
+                    {
+                        "name": "CB",
+                        "x:float": 0.022,
+                        "y:float": -0.966,
+                        "z:float": 1.181,
+                        "bond": [
+                            "CA",
+                            "CG",
+                            "HB2",
+                            "HB3"
+                        ]
+                    },
+                    {
+                        "name": "CG",
+                        "x:float": 1.224,
+                        "y:float": -1.872,
+                        "z:float": 1.131,
+                        "bond": [
+                            "CB",
+                            "SD",
+                            "HG2",
+                            "HG3"
+                        ]
+                    },
+                    {
+                        "name": "SD",
+                        "x:float": 1.131,
+                        "y:float": -2.818,
+                        "z:float": -0.431,
+                        "bond": [
+                            "CG",
+                            "CE"
+                        ]
+                    },
+                    {
+                        "name": "CE",
+                        "x:float": -0.436,
+                        "y:float": -3.661,
+                        "z:float": -0.189,
+                        "bond": [
+                            "SD",
+                            "HE1",
+                            "HE2",
+                            "HE3"
+                        ]
+                    },
+                    {
+                        "name": "H",
+                        "altname": "HN",
+                        "x:float": 1.201,
+                        "y:float": 1.847,
+                        "z:float": 0.0,
+                        "bond": "N"
+                    },
+                    {
+                        "name": "HA",
+                        "x:float": 0.0,
+                        "y:float": -0.539,
+                        "z:float": -0.842,
+                        "bond": "CA"
+                    },
+                    {
+                        "name": "HB2",
+                        "altname": "2HB",
+                        "x:float": 0.047,
+                        "y:float": -0.44,
+                        "z:float": 2.031,
+                        "bond": "CB"
+                    },
+                    {
+                        "name": "HB3",
+                        "altname": [
+                            "1HB",
+                            "HB1",
+                            "3HB"
+                        ],
+                        "x:float": -0.807,
+                        "y:float": -1.525,
+                        "z:float": 1.159,
+                        "bond": "CB"
+                    },
+                    {
+                        "name": "HG2",
+                        "altname": "2HG",
+                        "x:float": 2.063,
+                        "y:float": -1.328,
+                        "z:float": 1.152,
+                        "bond": "CG"
+                    },
+                    {
+                        "name": "HG3",
+                        "altname": [
+                            "1HG",
+                            "HG1",
+                            "3HG"
+                        ],
+                        "x:float": 1.214,
+                        "y:float": -2.498,
+                        "z:float": 1.911,
+                        "bond": "CG"
+                    },
+                    {
+                        "name": "HE1",
+                        "altname": "1HE",
+                        "x:float": -0.384,
+                        "y:float": -4.233,
+                        "z:float": 0.63,
+                        "bond": "CE"
+                    },
+                    {
+                        "name": "HE2",
+                        "altname": "2HE",
+                        "x:float": -1.165,
+                        "y:float": -2.986,
+                        "z:float": -0.078,
+                        "bond": "CE"
+                    },
+                    {
+                        "name": "HE3",
+                        "altname": "3HE",
+                        "x:float": -0.632,
+                        "y:float": -4.236,
+                        "z:float": -0.984,
+                        "bond": "CE"
+                    }
+                ],
+                "dihedral": [
+                    "N CA CB CG",
+                    "CA CB CG SD",
+                    "CB CG SD CE"
+                ]
+            },
+            {
+                "name": "PHE",
+                "atom": [
+                    {
+                        "name": "N",
+                        "x:float": 1.201,
+                        "y:float": 0.847,
+                        "z:float": 0.0,
+                        "bond": [
+                            "CA",
+                            "H"
+                        ]
+                    },
+                    {
+                        "name": "CA",
+                        "x:float": 0.0,
+                        "y:float": 0.0,
+                        "z:float": 0.0,
+                        "bond": [
+                            "N",
+                            "C",
+                            "CB",
+                            "HA"
+                        ]
+                    },
+                    {
+                        "name": "C",
+                        "x:float": -1.25,
+                        "y:float": 0.881,
+                        "z:float": 0.0,
+                        "bond": [
+                            "CA",
+                            "O"
+                        ]
+                    },
+                    {
+                        "name": "O",
+                        "x:float": -2.185,
+                        "y:float": 0.66,
+                        "z:float": -0.784,
+                        "bond": "C"
+                    },
+                    {
+                        "name": "CB",
+                        "x:float": 0.017,
+                        "y:float": -1.035,
+                        "z:float": 1.114,
+                        "bond": [
+                            "CA",
+                            "CG",
+                            "HB2",
+                            "HB3"
+                        ]
+                    },
+                    {
+                        "name": "CG",
+                        "x:float": 1.156,
+                        "y:float": -2.01,
+                        "z:float": 1.091,
+                        "bond": [
+                            "CB",
+                            "CD1",
+                            "CD2"
+                        ]
+                    },
+                    {
+                        "name": "CD1",
+                        "x:float": 2.341,
+                        "y:float": -1.718,
+                        "z:float": 1.764,
+                        "bond": [
+                            "CG",
+                            "CE1",
+                            "HD1"
+                        ]
+                    },
+                    {
+                        "name": "CD2",
+                        "x:float": 1.041,
+                        "y:float": -3.224,
+                        "z:float": 0.417,
+                        "bond": [
+                            "CG",
+                            "CE2",
+                            "HD2"
+                        ]
+                    },
+                    {
+                        "name": "CE1",
+                        "x:float": 3.404,
+                        "y:float": -2.603,
+                        "z:float": 1.765,
+                        "bond": [
+                            "CD1",
+                            "CZ",
+                            "HE1"
+                        ]
+                    },
+                    {
+                        "name": "CE2",
+                        "x:float": 2.093,
+                        "y:float": -4.138,
+                        "z:float": 0.397,
+                        "bond": [
+                            "CD2",
+                            "CZ",
+                            "HE2"
+                        ]
+                    },
+                    {
+                        "name": "CZ",
+                        "x:float": 3.288,
+                        "y:float": -3.808,
+                        "z:float": 1.062,
+                        "bond": [
+                            "CE1",
+                            "CE2",
+                            "HZ"
+                        ]
+                    },
+                    {
+                        "name": "H",
+                        "altname": "HN",
+                        "x:float": 1.201,
+                        "y:float": 1.847,
+                        "z:float": 0.0,
+                        "bond": "N"
+                    },
+                    {
+                        "name": "HA",
+                        "x:float": 0.0,
+                        "y:float": -0.503,
+                        "z:float": -0.864,
+                        "bond": "CA"
+                    },
+                    {
+                        "name": "HB2",
+                        "altname": "2HB",
+                        "x:float": 0.052,
+                        "y:float": -0.546,
+                        "z:float": 1.985,
+                        "bond": "CB"
+                    },
+                    {
+                        "name": "HB3",
+                        "altname": [
+                            "1HB",
+                            "HB1",
+                            "3HB"
+                        ],
+                        "x:float": -0.833,
+                        "y:float": -1.558,
+                        "z:float": 1.058,
+                        "bond": "CB"
+                    },
+                    {
+                        "name": "HD1",
+                        "altname": "1HD",
+                        "x:float": 2.424,
+                        "y:float": -0.852,
+                        "z:float": 2.257,
+                        "bond": "CD1"
+                    },
+                    {
+                        "name": "HD2",
+                        "altname": "2HD",
+                        "x:float": 0.189,
+                        "y:float": -3.444,
+                        "z:float": -0.06,
+                        "bond": "CD2"
+                    },
+                    {
+                        "name": "HE1",
+                        "altname": "1HE",
+                        "x:float": 4.245,
+                        "y:float": -2.385,
+                        "z:float": 2.26,
+                        "bond": "CE1"
+                    },
+                    {
+                        "name": "HE2",
+                        "altname": "2HE",
+                        "x:float": 2.001,
+                        "y:float": -5.011,
+                        "z:float": -0.082,
+                        "bond": "CE2"
+                    },
+                    {
+                        "name": "HZ",
+                        "x:float": 4.062,
+                        "y:float": -4.44,
+                        "z:float": 1.033,
+                        "bond": "CZ"
+                    }
+                ],
+                "dihedral": [
+                    "N CA CB CG",
+                    "CA CB CG CD1"
+                ]
+            },
+            {
+                "name": "PRO",
+                "atom": [
+                    {
+                        "name": "N",
+                        "x:float": 1.201,
+                        "y:float": 0.847,
+                        "z:float": 0.0,
+                        "bond": [
+                            "CA",
+                            "CD"
+                        ]
+                    },
+                    {
+                        "name": "CA",
+                        "x:float": 0.0,
+                        "y:float": 0.0,
+                        "z:float": 0.0,
+                        "bond": [
+                            "N",
+                            "C",
+                            "CB",
+                            "HA"
+                        ]
+                    },
+                    {
+                        "name": "C",
+                        "x:float": -1.25,
+                        "y:float": 0.881,
+                        "z:float": 0.0,
+                        "bond": [
+                            "CA",
+                            "O"
+                        ]
+                    },
+                    {
+                        "name": "O",
+                        "x:float": -2.185,
+                        "y:float": 0.66,
+                        "z:float": -0.784,
+                        "bond": "C"
+                    },
+                    {
+                        "name": "CB",
+                        "x:float": 0.124,
+                        "y:float": -0.783,
+                        "z:float": 1.314,
+                        "bond": [
+                            "CA",
+                            "CG",
+                            "HB2",
+                            "HB3"
+                        ]
+                    },
+                    {
+                        "name": "CG",
+                        "x:float": 0.895,
+                        "y:float": 0.139,
+                        "z:float": 2.221,
+                        "bond": [
+                            "CB",
+                            "CD",
+                            "HG2",
+                            "HG3"
+                        ]
+                    },
+                    {
+                        "name": "CD",
+                        "x:float": 1.874,
+                        "y:float": 0.862,
+                        "z:float": 1.306,
+                        "bond": [
+                            "CG",
+                            "N",
+                            "HD2",
+                            "HD3"
+                        ]
+                    },
+                    {
+                        "name": "HA",
+                        "x:float": 0.0,
+                        "y:float": -0.619,
+                        "z:float": -0.785,
+                        "bond": "CA"
+                    },
+                    {
+                        "name": "HB2",
+                        "altname": "2HB",
+                        "x:float": -0.779,
+                        "y:float": -0.981,
+                        "z:float": 1.695,
+                        "bond": "CB"
+                    },
+                    {
+                        "name": "HB3",
+                        "altname": [
+                            "1HB",
+                            "HB1",
+                            "3HB"
+                        ],
+                        "x:float": 0.621,
+                        "y:float": -1.638,
+                        "z:float": 1.172,
+                        "bond": "CB"
+                    },
+                    {
+                        "name": "HG2",
+                        "altname": "2HG",
+                        "x:float": 0.28,
+                        "y:float": 0.791,
+                        "z:float": 2.664,
+                        "bond": "CG"
+                    },
+                    {
+                        "name": "HG3",
+                        "altname": [
+                            "1HG",
+                            "HG1",
+                            "3HG"
+                        ],
+                        "x:float": 1.385,
+                        "y:float": -0.384,
+                        "z:float": 2.918,
+                        "bond": "CG"
+                    },
+                    {
+                        "name": "HD2",
+                        "altname": "2HD",
+                        "x:float": 2.028,
+                        "y:float": 1.799,
+                        "z:float": 1.617,
+                        "bond": "CD"
+                    },
+                    {
+                        "name": "HD3",
+                        "altname": [
+                            "1HD",
+                            "HD1",
+                            "3HD"
+                        ],
+                        "x:float": 2.748,
+                        "y:float": 0.377,
+                        "z:float": 1.263,
+                        "bond": "CD"
+                    }
+                ]
+            },
+            {
+                "name": "SER",
+                "atom": [
+                    {
+                        "name": "N",
+                        "x:float": 1.201,
+                        "y:float": 0.847,
+                        "z:float": 0.0,
+                        "bond": [
+                            "CA",
+                            "H"
+                        ]
+                    },
+                    {
+                        "name": "CA",
+                        "x:float": 0.0,
+                        "y:float": 0.0,
+                        "z:float": 0.0,
+                        "bond": [
+                            "N",
+                            "C",
+                            "CB",
+                            "HA"
+                        ]
+                    },
+                    {
+                        "name": "C",
+                        "x:float": -1.25,
+                        "y:float": 0.881,
+                        "z:float": 0.0,
+                        "bond": [
+                            "CA",
+                            "O"
+                        ]
+                    },
+                    {
+                        "name": "O",
+                        "x:float": -2.185,
+                        "y:float": 0.66,
+                        "z:float": -0.784,
+                        "bond": "C"
+                    },
+                    {
+                        "name": "CB",
+                        "x:float": 0.014,
+                        "y:float": -0.971,
+                        "z:float": 1.174,
+                        "bond": [
+                            "CA",
+                            "OG",
+                            "HB2",
+                            "HB3"
+                        ]
+                    },
+                    {
+                        "name": "OG",
+                        "x:float": 0.056,
+                        "y:float": -0.296,
+                        "z:float": 2.418,
+                        "bond": [
+                            "CB",
+                            "HG"
+                        ]
+                    },
+                    {
+                        "name": "H",
+                        "altname": "HN",
+                        "x:float": 1.201,
+                        "y:float": 1.847,
+                        "z:float": 0.0,
+                        "bond": "N"
+                    },
+                    {
+                        "name": "HA",
+                        "x:float": 0.0,
+                        "y:float": -0.536,
+                        "z:float": -0.844,
+                        "bond": "CA"
+                    },
+                    {
+                        "name": "HB2",
+                        "altname": "2HB",
+                        "x:float": -0.812,
+                        "y:float": -1.533,
+                        "z:float": 1.139,
+                        "bond": "CB"
+                    },
+                    {
+                        "name": "HB3",
+                        "altname": [
+                            "1HB",
+                            "HB1",
+                            "3HB"
+                        ],
+                        "x:float": 0.82,
+                        "y:float": -1.558,
+                        "z:float": 1.098,
+                        "bond": "CB"
+                    },
+                    {
+                        "name": "HG",
+                        "x:float": 0.067,
+                        "y:float": 0.691,
+                        "z:float": 2.262,
+                        "bond": "OG"
+                    }
+                ],
+                "dihedral": [
+                    "N CA CB OG",
+                    "CA CB OG HG"
+                ]
+            },
+            {
+                "name": "THR",
+                "atom": [
+                    {
+                        "name": "N",
+                        "x:float": 1.201,
+                        "y:float": 0.847,
+                        "z:float": 0.0,
+                        "bond": [
+                            "CA",
+                            "H"
+                        ]
+                    },
+                    {
+                        "name": "CA",
+                        "x:float": 0.0,
+                        "y:float": 0.0,
+                        "z:float": 0.0,
+                        "bond": [
+                            "N",
+                            "C",
+                            "CB",
+                            "HA"
+                        ]
+                    },
+                    {
+                        "name": "C",
+                        "x:float": -1.25,
+                        "y:float": 0.881,
+                        "z:float": 0.0,
+                        "bond": [
+                            "CA",
+                            "O"
+                        ]
+                    },
+                    {
+                        "name": "O",
+                        "x:float": -2.185,
+                        "y:float": 0.66,
+                        "z:float": -0.784,
+                        "bond": "C"
+                    },
+                    {
+                        "name": "CB",
+                        "x:float": 0.001,
+                        "y:float": -0.981,
+                        "z:float": 1.242,
+                        "bond": [
+                            "CA",
+                            "OG1",
+                            "CG2",
+                            "HB"
+                        ]
+                    },
+                    {
+                        "name": "OG1",
+                        "x:float": 1.226,
+                        "y:float": -1.775,
+                        "z:float": 1.136,
+                        "bond": [
+                            "CB",
+                            "HG1"
+                        ]
+                    },
+                    {
+                        "name": "CG2",
+                        "x:float": -1.252,
+                        "y:float": -1.866,
+                        "z:float": 1.324,
+                        "bond": [
+                            "CB",
+                            "HG21",
+                            "HG22",
+                            "HG23"
+                        ]
+                    },
+                    {
+                        "name": "H",
+                        "altname": "HN",
+                        "x:float": 1.201,
+                        "y:float": 1.847,
+                        "z:float": 0.0,
+                        "bond": "N"
+                    },
+                    {
+                        "name": "HA",
+                        "x:float": 0.0,
+                        "y:float": -0.549,
+                        "z:float": -0.836,
+                        "bond": "CA"
+                    },
+                    {
+                        "name": "HB",
+                        "x:float": 0.054,
+                        "y:float": -0.432,
+                        "z:float": 2.076,
+                        "bond": "CB"
+                    },
+                    {
+                        "name": "HG1",
+                        "altname": "1HG",
+                        "x:float": 1.735,
+                        "y:float": -1.497,
+                        "z:float": 0.321,
+                        "bond": "OG1"
+                    },
+                    {
+                        "name": "HG21",
+                        "altname": "1HG2",
+                        "x:float": -2.064,
+                        "y:float": -1.287,
+                        "z:float": 1.399,
+                        "bond": "CG2"
+                    },
+                    {
+                        "name": "HG22",
+                        "altname": "2HG2",
+                        "x:float": -1.318,
+                        "y:float": -2.427,
+                        "z:float": 0.498,
+                        "bond": "CG2"
+                    },
+                    {
+                        "name": "HG23",
+                        "altname": "3HG2",
+                        "x:float": -1.19,
+                        "y:float": -2.459,
+                        "z:float": 2.126,
+                        "bond": "CG2"
+                    }
+                ],
+                "dihedral": [
+                    "N CA CB OG1",
+                    "CA CB OG1 HG1"
+                ]
+            },
+            {
+                "name": "TRP",
+                "atom": [
+                    {
+                        "name": "N",
+                        "x:float": 1.201,
+                        "y:float": 0.847,
+                        "z:float": 0.0,
+                        "bond": [
+                            "CA",
+                            "H"
+                        ]
+                    },
+                    {
+                        "name": "CA",
+                        "x:float": 0.0,
+                        "y:float": 0.0,
+                        "z:float": 0.0,
+                        "bond": [
+                            "N",
+                            "C",
+                            "CB",
+                            "HA"
+                        ]
+                    },
+                    {
+                        "name": "C",
+                        "x:float": -1.25,
+                        "y:float": 0.881,
+                        "z:float": 0.0,
+                        "bond": [
+                            "CA",
+                            "O"
+                        ]
+                    },
+                    {
+                        "name": "O",
+                        "x:float": -2.185,
+                        "y:float": 0.66,
+                        "z:float": -0.784,
+                        "bond": "C"
+                    },
+                    {
+                        "name": "CB",
+                        "x:float": 0.046,
+                        "y:float": -1.011,
+                        "z:float": 1.18,
+                        "bond": [
+                            "CA",
+                            "CG",
+                            "HB2",
+                            "HB3"
+                        ]
+                    },
+                    {
+                        "name": "CG",
+                        "x:float": 1.198,
+                        "y:float": -1.948,
+                        "z:float": 1.179,
+                        "bond": [
+                            "CB",
+                            "CD1",
+                            "CD2"
+                        ]
+                    },
+                    {
+                        "name": "CD1",
+                        "x:float": 2.424,
+                        "y:float": -1.767,
+                        "z:float": 1.763,
+                        "bond": [
+                            "CG",
+                            "NE1",
+                            "HD1"
+                        ]
+                    },
+                    {
+                        "name": "CD2",
+                        "x:float": 1.241,
+                        "y:float": -3.251,
+                        "z:float": 0.576,
+                        "bond": [
+                            "CG",
+                            "CE2",
+                            "CE3"
+                        ]
+                    },
+                    {
+                        "name": "NE1",
+                        "x:float": 3.217,
+                        "y:float": -2.87,
+                        "z:float": 1.56,
+                        "bond": [
+                            "CD1",
+                            "CE2",
+                            "HE1"
+                        ]
+                    },
+                    {
+                        "name": "CE2",
+                        "x:float": 2.521,
+                        "y:float": -3.787,
+                        "z:float": 0.825,
+                        "bond": [
+                            "NE1",
+                            "CD2",
+                            "CZ2"
+                        ]
+                    },
+                    {
+                        "name": "CE3",
+                        "x:float": 0.32,
+                        "y:float": -3.997,
+                        "z:float": -0.158,
+                        "bond": [
+                            "CD2",
+                            "CZ3",
+                            "HE3"
+                        ]
+                    },
+                    {
+                        "name": "CZ2",
+                        "x:float": 2.898,
+                        "y:float": -5.036,
+                        "z:float": 0.383,
+                        "bond": [
+                            "CE2",
+                            "CH2",
+                            "HZ2"
+                        ]
+                    },
+                    {
+                        "name": "CZ3",
+                        "x:float": 0.688,
+                        "y:float": -5.237,
+                        "z:float": -0.605,
+                        "bond": [
+                            "CE3",
+                            "CH2",
+                            "HZ3"
+                        ]
+                    },
+                    {
+                        "name": "CH2",
+                        "x:float": 1.958,
+                        "y:float": -5.752,
+                        "z:float": -0.344,
+                        "bond": [
+                            "CZ2",
+                            "CZ3",
+                            "HH2"
+                        ]
+                    },
+                    {
+                        "name": "H",
+                        "altname": "HN",
+                        "x:float": 1.201,
+                        "y:float": 1.847,
+                        "z:float": 0.0,
+                        "bond": "N"
+                    },
+                    {
+                        "name": "HA",
+                        "x:float": 0.0,
+                        "y:float": -0.526,
+                        "z:float": -0.85,
+                        "bond": "CA"
+                    },
+                    {
+                        "name": "HB2",
+                        "altname": "2HB",
+                        "x:float": 0.076,
+                        "y:float": -0.488,
+                        "z:float": 2.032,
+                        "bond": "CB"
+                    },
+                    {
+                        "name": "HB3",
+                        "altname": [
+                            "1HB",
+                            "HB1",
+                            "3HB"
+                        ],
+                        "x:float": -0.793,
+                        "y:float": -1.555,
+                        "z:float": 1.152,
+                        "bond": "CB"
+                    },
+                    {
+                        "name": "HD1",
+                        "altname": "1HD",
+                        "x:float": 2.702,
+                        "y:float": -0.949,
+                        "z:float": 2.265,
+                        "bond": "CD1"
+                    },
+                    {
+                        "name": "HE1",
+                        "altname": "1HE",
+                        "x:float": 4.152,
+                        "y:float": -2.983,
+                        "z:float": 1.896,
+                        "bond": "NE1"
+                    },
+                    {
+                        "name": "HE3",
+                        "altname": "3HE",
+                        "x:float": -0.591,
+                        "y:float": -3.634,
+                        "z:float": -0.353,
+                        "bond": "CE3"
+                    },
+                    {
+                        "name": "HZ2",
+                        "altname": "2HZ",
+                        "x:float": 3.805,
+                        "y:float": -5.408,
+                        "z:float": 0.576,
+                        "bond": "CZ2"
+                    },
+                    {
+                        "name": "HZ3",
+                        "altname": [
+                            "1HZ",
+                            "HZ1",
+                            "3HZ"
+                        ],
+                        "x:float": 0.035,
+                        "y:float": -5.784,
+                        "z:float": -1.129,
+                        "bond": "CZ3"
+                    },
+                    {
+                        "name": "HH2",
+                        "altname": "2HH",
+                        "x:float": 2.197,
+                        "y:float": -6.66,
+                        "z:float": -0.689,
+                        "bond": "CH2"
+                    }
+                ],
+                "dihedral": [
+                    "N CA CB CG",
+                    "CA CB CG CD1"
+                ]
+            },
+            {
+                "name": "TYR",
+                "atom": [
+                    {
+                        "name": "N",
+                        "x:float": 1.201,
+                        "y:float": 0.847,
+                        "z:float": 0.0,
+                        "bond": [
+                            "CA",
+                            "H"
+                        ]
+                    },
+                    {
+                        "name": "CA",
+                        "x:float": 0.0,
+                        "y:float": 0.0,
+                        "z:float": 0.0,
+                        "bond": [
+                            "N",
+                            "C",
+                            "CB",
+                            "HA"
+                        ]
+                    },
+                    {
+                        "name": "C",
+                        "x:float": -1.25,
+                        "y:float": 0.881,
+                        "z:float": 0.0,
+                        "bond": [
+                            "CA",
+                            "O"
+                        ]
+                    },
+                    {
+                        "name": "O",
+                        "x:float": -2.185,
+                        "y:float": 0.66,
+                        "z:float": -0.784,
+                        "bond": "C"
+                    },
+                    {
+                        "name": "CB",
+                        "x:float": 0.012,
+                        "y:float": -0.963,
+                        "z:float": 1.196,
+                        "bond": [
+                            "CA",
+                            "CG",
+                            "HB2",
+                            "HB3"
+                        ]
+                    },
+                    {
+                        "name": "CG",
+                        "x:float": 1.193,
+                        "y:float": -1.914,
+                        "z:float": 1.235,
+                        "bond": [
+                            "CB",
+                            "CD1",
+                            "CD2"
+                        ]
+                    },
+                    {
+                        "name": "CD1",
+                        "x:float": 2.381,
+                        "y:float": -1.57,
+                        "z:float": 1.891,
+                        "bond": [
+                            "CG",
+                            "CE1",
+                            "HD1"
+                        ]
+                    },
+                    {
+                        "name": "CD2",
+                        "x:float": 1.136,
+                        "y:float": -3.152,
+                        "z:float": 0.597,
+                        "bond": [
+                            "CG",
+                            "CE2",
+                            "HD2"
+                        ]
+                    },
+                    {
+                        "name": "CE1",
+                        "x:float": 3.48,
+                        "y:float": -2.427,
+                        "z:float": 1.889,
+                        "bond": [
+                            "CD1",
+                            "CZ",
+                            "HE1"
+                        ]
+                    },
+                    {
+                        "name": "CE2",
+                        "x:float": 2.228,
+                        "y:float": -4.012,
+                        "z:float": 0.583,
+                        "bond": [
+                            "CD2",
+                            "CZ",
+                            "HE2"
+                        ]
+                    },
+                    {
+                        "name": "CZ",
+                        "x:float": 3.404,
+                        "y:float": -3.644,
+                        "z:float": 1.219,
+                        "bond": [
+                            "CE1",
+                            "CE2",
+                            "OH"
+                        ]
+                    },
+                    {
+                        "name": "OH",
+                        "x:float": 4.469,
+                        "y:float": -4.494,
+                        "z:float": 1.141,
+                        "bond": [
+                            "CZ",
+                            "HH"
+                        ]
+                    },
+                    {
+                        "name": "H",
+                        "altname": "HN",
+                        "x:float": 1.201,
+                        "y:float": 1.847,
+                        "z:float": 0.0,
+                        "bond": "N"
+                    },
+                    {
+                        "name": "HA",
+                        "x:float": 0.0,
+                        "y:float": -0.543,
+                        "z:float": -0.84,
+                        "bond": "CA"
+                    },
+                    {
+                        "name": "HB2",
+                        "altname": "2HB",
+                        "x:float": 0.023,
+                        "y:float": -0.418,
+                        "z:float": 2.034,
+                        "bond": "CB"
+                    },
+                    {
+                        "name": "HB3",
+                        "altname": [
+                            "1HB",
+                            "HB1",
+                            "3HB"
+                        ],
+                        "x:float": -0.825,
+                        "y:float": -1.509,
+                        "z:float": 1.164,
+                        "bond": "CB"
+                    },
+                    {
+                        "name": "HD1",
+                        "altname": "1HD",
+                        "x:float": 2.443,
+                        "y:float": -0.694,
+                        "z:float": 2.369,
+                        "bond": "CD1"
+                    },
+                    {
+                        "name": "HD2",
+                        "altname": "2HD",
+                        "x:float": 0.29,
+                        "y:float": -3.428,
+                        "z:float": 0.14,
+                        "bond": "CD2"
+                    },
+                    {
+                        "name": "HE1",
+                        "altname": "1HE",
+                        "x:float": 4.319,
+                        "y:float": -2.169,
+                        "z:float": 2.368,
+                        "bond": "CE1"
+                    },
+                    {
+                        "name": "HE2",
+                        "altname": "2HE",
+                        "x:float": 2.166,
+                        "y:float": -4.894,
+                        "z:float": 0.115,
+                        "bond": "CE2"
+                    },
+                    {
+                        "name": "HH",
+                        "x:float": 4.215,
+                        "y:float": -5.298,
+                        "z:float": 0.603,
+                        "bond": "OH"
+                    }
+                ],
+                "dihedral": [
+                    "N CA CB CG",
+                    "CA CB CG CD1",
+                    "CE2 CZ OH HH"
+                ]
+            },
+            {
+                "name": "VAL",
+                "atom": [
+                    {
+                        "name": "N",
+                        "x:float": 1.201,
+                        "y:float": 0.847,
+                        "z:float": 0.0,
+                        "bond": [
+                            "CA",
+                            "H"
+                        ]
+                    },
+                    {
+                        "name": "CA",
+                        "x:float": 0.0,
+                        "y:float": 0.0,
+                        "z:float": 0.0,
+                        "bond": [
+                            "N",
+                            "C",
+                            "CB",
+                            "HA"
+                        ]
+                    },
+                    {
+                        "name": "C",
+                        "x:float": -1.25,
+                        "y:float": 0.881,
+                        "z:float": 0.0,
+                        "bond": [
+                            "CA",
+                            "O"
+                        ]
+                    },
+                    {
+                        "name": "O",
+                        "x:float": -2.185,
+                        "y:float": 0.66,
+                        "z:float": -0.784,
+                        "bond": "C"
+                    },
+                    {
+                        "name": "CB",
+                        "x:float": 0.065,
+                        "y:float": -0.989,
+                        "z:float": 1.204,
+                        "bond": [
+                            "CA",
+                            "CG1",
+                            "CG2",
+                            "HB"
+                        ]
+                    },
+                    {
+                        "name": "CG1",
+                        "x:float": -1.152,
+                        "y:float": -1.903,
+                        "z:float": 1.272,
+                        "bond": [
+                            "CB",
+                            "HG11",
+                            "HG12",
+                            "HG13"
+                        ]
+                    },
+                    {
+                        "name": "CG2",
+                        "x:float": 1.349,
+                        "y:float": -1.797,
+                        "z:float": 1.196,
+                        "bond": [
+                            "CB",
+                            "HG21",
+                            "HG22",
+                            "HG23"
+                        ]
+                    },
+                    {
+                        "name": "H",
+                        "altname": "HN",
+                        "x:float": 1.201,
+                        "y:float": 1.847,
+                        "z:float": 0.0,
+                        "bond": "N"
+                    },
+                    {
+                        "name": "HA",
+                        "x:float": 0.0,
+                        "y:float": -0.538,
+                        "z:float": -0.843,
+                        "bond": "CA"
+                    },
+                    {
+                        "name": "HB",
+                        "x:float": 0.068,
+                        "y:float": -0.438,
+                        "z:float": 2.039,
+                        "bond": "CB"
+                    },
+                    {
+                        "name": "HG11",
+                        "altname": "1HG1",
+                        "x:float": -1.979,
+                        "y:float": -1.35,
+                        "z:float": 1.37,
+                        "bond": "CG1"
+                    },
+                    {
+                        "name": "HG12",
+                        "altname": "2HG1",
+                        "x:float": -1.21,
+                        "y:float": -2.443,
+                        "z:float": 0.432,
+                        "bond": "CG1"
+                    },
+                    {
+                        "name": "HG13",
+                        "altname": "3HG1",
+                        "x:float": -1.065,
+                        "y:float": -2.516,
+                        "z:float": 2.057,
+                        "bond": "CG1"
+                    },
+                    {
+                        "name": "HG21",
+                        "altname": "1HG2",
+                        "x:float": 1.403,
+                        "y:float": -2.327,
+                        "z:float": 0.349,
+                        "bond": "CG2"
+                    },
+                    {
+                        "name": "HG22",
+                        "altname": "2HG2",
+                        "x:float": 2.133,
+                        "y:float": -1.179,
+                        "z:float": 1.252,
+                        "bond": "CG2"
+                    },
+                    {
+                        "name": "HG23",
+                        "altname": "3HG2",
+                        "x:float": 1.357,
+                        "y:float": -2.419,
+                        "z:float": 1.979,
+                        "bond": "CG2"
+                    }
+                ],
+                "dihedral": "N CA CB CG1"
+            },
+            {
+                "name": "WAT",
+                "atom": [
+                    {
+                        "name": "O",
+                        "altname": [
+                            "OH2",
+                            "OW",
+                            "OH"
+                        ],
+                        "x:float": 3.24,
+                        "y:float": 55.829,
+                        "z:float": 19.243,
+                        "bond": [
+                            "H1",
+                            "H2"
+                        ]
+                    },
+                    {
+                        "name": "H1",
+                        "altname": [
+                            "HW",
+                            "HH1",
+                            "1H"
+                        ],
+                        "x:float": 2.865,
+                        "y:float": 56.756,
+                        "z:float": 19.243,
+                        "bond": "O"
+                    },
+                    {
+                        "name": "H2",
+                        "altname": [
+                            "HW",
+                            "HH2",
+                            "2H"
+                        ],
+                        "x:float": 4.24,
+                        "y:float": 55.829,
+                        "z:float": 19.243,
+                        "bond": "O"
+                    }
+                ]
+            }
+        ]
+    }
+}
