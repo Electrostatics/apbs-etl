@@ -63,7 +63,6 @@ def test_invalid_combinations(arguments, search_phrase):
     with pytest.raises(RuntimeError) as err_info:
         check_options(get_cli_args(arguments))
 
-    print(err_info.value)
     assert search_phrase in str(err_info.value)
 
 
@@ -95,7 +94,6 @@ def test_file_existence(arguments, expected_error, search_phrase):
         args = get_cli_args(arguments)
         check_files(args)
 
-    print(err_info.value)
     if search_phrase is not None:
         assert search_phrase in str(err_info.value)
 

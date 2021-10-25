@@ -56,7 +56,6 @@ def test_inputgen(tmp_path, arguments: str, output_file: str, method):
 
     for file_path in outfile_list:
         with open(file_path) as output_fin:
-            print(file_path)
             assert output_fin.read() == get_ref_output(Path(file_path).name)
 
 

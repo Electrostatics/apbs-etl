@@ -140,7 +140,6 @@ end
 def test_elec(pqr_name, method, asyncflag, istrng, potdx, output):
     """Tests valid construction of Elec objects"""
     elec = Elec(pqr_name, method, Psize(), asyncflag, istrng, potdx)
-    print(elec)
 
     assert str(elec) == output
 
