@@ -5,6 +5,7 @@ from pdb2pqr.config import ApbsCalcType
 from pdb2pqr.psize import Psize
 from pathlib import Path
 
+
 class Elec:
     """Holds the data and creates ASCII representation of APBS input file"""
 

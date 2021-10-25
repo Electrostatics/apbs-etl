@@ -485,7 +485,7 @@ def get_cli_args(args_str: str = None) -> Namespace:
     parser.add_argument(
         "--log-level",
         help="Set logging level",
-        default=LogLevels.INFO,
+        default=str(LogLevels.INFO),
         choices=LogLevels.values(),
     )
 

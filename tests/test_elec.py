@@ -1,7 +1,6 @@
 from pdb2pqr.elec import Elec
 from pdb2pqr.psize import Psize
 import pytest
-from re import sub
 
 
 @pytest.mark.parametrize(
