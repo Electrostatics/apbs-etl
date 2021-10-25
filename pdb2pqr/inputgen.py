@@ -140,7 +140,7 @@ def split_input(filename: Path, stem: str = None):
         raise RuntimeError(errstr)
 
     for iproc in range(nproc):
-        if stem is None: 
+        if stem is None:
             stem = filename.stem
         outname = filename.parent / f"{stem}-PE{iproc}.in"
         outtext = text.replace("mg-para\n", f"mg-para\n    async {iproc}\n")

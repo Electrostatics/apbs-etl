@@ -12,12 +12,18 @@ from pdb2pqr.process_cli import check_file
 from pdb2pqr.psize import Psize
 
 
-
 @pytest.mark.parametrize(
     "arguments, output_file, method",
     [
-        pytest.param(f"{INPUT_DIR}/dx2cube.pqr", "inputgen_1.in", "mg-auto", id="1"),
-        pytest.param(f"{INPUT_DIR}/1AFS_ff=AMBER.pqr --asynch", "inputgen_2-para.in", "mg-para", id="2"),
+        pytest.param(
+            f"{INPUT_DIR}/dx2cube.pqr", "inputgen_1.in", "mg-auto", id="1"
+        ),
+        pytest.param(
+            f"{INPUT_DIR}/1AFS_ff=AMBER.pqr --asynch",
+            "inputgen_2-para.in",
+            "mg-para",
+            id="2",
+        ),
         # pytest.param(f"{DATA_DIR}/1AFS_ff=AMBER.pqr", "intputgen_2.out", id="2"),
     ],
 )
@@ -32,9 +38,7 @@ def test_inputgen(tmp_path, arguments: str, output_file: str, method):
     """
 
     args = get_cli_args(arguments)
-    check_file(
-        output_file, permission=FilePermission.WRITE, overwrite=False
-    )
+    check_file(output_file, permission=FilePermission.WRITE, overwrite=False)
 
     size = Psize()
     size.run_psize(args.filename)
@@ -60,7 +64,7 @@ def test_inputgen(tmp_path, arguments: str, output_file: str, method):
     "arguments",
     [
         pytest.param(f"{INPUT_DIR}/dx2cube.pqr --split", id="1"),
-    ]
+    ],
 )
 def test_split_input(arguments):
 

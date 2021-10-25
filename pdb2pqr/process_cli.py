@@ -18,7 +18,7 @@ from .config import (
     ForceFields,
     LogLevels,
     TitrationMethods,
-    setup_logger
+    setup_logger,
 )
 
 _LOGGER = getLogger(f"PDB2PQR {VERSION}")
@@ -319,16 +319,22 @@ def check_file(
     if permission == FilePermission.READ:
         # file must exist
         if not file_path.is_file():
-            raise FileNotFoundError(f"{context}: File '{file_name}' cannot be found.")
+            raise FileNotFoundError(
+                f"{context}: File '{file_name}' cannot be found."
+            )
 
         # file must be readable
         if not access(file_path, R_OK):
-            raise PermissionError(f"{context}: Cannot read file, {file_path.absolute()}")
+            raise PermissionError(
+                f"{context}: Cannot read file, {file_path.absolute()}"
+            )
 
         # file must be nonzero
         size: int = file_path.stat().st_size
         if size == 0:
-            raise EmptyFileError(f"{context}: File, '{file_name}', has {size} bytes.")
+            raise EmptyFileError(
+                f"{context}: File, '{file_name}', has {size} bytes."
+            )
 
     # WRITE
     elif permission == FilePermission.WRITE:
@@ -340,7 +346,9 @@ def check_file(
 
         # File must not exist unless overwrite
         if not overwrite and file_path.is_file():
-            raise FileExistsError(f"{context}: File, '{file_name}', already exists.")
+            raise FileExistsError(
+                f"{context}: File, '{file_name}', already exists."
+            )
 
         # Must have write access if attempting to overwrite
         if overwrite and file_path.is_file() and not access(file_path, W_OK):

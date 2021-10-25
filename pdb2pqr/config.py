@@ -77,6 +77,7 @@ class ApbsCalcType(BaseEnum):
 
 class DuplicateFilter(logging.Filter):
     """Filter duplicate messages."""
+
     def __init__(self):
         super().__init__()
         self.warn_count = Counter()
@@ -91,7 +92,8 @@ class DuplicateFilter(logging.Filter):
                 "Multiple occupancies found",
             ]
 
-            #: Number of times warning string is printed before supressing further output
+            # Number of times warning string is printed before supressing
+            # further output
             filter_warnings_limit = 10
 
             for fwarn in filter_warnings:
