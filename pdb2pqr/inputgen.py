@@ -88,6 +88,9 @@ class Input:
 
         :param output_path:  location for generated files
         :type output_path:  str
+
+        :return: List of file paths which were generated
+        :rtype: List[str]
         """
         file_list = []
         path = Path(output_path)
@@ -113,11 +116,16 @@ class Input:
         return file_list
 
 
-def split_input(filename: Path, stem: str = None):
+def split_input(filename: Path, stem: str = None) -> List[str]:
     """Split the parallel input file into multiple async file names.
 
     :param filename:  the path to the original parallel input file
     :type filename:  str
+    :param stem:  an optional file prefix for name
+    :type stem:  str
+
+    :return: List of file paths which were generated
+    :rtype: List[str]
     """
     nproc = 0
     file_list = []
