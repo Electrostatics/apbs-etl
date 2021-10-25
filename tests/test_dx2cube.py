@@ -5,7 +5,7 @@ This tests the dx entrypoint executable.
 import pytest
 from logging import getLogger
 from difflib import Differ
-from .common import DATA_DIR
+from .common import INPUT_DIR
 # from pdb2pqr.io import read_pqr, read_dx, write_cube, read_qcd
 
 _LOGGER = getLogger(__name__)
@@ -15,10 +15,10 @@ _LOGGER = getLogger(__name__)
 def test_dx2cube(tmp_path):
     """Test conversion of OpenDX files to Cube files."""
 
-    pqr_path = DATA_DIR / "dx2cube.pqr"
-    dx_path = DATA_DIR / "dx2cube.dx"
+    pqr_path = INPUT_DIR / "dx2cube.pqr"
+    dx_path = INPUT_DIR / "dx2cube.dx"
     cube_gen = tmp_path / "test.cube"
-    cube_test = DATA_DIR / "dx2cube.cube"
+    cube_test = INPUT_DIR / "dx2cube.cube"
     _LOGGER.info(f"Reading PQR from {pqr_path}...")
 
     raise NotImplementedError

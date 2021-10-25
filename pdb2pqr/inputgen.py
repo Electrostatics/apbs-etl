@@ -12,9 +12,10 @@ from argparse import (
     Namespace,
 )
 from pathlib import Path
+from typing import List
 
 from pdb2pqr.process_cli import check_file
-from . import psize
+from .psize import Psize, CFAC, FADD, SPACE, GMEMFAC, GMEMCEIL, OFRAC, REDFAC
 from .config import ApbsCalcType, FilePermission, LogLevels, TITLE_STR
 from .elec import Elec
 
@@ -65,7 +66,7 @@ class Input:
             setattr(elec2, "write", [])
         else:
             elec2 = ""
-        self.elecs = [elec1, elec2]
+        self.elecs: List[Elec] = [elec1, elec2]
         if not potdx:
             self.prints = ["print elecEnergy 2 - 1 end"]
         else:
@@ -82,43 +83,44 @@ class Input:
         text += "\nquit\n"
         return text
 
-    def print_input_files(self, output_path):
+    def print_input_files(self, output_path) -> List[str]:
         """Generate the input file(s) associated with this object.
 
         :param output_path:  location for generated files
         :type output_path:  str
         """
+        file_list = []
         path = Path(output_path)
-        base_name = path.stem
         if self.asyncflag:
-            outname = base_name + "-para.in"
+            base_name = path.stem
+            outname = path.parent / f"{base_name}"
             # Temporarily disable async flag
             for elec in self.elecs:
                 elec.asyncflag = False
-            with open(outname, "wt") as out_file:
+            para_name = path.parent / f"{outname}-para.in"
+            with open(para_name, "wt") as out_file:
                 out_file.write(str(self))
+            file_list.append(para_name)
+
             # Now make the async files
-            elec = self.elecs[0]
-            nproc = elec.pdime[0] * elec.pdime[1] * elec.pdime[2]
-            for i in range(int(nproc)):
-                outname = base_name + f"-PE{i}.in"
-                for elec in self.elecs:
-                    elec.asyncflag = True
-                    elec.async_ = i
-                with open(outname, "wt") as out_file:
-                    out_file.write(str(self))
+            file_list.extend(split_input(para_name, outname))
+
         else:
             with open(path, "wt") as out_file:
                 out_file.write(str(self))
+            file_list.append(path)
+
+        return file_list
 
 
-def split_input(filename):
+def split_input(filename: Path, stem: str = None):
     """Split the parallel input file into multiple async file names.
 
     :param filename:  the path to the original parallel input file
     :type filename:  str
     """
     nproc = 0
+    file_list = []
     with open(filename, "rt") as file_:
         text = ""
         while True:
@@ -136,12 +138,17 @@ def split_input(filename):
             "The inputgen script was unable to asynchronize this file!"
         )
         raise RuntimeError(errstr)
-    base_pqr_name = Path(filename).stem
+
     for iproc in range(nproc):
-        outname = base_pqr_name + f"-PE{iproc}.in"
+        if stem is None: 
+            stem = filename.stem
+        outname = filename.parent / f"{stem}-PE{iproc}.in"
         outtext = text.replace("mg-para\n", f"mg-para\n    async {iproc}\n")
         with open(outname, "w") as outfile:
             outfile.write(outtext)
+        file_list.append(outname)
+
+    return file_list
 
 
 def get_cli_args(args_str: str = None) -> Namespace:
@@ -193,7 +200,7 @@ def get_cli_args(args_str: str = None) -> Namespace:
     parser.add_argument(
         "--cfac",
         type=float,
-        default=psize.CFAC,
+        default=CFAC,
         help=(
             "factor by which to expand molecular dimensions to "
             "get coarse grid dimensions."
@@ -202,7 +209,7 @@ def get_cli_args(args_str: str = None) -> Namespace:
     parser.add_argument(
         "--fadd",
         type=float,
-        default=psize.FADD,
+        default=FADD,
         help=(
             "amount to add to molecular dimensions to get fine "
             "grid dimensions."
@@ -211,13 +218,13 @@ def get_cli_args(args_str: str = None) -> Namespace:
     parser.add_argument(
         "--space",
         type=float,
-        default=psize.SPACE,
+        default=SPACE,
         help="desired fine mesh resolution",
     )
     parser.add_argument(
         "--gmemfac",
         type=int,
-        default=psize.GMEMFAC,
+        default=GMEMFAC,
         help=(
             "number of bytes per grid point required for sequential "
             "MG calculation"
@@ -226,7 +233,7 @@ def get_cli_args(args_str: str = None) -> Namespace:
     parser.add_argument(
         "--gmemceil",
         type=int,
-        default=psize.GMEMCEIL,
+        default=GMEMCEIL,
         help=(
             "max MB allowed for sequential MG calculation; adjust "
             "this to force the script to perform faster calculations "
@@ -236,13 +243,13 @@ def get_cli_args(args_str: str = None) -> Namespace:
     parser.add_argument(
         "--ofrac",
         type=float,
-        default=psize.OFRAC,
+        default=OFRAC,
         help="overlap factor between mesh partitions (parallel)",
     )
     parser.add_argument(
         "--redfac",
         type=float,
-        default=psize.REDFAC,
+        default=REDFAC,
         help=(
             "the maximum factor by which a domain dimension can "
             "be reduced during focusing"
@@ -271,21 +278,22 @@ def main():
     """Main driver"""
     args = get_cli_args()
 
-    size = psize.Psize()
-    filename = Path(args.filename)
-    output_path = filename.parent / Path(f"{filename.stem}.in")
     check_file(args.filename)
 
+    filename = Path(args.filename)
     if args.split:
-        split_input(args.filename)
+        split_input(filename)
     else:
+        output_path = filename.parent / Path(f"{filename.stem}.in")
+
         check_file(
             output_path, permission=FilePermission.WRITE, overwrite=False
         )
-        size.run_psize(args.filename)
+        psize = Psize()
+        psize.run_psize(args.filename)
         input_ = Input(
             args.filename,
-            size,
+            psize,
             args.method,
             args.asynch,
             args.istrng,
