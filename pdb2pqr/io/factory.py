@@ -13,8 +13,8 @@ def InputFactory(reader="pdb"):
 
 def OutputFactory(reader="pqr"):
     readers = {
-        # "pdb": PDBReader,
-        # "cif": CIFReader,
+        # "pdb": PDBWriter,
+        # "cif": CIFWriter,
     }
 
     return readers[reader]()

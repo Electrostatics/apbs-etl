@@ -33,10 +33,12 @@ def test_write_data_file(tmp_path):
     print(f"Output written to: {output_path}")
 
 
-@pytest.mark.parametrize("category_name, attribute_list, data",
+@pytest.mark.parametrize(
+    "category_name, attribute_list, data",
     [
         pytest.param(
-            "pdbx_seqtool_mapping_ref", [
+            "pdbx_seqtool_mapping_ref",
+            [
                 "ordinal",
                 "entity_id",
                 "auth_mon_id",
@@ -44,10 +46,18 @@ def test_write_data_file(tmp_path):
                 "pdb_chain_id",
                 "ref_mon_id",
                 "ref_mon_num",
-            ], [(1, 2, 3, 4, 5, 6, 7), (1, 2, 3, 4, 5, 6, 7), (1, 2, 3, 4, 5, 6, 7), (1, 2, 3, 4, 5, 6, 7), ], id="1"
+            ],
+            [
+                (1, 2, 3, 4, 5, 6, 7),
+                (1, 2, 3, 4, 5, 6, 7),
+                (1, 2, 3, 4, 5, 6, 7),
+                (1, 2, 3, 4, 5, 6, 7),
+            ],
+            id="1",
         ),
         pytest.param(
-            "JUNK", [
+            "JUNK",
+            [
                 "ordinal",
                 "entity_id",
                 "auth_mon_id",
@@ -55,10 +65,15 @@ def test_write_data_file(tmp_path):
                 "pdb_chain_id",
                 "ref_mon_id",
                 "ref_mon_num",
-            ], [(1, 2, 3, 4, 5, 6, 7)], id="2"
+            ],
+            [(1, 2, 3, 4, 5, 6, 7)],
+            id="2",
         ),
-    ])
-def test_write_data_file2(tmp_path, category_name: str, attribute_list: List[str], data: List[tuple]):
+    ],
+)
+def test_write_data_file2(
+    tmp_path, category_name: str, attribute_list: List[str], data: List[tuple]
+):
     """Test case -  write data file."""
     output_path = Path(tmp_path) / Path("test-output2.cif")
     category = DataCategory(category_name)
@@ -77,8 +92,6 @@ def test_write_data_file2(tmp_path, category_name: str, attribute_list: List[str
         writer.write(data_list)
 
     print(f"Output written to: {output_path}")
-
-
 
     # dict {
     #     'ATOM': [[1st atom data]], [2nd atom data]],
