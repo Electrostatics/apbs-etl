@@ -1,3 +1,6 @@
+"""This file tests the PDB reader."""
+from typing import List
+from pdbx.containers import DataContainer
 from pytest import mark
 from pathlib import Path
 from pdb2pqr.io.reader_cif import CIFReader
@@ -12,6 +15,6 @@ def test_data_file(input_cif):
     reader = CIFReader()
 
     input_path = DATA_DIR / Path(input_cif)
-    data_list = reader.read(input_path)
+    data_list: List[DataContainer] = reader.read(input_path)
     for item in data_list:
         print(item.get_object("atom_site").print_it())
