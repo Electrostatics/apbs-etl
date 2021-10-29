@@ -4,8 +4,7 @@ from pdbx.containers import DataContainer
 from pytest import mark
 from pathlib import Path
 from pdb2pqr.io.reader_cif import CIFReader
-
-DATA_DIR = Path(__file__).parent.absolute() / "data"
+from .common import INPUT_DIR
 
 
 @mark.parametrize("input_cif", ["1FAS.cif", "3U7T.cif"], ids=str)
@@ -14,7 +13,7 @@ def test_data_file(input_cif):
 
     reader = CIFReader()
 
-    input_path = DATA_DIR / Path(input_cif)
+    input_path = INPUT_DIR / Path(input_cif)
     data_list: List[DataContainer] = reader.read(input_path)
     for item in data_list:
         print(item.get_object("atom_site").print_it())
