@@ -5,3 +5,4 @@ Store the version here so:
 * we can import it into your module
 """
 __version__ = "4.0.0"
+VERSION = __version__

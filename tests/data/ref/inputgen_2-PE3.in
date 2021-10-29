@@ -1,0 +1,54 @@
+read
+    mol pqr 1AFS_ff=AMBER.pqr
+end
+elec 
+    mg-para
+    async 3
+    dime 97 129 129
+    pdime 2 3 2
+    ofrac 0.1
+    cglen 104.2576 177.6694 105.8998
+    fglen 81.3280 124.5114 82.2940
+    cgcent mol 1
+    fgcent mol 1
+    mol 1
+    lpbe
+    bcfl sdh
+    pdie 2.0000
+    sdie 78.5400
+    srfm smol
+    chgm spl2
+    sdens 10.00
+    srad 1.40
+    swin 0.30
+    temp 298.15
+    calcenergy total
+    calcforce no
+    write pot dx pot
+end
+elec 
+    mg-para
+    async 3
+    dime 97 129 129
+    pdime 2 3 2
+    ofrac 0.1
+    cglen 104.2576 177.6694 105.8998
+    fglen 81.3280 124.5114 82.2940
+    cgcent mol 1
+    fgcent mol 1
+    mol 1
+    lpbe
+    bcfl sdh
+    pdie 2.0000
+    sdie 2.0000
+    srfm smol
+    chgm spl2
+    sdens 10.00
+    srad 1.40
+    swin 0.30
+    temp 298.15
+    calcenergy total
+    calcforce no
+end
+print elecEnergy 2 - 1 end
+quit
