@@ -1,12 +1,16 @@
 """This file handles the reading CIF files into appropriate containers."""
-from pdbx import load
-from pdbx.containers import DataContainer
 from pathlib import Path
 from typing import List
 
+from pdbx import load
+from pdbx.containers import DataContainer
 
-class CIFReader:
+from .reader import Reader
+
+
+class CIFReader(Reader):
     """Factory class to handle reading CIF input files."""
+
     def __init__(self):
         pass
 

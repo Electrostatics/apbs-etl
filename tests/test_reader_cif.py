@@ -3,17 +3,17 @@ from typing import List
 from pdbx.containers import DataContainer
 from pytest import mark
 from pathlib import Path
-from pdb2pqr.io.reader_cif import CIFReader
+from pdb2pqr.io.factory import input_factory
 from .common import INPUT_DIR
 
 
-@mark.parametrize("input_cif", ["1FAS.cif", "3U7T.cif"], ids=str)
-def test_data_file(input_cif):
+@mark.parametrize("input_file", ["1FAS.cif", "3U7T.cif", "1AFS.pdb"], ids=str)
+def test_data_file(input_file):
     """Test data file input."""
 
-    reader = CIFReader()
+    input_path = INPUT_DIR / Path(input_file)
+    reader = input_factory(input_path.suffix)
 
-    input_path = INPUT_DIR / Path(input_cif)
     data_list: List[DataContainer] = reader.read(input_path)
     for item in data_list:
         print(item.get_object("atom_site").print_it())
