@@ -3,6 +3,8 @@ from pathlib import Path
 from typing import List
 from pdbx.containers import DataContainer
 
+from .pdb_record import read_pdb
+
 from .reader import Reader
 
 
@@ -16,7 +18,9 @@ class PDBReader(Reader):
         """Read a PDB file into mmcif_pdbx container"""
         data_containers: List[DataContainer] = []
 
-        # TODO: implement readers
+        # TODO: Convert pdblist to DataContainer
+        raise NotImplementedError
+        pdblist, errlist = read_pdb(file_path)
 
         return data_containers
 

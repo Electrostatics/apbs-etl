@@ -57,7 +57,7 @@ def get_cli_args(args_str: str = None) -> Namespace:
         "input_path",
         help="Input PDB path or ID (to be retrieved from RCSB database",
     )
-    parser.add_argument("output_pqr", help="Output PQR path")
+    parser.add_argument("output_file", help="Output PQR path")
 
     required_options = parser.add_argument_group(
         title="Mandatory options",
@@ -136,6 +136,7 @@ def get_cli_args(args_str: str = None) -> Namespace:
     )
     general_options.add_argument(
         "--apbs-input",
+        default=None,
         help=(
             "Create a template APBS input file based on the generated PQR "
             "file at the specified location."
@@ -395,6 +396,31 @@ def validate(args: Namespace):
     args = transform_arguments(args)
     check_files(args)
     check_options(args)
+    # TODO: Check PROPKA input files
+    if args.apbs_input:
+        check_file(
+            args.apbs_input,
+            context="Write APBS input file",
+            permission=FilePermission.WRITE,
+            overwrite=False,
+        )
+    if args.pdb_output:
+        check_file(
+            args.pdb_output,
+            context="Write PDB file based on calculations",
+            permission=FilePermission.WRITE,
+            overwrite=False,
+        )
+    if Path(args.input_path).is_file():
+        check_file(args.input_path, context="Read input file")
+
+    # Log file created based on args.output_file. Default behavior is to append
+    check_file(
+        args.output_file,
+        context="Write output file",
+        permission=FilePermission.WRITE,
+        overwrite=False,
+    )
 
 
 def process_cli() -> Namespace:
@@ -404,6 +430,6 @@ def process_cli() -> Namespace:
     :rtype:  argparse.Namespace
     """
     args: Namespace = get_cli_args()
-    setup_logger(args.output_pqr, level=args.log_level)
+    setup_logger(args.output_file, level=args.log_level)
     validate(args)
     return args
