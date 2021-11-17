@@ -145,3 +145,4 @@ tmp*.pka
 
 # Generated files
 apbs.in
+coverage.txt
