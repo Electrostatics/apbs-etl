@@ -18,7 +18,7 @@ from pdb2pqr.process_cli import (
     get_cli_args,
     transform_arguments,
 )
-from .common import DATA_DIR
+from .common import DATA_DIR, INPUT_DIR
 
 _LOGGER = getLogger(__name__)
 
@@ -48,12 +48,12 @@ _LOGGER = getLogger(__name__)
             id="Invalid forcefield with --neutralc",
         ),
         pytest.param(
-            f"--usernames={DATA_DIR}/custom.names 1fas test.pqr",
+            f"--usernames={INPUT_DIR}/custom.names 1fas test.pqr",
             "--usernames without --userff",
             id="Missing userff file",
         ),
         pytest.param(
-            f"--userff={DATA_DIR}/custom-ff.dat 1fas test.pqr",
+            f"--userff={INPUT_DIR}/custom-ff.dat 1fas test.pqr",
             "--usernames must be specified if using --userff",
             id="--userff but no --usernames",
         ),
@@ -70,21 +70,21 @@ def test_invalid_combinations(arguments, search_phrase):
     "arguments, expected_error, search_phrase",
     [
         pytest.param(
-            f"--userff=missing_ff.dat --usernames={DATA_DIR}/custom.names 1fas test.pqr",
+            f"--userff=missing_ff.dat --usernames={INPUT_DIR}/custom.names 1fas test.pqr",
             FileNotFoundError,
-            None,
+            "missing_ff.dat",
             id="Missing userff file",
         ),
         pytest.param(
-            f"--userff={DATA_DIR}/custom-ff.dat --usernames=missing_name.names 1fas test.pqr",
+            f"--userff={INPUT_DIR}/custom-ff.dat --usernames=missing_name.names 1fas test.pqr",
             FileNotFoundError,
-            None,
+            "missing_name.names",
             id="Missing usernames file",
         ),
         pytest.param(
             "--ligand=missing_ligand.mol2 1fas test.pqr",
             FileNotFoundError,
-            None,
+            "missing_ligand.mol2",
             id="Missing ligand file",
         ),
     ],
