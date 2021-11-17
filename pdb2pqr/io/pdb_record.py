@@ -10,7 +10,7 @@ the classes is taken directly from the above PDB Format Description.
 .. codeauthor::  Nathan Baker
 """
 import logging
-
+from typing import List, Tuple
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -2549,7 +2549,7 @@ def read_atom(line):
     return klass(newline)
 
 
-def read_pdb(file_):
+def read_pdb(file_) -> Tuple[List[str], List[str]]:
     """Parse PDB-format data into array of Atom objects.
 
     :param file_:  open File-like object
