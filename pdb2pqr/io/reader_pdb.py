@@ -1,7 +1,6 @@
 """This file handles the reading PDB files into appropriate containers."""
 from pathlib import Path
-from typing import List
-from pdbx.containers import DataContainer
+from typing import List, Tuple
 
 from .pdb_record import read_pdb
 
@@ -14,17 +13,14 @@ class PDBReader(Reader):
     def __init__(self):
         pass
 
-    def read(self, file_path: Path) -> List[DataContainer]:
-        """Read a PDB file into mmcif_pdbx container"""
-        data_containers: List[DataContainer] = []
+    def read(self, file_path: Path) -> Tuple[List[str], List[str]]:
+        """Read a PDB file into mmcif_pdbx container
 
-        # TODO: Convert pdblist to DataContainer
-        raise NotImplementedError
-        pdblist, errlist = read_pdb(file_path)
+        :param file_path:  path to CIF file
+        :type file_path:  str
 
-        return data_containers
-
-
-# reader = PDBReader()
-# data = reader.read(Path('tests/data/1afs.pdb'))
-# print(data)
+        :return:  List of PDB and ERROR objects read from input file
+        :rtype:  Tuple[List[str], List[str]]
+        """
+        with open(file_path) as fin:
+            return read_pdb(fin)
