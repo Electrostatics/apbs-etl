@@ -29,6 +29,7 @@ class CIFReader(Reader):
 
         # TODO: We need to convert mmcif_pdbx_data.get_object['atom_site']
         #       to pdblist and errlist
+        raise NotImplementedError
 
         pdblist: List[str] = []
         errlist: List[str] = []

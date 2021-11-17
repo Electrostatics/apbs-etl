@@ -22,6 +22,5 @@ class PDBReader(Reader):
         :return:  List of PDB and ERROR objects read from input file
         :rtype:  Tuple[List[str], List[str]]
         """
-
-        # TODO: Convert pdblist to DataContainer
-        return read_pdb(file_path)
+        with open(file_path) as fin:
+            return read_pdb(fin)

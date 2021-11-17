@@ -71,6 +71,7 @@ setup(
             "coverage",
             "flake8",
             "pandas >= 1.0",
+            "pylint",
             "pytest",
             "testfixtures",
         ],
