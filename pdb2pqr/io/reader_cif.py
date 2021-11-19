@@ -5,6 +5,7 @@ from typing import List, Tuple
 from pdbx import load
 from pdbx.containers import DataContainer
 
+from .pdb_record import BaseRecord
 from .reader import Reader
 
 
@@ -14,14 +15,14 @@ class CIFReader(Reader):
     def __init__(self):
         pass
 
-    def read(self, file_path: Path) -> Tuple[List[str], List[str]]:
+    def read(self, file_path: Path) -> Tuple[List[BaseRecord], List[str]]:
         """Read a CIF file into mmcif_pdbx container
 
         :param file_path:  path to CIF file
         :type file_path:  str
 
         :return:  List of PDB and ERROR objects read from input file
-        :rtype:  Tuple[List[str], List[str]]
+        :rtype:  Tuple[List[BaseRecord], List[str]]
         """
         mmcif_pdbx_data: List[DataContainer] = []
         with file_path.open() as fin:

@@ -11,6 +11,8 @@ import sys
 
 from pdb2pqr.process_cli import check_file
 from .config import TITLE_STR, VERSION, FilePermission, LogLevels
+from .io.dx import read_dx, write_cube
+from .io.reader_pqr import read_pqr
 
 _LOGGER = logging.getLogger(f"dx2cube {VERSION}")
 
@@ -76,18 +78,15 @@ def main():
 
     # TODO: use try/except to catch/log permission-based exceptions
     with open(args.pqr_input, "rt") as pqr_file:
-        # atom_list = io.read_pqr(pqr_file)
-        pass
+        atom_list = read_pqr(pqr_file)
 
     _LOGGER.info("Reading DX from %s...", args.dx_input)
     with open(args.dx_input, "rt") as dx_file:
-        # dx_dict = io.read_dx(dx_file)
-        pass
+        dx_dict = read_dx(dx_file)
 
     _LOGGER.info("Writing Cube to %s...", args.output)
     with open(args.output, "wt") as cube_file:
-        # io.write_cube(cube_file, dx_dict, atom_list)
-        pass
+        write_cube(cube_file, dx_dict, atom_list)
 
 
 if __name__ == "__main__":

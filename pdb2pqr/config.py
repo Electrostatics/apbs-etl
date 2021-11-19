@@ -72,6 +72,25 @@ class ApbsCalcType(BaseEnum):
     MG_MANUAL = "mg-manual"
 
 
+class AtomType(BaseEnum):
+    """Enumerate atom types."""
+    ATOM = "ATOM"
+    HETATM = "HETATM"
+
+
+class Backbone(BaseEnum):
+    """Standard backbone atom names."""
+    N = "N"
+    CA = "CA"
+    C = "C"
+    O = "O"  # noqa: E741
+    O2 = "O2"
+    HA = "HA"
+    HN = "HN"
+    H = "H"
+    tN = "tN"
+
+
 """Logging"""
 
 
