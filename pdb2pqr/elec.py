@@ -1,9 +1,10 @@
 """This is used to create the ELEC section of an APBS input file."""
 
 
+from pathlib import Path
+
 from pdb2pqr.config import ApbsCalcType
 from pdb2pqr.psize import Psize
-from pathlib import Path
 
 
 class Elec:

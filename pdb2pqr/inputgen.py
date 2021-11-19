@@ -101,7 +101,7 @@ class Input:
             for elec in self.elecs:
                 elec.asyncflag = False
             para_name = path.parent / f"{outname}-para.in"
-            with open(para_name, "wt") as out_file:
+            with open(para_name, "wt", encoding="utf-8") as out_file:
                 out_file.write(str(self))
             file_list.append(para_name)
 
@@ -109,7 +109,7 @@ class Input:
             file_list.extend(split_input(para_name, outname))
 
         else:
-            with open(path, "wt") as out_file:
+            with open(path, "wt", encoding="utf-8") as out_file:
                 out_file.write(str(self))
             file_list.append(path)
 
@@ -129,7 +129,7 @@ def split_input(filename: Path, stem: str = None) -> List[str]:
     """
     nproc = 0
     file_list = []
-    with open(filename, "rt") as file_:
+    with open(filename, "rt", encoding="utf-8") as file_:
         text = ""
         while True:
             line = file_.readline()
@@ -152,7 +152,7 @@ def split_input(filename: Path, stem: str = None) -> List[str]:
             stem = filename.stem
         outname = filename.parent / f"{stem}-PE{iproc}.in"
         outtext = text.replace("mg-para\n", f"mg-para\n    async {iproc}\n")
-        with open(outname, "w") as outfile:
+        with open(outname, "w", encoding="utf-8") as outfile:
             outfile.write(outtext)
         file_list.append(outname)
 

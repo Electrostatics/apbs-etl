@@ -4,6 +4,9 @@ from pathlib import Path
 from typing import List, Tuple
 
 from .factory import input_factory
+from .reader_pqr import read_pqr  # noqa: F401
+from .reader_qcd import read_qcd  # noqa: F401
+from .dx import read_dx, write_cube  # noqa: F401
 
 
 def read_input(inputfile_path: str) -> Tuple[List[str], List[str]]:
