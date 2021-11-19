@@ -21,5 +21,5 @@ class PDBReader(Reader):
         :return:  List of PDB and ERROR objects read from input file
         :rtype:  Tuple[List[BaseRecord], List[str]]
         """
-        with open(file_path) as fin:
+        with open(file_path, encoding="utf-8") as fin:
             return read_pdb(fin)
