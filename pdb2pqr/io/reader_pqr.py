@@ -1,3 +1,5 @@
+"""This file handles the reading PQR files into appropriate containers."""
+
 from io import FileIO
 from typing import List
 

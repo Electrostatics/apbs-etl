@@ -1,3 +1,5 @@
+"""Read and write functions to support dx2cube.py"""
+
 from io import FileIO
 
 
@@ -50,7 +52,12 @@ def read_dx(dx_file: FileIO):
     return dx_dict
 
 
-def write_cube(cube_file: FileIO, data_dict: dict, atom_list: list, comment:str="CPMD CUBE FILE."):
+def write_cube(
+    cube_file: FileIO,
+    data_dict: dict,
+    atom_list: list,
+    comment: str = "CPMD CUBE FILE.",
+):
     """Write a Cube-format data file.
 
     Cube file format is defined at

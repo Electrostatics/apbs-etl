@@ -2582,10 +2582,10 @@ def read_pdb(file_) -> Tuple[List[str], List[str]]:
         except (KeyError, ValueError) as details:
             if record not in ["HETATM", "ATOM"]:
                 errlist.append(record)
-                _LOGGER.error(f"Error parsing line: {details}")
-                _LOGGER.error(f"<{line.strip()}>")
+                _LOGGER.error("Error parsing line: %s", details)
+                _LOGGER.error("<%s>", line.strip())
                 _LOGGER.error(
-                    f"Truncating remaining errors for record type:{record}"
+                    "Truncating remaining errors for record type: %s", record
                 )
             else:
                 raise details
@@ -2595,14 +2595,14 @@ def read_pdb(file_) -> Tuple[List[str], List[str]]:
                     obj = read_atom(line)
                     pdblist.append(obj)
                 except IndexError as details:
-                    _LOGGER.error(f"Error parsing line: {details},")
-                    _LOGGER.error(f"<{line.strip()}>")
+                    _LOGGER.error("Error parsing line: %s,", details)
+                    _LOGGER.error("<%s>", line.strip())
             elif record in ["SITE", "TURN"]:
                 pass
             elif record in ["SSBOND", "LINK"]:
                 _LOGGER.error("Warning -- ignoring record:")
-                _LOGGER.error(f"<{line.strip()}>")
+                _LOGGER.error("<%s>", line.strip())
             else:
-                _LOGGER.error(f"Error parsing line: {details},")
-                _LOGGER.error(f"<{line.strip()}>")
+                _LOGGER.error("Error parsing line: %s,", details)
+                _LOGGER.error("<%s>", line.strip())
     return pdblist, errlist

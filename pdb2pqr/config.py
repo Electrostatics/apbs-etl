@@ -74,12 +74,14 @@ class ApbsCalcType(BaseEnum):
 
 class AtomType(BaseEnum):
     """Enumerate atom types."""
+
     ATOM = "ATOM"
     HETATM = "HETATM"
 
 
 class Backbone(BaseEnum):
     """Standard backbone atom names."""
+
     N = "N"
     CA = "CA"
     C = "C"
@@ -88,7 +90,7 @@ class Backbone(BaseEnum):
     HA = "HA"
     HN = "HN"
     H = "H"
-    tN = "tN"
+    TN = "tN"
 
 
 """Logging"""
@@ -122,7 +124,7 @@ class DuplicateFilter(logging.Filter):
                         return False
                     elif self.warn_count[fwarn] == filter_warnings_limit:
                         _LOGGER.warning(
-                            f'Suppressing further "{fwarn}" messages'
+                            'Suppressing further "%s" messages', fwarn
                         )
                         return False
                     else:
@@ -158,4 +160,4 @@ def setup_logger(output_filename, level="DEBUG"):
     logging.getLogger("").addHandler(console)
     logging.getLogger("").addFilter(DuplicateFilter())
 
-    _LOGGER.info(f"Logs stored: {log_file}")
+    _LOGGER.info("Logs stored: %s", log_file)

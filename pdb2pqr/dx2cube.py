@@ -77,15 +77,15 @@ def main():
     _LOGGER.info("Reading PQR from %s...", args.pqr_input)
 
     # TODO: use try/except to catch/log permission-based exceptions
-    with open(args.pqr_input, "rt") as pqr_file:
+    with open(args.pqr_input, "rt", encoding="utf-8") as pqr_file:
         atom_list = read_pqr(pqr_file)
 
     _LOGGER.info("Reading DX from %s...", args.dx_input)
-    with open(args.dx_input, "rt") as dx_file:
+    with open(args.dx_input, "rt", encoding="utf-8") as dx_file:
         dx_dict = read_dx(dx_file)
 
     _LOGGER.info("Writing Cube to %s...", args.output)
-    with open(args.output, "wt") as cube_file:
+    with open(args.output, "wt", encoding="utf-8") as cube_file:
         write_cube(cube_file, dx_dict, atom_list)
 
 
