@@ -2549,7 +2549,7 @@ def read_atom(line):
     return klass(newline)
 
 
-def read_pdb(file_) -> Tuple[List[str], List[str]]:
+def read_pdb(file_) -> Tuple[List[BaseRecord], List[str]]:
     """Parse PDB-format data into array of Atom objects.
 
     :param file_:  open File-like object

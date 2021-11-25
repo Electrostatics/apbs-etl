@@ -112,7 +112,7 @@ class Atom:
         self.refdistance = 0
         self.id = None
         self.mol2charge = None
-        if type_ in ["ATOM", "HETATM"]:
+        if type_ in ["ATOM", "HETATM"]:  # TODO: use enum here
             self.type = type_
         else:
             err = f"Invalid atom type {type_} (Atom Class IN structures.py)!"

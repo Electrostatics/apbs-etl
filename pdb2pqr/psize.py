@@ -10,18 +10,23 @@
 .. codeauthor:: Todd Dolinksy
 .. codeauthor:: Yong Huang
 """
-from math import log
-import logging
 import sys
-
-# import argparse
+import logging
+from math import log
 from argparse import (
     ArgumentDefaultsHelpFormatter,
     ArgumentError,
     ArgumentParser,
     Namespace,
 )
-from .config import TITLE_STR, LogLevels
+
+from typing import List
+from numpy import ndarray
+
+from .chemistry.structures import Atom
+from .io import read_pqr
+from .process_cli import check_file
+from .config import TITLE_STR, AtomType, LogLevels
 
 
 #: The number of Angstroms added to the molecular dimensions to determine the
@@ -104,15 +109,6 @@ class Psize:
         self.nsmall = [0, 0, 0]
         self.nfocus = 0
 
-    def _parse_string(self, structure):
-        """Parse the input structure as a string in PDB or PQR format.
-
-        :param structure:  input structure as string in PDB or PQR format.
-        :type structure:  str
-        """
-        lines = structure.split("\n")
-        self._parse_lines(lines)
-
     def _parse_input(self, filename):
         """Parse input structure file in PDB or PQR format.
 
@@ -121,6 +117,37 @@ class Psize:
         """
         with open(filename, "rt", encoding="utf-8") as file_:
             self._parse_lines(file_.readlines())
+
+    def _parse_input_for_dimensions(self, filename: str):
+        """Parse PQR file for minimum/maximum grid dimensions
+
+        :param filename: path the PQR file to read
+        :type filename: str
+        """
+        with open(filename, "r", encoding="utf-8") as fin:
+            atoms: List[Atom] = read_pqr(fin)
+            center = ndarray(shape=(3, len(atoms)))
+            rad = ndarray(shape=(len(atoms)))
+
+            for idx, atom in enumerate(atoms):
+                if atom.type == str(AtomType.ATOM):
+                    self.gotatom += 1
+                else:
+                    self.gothet += 1
+
+                X, Y, Z = 0, 1, 2   # TODO: Could probably be enum; ask Darren
+                center[X][idx] = atom.x
+                center[Y][idx] = atom.y
+                center[Z][idx] = atom.z
+                # center[int(Dimension.X)][idx] = atom.x
+                # center[int(Dimension.Y)][idx] = atom.y
+                # center[int(Dimension.Z)][idx] = atom.z
+
+                rad[idx] = atom.radius
+                self.charge += atom.charge
+
+            self.minlen = ndarray.min(center - rad, 1)
+            self.maxlen = ndarray.max(center + rad, 1)
 
     def _parse_lines(self, lines):
         """Parse the PQR/PDB lines.
@@ -361,7 +388,8 @@ class Psize:
         :param filename:  path of PQR file
         :type filename:  str
         """
-        self._parse_input(filename)
+        # self._parse_input(filename)
+        self._parse_input_for_dimensions(filename)
         self._set_all()
 
     def __str__(self):
@@ -570,7 +598,11 @@ def main():
         ofrac=args.ofrac,
         redfac=args.redfac,
     )
-    print(psize)  # TODO: should we be logging this instead?
+
+    check_file(args.mol_path)
+    psize.run_psize(args.mol_path)
+
+    print(psize)
 
 
 if __name__ == "__main__":
