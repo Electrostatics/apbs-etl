@@ -107,7 +107,7 @@ class Psize:
         self.nfocus = 0
 
     def _parse_input_for_grid_lengths(self, filename: str):
-        """Parse PQR file for minimum/maximum grid lengths
+        """Parse a PQR file to set minimum/maximum grid lengths
 
         :param filename: path the PQR file to read
         :type filename: str
@@ -134,7 +134,7 @@ class Psize:
             self.minlen = ndarray.min(center - rad, 1)
             self.maxlen = ndarray.max(center + rad, 1)
 
-    def _set_length(self, maxlen, minlen):
+    def _set_length(self, maxlen, minlen) -> List[float]:
         """Compute molecular dimensions, adjusting for zero-length values.
 
         .. todo:: Replace hard-coded values in this function.
@@ -152,7 +152,7 @@ class Psize:
                 self.mol_length[i] = MIN_MOL_LENGTH
         return self.mol_length
 
-    def _set_coarse_grid_dims(self, mol_length):
+    def _set_coarse_grid_dims(self, mol_length) -> List[float]:
         """Compute coarse mesh lengths.
 
         :param mol_length:  input molecule lengths
@@ -164,7 +164,7 @@ class Psize:
             self.coarse_length[i] = self.cfac * mol_length[i]
         return self.coarse_length
 
-    def _set_fine_grid_dims(self, mol_length, coarse_length):
+    def _set_fine_grid_dims(self, mol_length, coarse_length) -> List[float]:
         """Compute fine mesh lengths.
 
         :param mol_length:  input molecule lengths
@@ -180,7 +180,7 @@ class Psize:
                 self.fine_length[i] = coarse_length[i]
         return self.fine_length
 
-    def _set_center(self, maxlen, minlen):
+    def _set_center(self, maxlen, minlen) -> List[float]:
         """Compute molecular center.
 
         :param maxlen:  maximum molecule lengths
@@ -194,10 +194,8 @@ class Psize:
             self.center[i] = (maxlen[i] + minlen[i]) / 2
         return self.center
 
-    def _set_fine_grid_points(self, fine_length):
+    def _set_fine_grid_points(self, fine_length) -> List[int]:
         """Compute mesh grid points, assuming 4 levels in multigrid hierarchy.
-
-        .. todo:: remove hard-coded values from this function.
 
         :param fine_length:  lengths of the fine grid
         :type fine_length:  [float, float, float]
@@ -214,7 +212,7 @@ class Psize:
                 self.ngrid[i] = MIN_GRID_POINTS
         return self.ngrid
 
-    def _set_smallest(self, ngrid):
+    def _set_smallest(self, ngrid) -> List[int]:
         """Set smallest dimensions.
 
         Compute parallel division of domain in case the memory requirements
@@ -253,7 +251,7 @@ class Psize:
         self.nsmall = nsmall
         return nsmall
 
-    def _set_proc_grid(self, ngrid, nsmall):
+    def _set_proc_grid(self, ngrid, nsmall) -> List[int]:
         """Calculate the number of processors required in a parallel focusing
         calculation to span each dimension of the grid given the grid size
         suitable for memory constraints.
@@ -318,7 +316,7 @@ class Psize:
         nproc = self.proc_grid
         self._set_focus(fine_length, nproc, coarse_length)
 
-    def get_smallest(self):
+    def get_smallest(self) -> List[int]:
         """Get Smallest"""
         return self.nsmall
 
@@ -331,7 +329,7 @@ class Psize:
         self._parse_input_for_grid_lengths(filename)
         self._set_all()
 
-    def __str__(self):
+    def __str__(self) -> str:
         """Return a string with the formatted results.
 
         :return:  string with formatted results

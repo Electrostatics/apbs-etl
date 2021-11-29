@@ -12,6 +12,8 @@ the classes is taken directly from the above PDB Format Description.
 import logging
 from typing import List, Tuple
 
+from ..config import AtomType
+
 _LOGGER = logging.getLogger(__name__)
 
 
@@ -2556,7 +2558,7 @@ def read_pdb(file_) -> Tuple[List[BaseRecord], List[str]]:
     :type file_:  file
     :return:  (a list of objects from this module, a list of record names that
         couldn't be parsed)
-    :rtype:  (list, list)
+    :rtype:  Tuple[List[BaseRecord], List[str]]
     """
     pdblist = []  # Array of parsed lines (as objects)
     errlist = []  # List of records we can't parse
@@ -2580,17 +2582,16 @@ def read_pdb(file_) -> Tuple[List[BaseRecord], List[str]]:
                 obj = klass(line)
                 pdblist.append(obj)
         except (KeyError, ValueError) as details:
-            if record not in ["HETATM", "ATOM"]:
-                errlist.append(record)
-                _LOGGER.error("Error parsing line: %s", details)
-                _LOGGER.error("<%s>", line.strip())
-                _LOGGER.error(
-                    "Truncating remaining errors for record type: %s", record
-                )
-            else:
+            if record in AtomType.values():
                 raise details
+            errlist.append(record)
+            _LOGGER.error("Error parsing line: %s", details)
+            _LOGGER.error("<%s>", line.strip())
+            _LOGGER.error(
+                "Truncating remaining errors for record type: %s", record
+            )
         except IndexError as details:
-            if record in ["ATOM", "HETATM"]:
+            if record in AtomType.values():
                 try:
                     obj = read_atom(line)
                     pdblist.append(obj)
