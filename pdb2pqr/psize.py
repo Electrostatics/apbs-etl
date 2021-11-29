@@ -135,13 +135,10 @@ class Psize:
                 else:
                     self.gothet += 1
 
-                X, Y, Z = 0, 1, 2   # TODO: Could probably be enum; ask Darren
-                center[X][idx] = atom.x
-                center[Y][idx] = atom.y
-                center[Z][idx] = atom.z
-                # center[int(Dimension.X)][idx] = atom.x
-                # center[int(Dimension.Y)][idx] = atom.y
-                # center[int(Dimension.Z)][idx] = atom.z
+                x_axis, y_axis, z_axis = 0, 1, 2
+                center[x_axis][idx] = atom.x
+                center[y_axis][idx] = atom.y
+                center[z_axis][idx] = atom.z
 
                 rad[idx] = atom.radius
                 self.charge += atom.charge
