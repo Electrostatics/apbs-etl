@@ -95,8 +95,8 @@ class Psize:
         self.ofrac = ofrac
         self.redfac = redfac
         self.charge = 0.0
-        self.gotatom = 0
-        self.gothet = 0
+        self.num_atom = 0
+        self.num_hetatm = 0
         self.mol_length = [0.0, 0.0, 0.0]
         self.center = [0.0, 0.0, 0.0]
         self.coarse_length = [0.0, 0.0, 0.0]
@@ -119,9 +119,9 @@ class Psize:
 
             for idx, atom in enumerate(atoms):
                 if atom.type == str(AtomType.ATOM):
-                    self.gotatom += 1
+                    self.num_atom += 1
                 else:
-                    self.gothet += 1
+                    self.num_hetatm += 1
 
                 x_axis, y_axis, z_axis = 0, 1, 2
                 center[x_axis][idx] = atom.x
@@ -338,7 +338,7 @@ class Psize:
         :rtype:  str
         """
         str_ = "\n"
-        if self.gotatom > 0:
+        if self.num_atom > 0:
             maxlen = self.maxlen
             minlen = self.minlen
             charge = self.charge
@@ -369,8 +369,8 @@ class Psize:
             )
             # Print the calculated entries
             str_ += "######## MOLECULE INFO ########\n"
-            str_ += f"Number of ATOM entries = {self.gotatom}\n"
-            str_ += f"Number of HETATM entries (ignored) = {self.gothet}\n"
+            str_ += f"Number of ATOM entries = {self.num_atom}\n"
+            str_ += f"Number of HETATM entries (ignored) = {self.num_hetatm}\n"
             str_ += f"Total charge = {charge:.3f} e\n"
             str_ += f"Dimensions = {mol_length[0]:.3f} Å x "
             str_ += f"{mol_length[1]:.3f} Å x {mol_length[2]:.3f} Å\n"
