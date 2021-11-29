@@ -7,7 +7,7 @@ associated methods.
 .. codeauthor:: Nathan Baker
 """
 # from . import pdb
-from ..config import Backbone
+from ..config import AtomType, Backbone
 
 
 class Chain:
@@ -112,7 +112,7 @@ class Atom:
         self.refdistance = 0
         self.id = None
         self.mol2charge = None
-        if type_ in ["ATOM", "HETATM"]:
+        if type_ in AtomType.values():
             self.type = type_
         else:
             err = f"Invalid atom type {type_} (Atom Class IN structures.py)!"

@@ -1,8 +1,6 @@
 #!/usr/bin/python
 """Get dimensions and other information from a PQR file.
 
-.. todo:: This code could be combined with :mod:`inputgen`.
-
 .. todo:: This code should be moved to the APBS code base.
 
 .. codeauthor:: Dave Sept
@@ -10,32 +8,38 @@
 .. codeauthor:: Todd Dolinksy
 .. codeauthor:: Yong Huang
 """
-from math import log
-import logging
 import sys
-
-# import argparse
+import logging
+from math import log
 from argparse import (
     ArgumentDefaultsHelpFormatter,
     ArgumentError,
     ArgumentParser,
     Namespace,
 )
+
+from typing import List
+from numpy import ndarray
+
+from .chemistry.structures import Atom
+from .io import read_pqr
+from .process_cli import check_file
 from .config import (
-    TITLE_STR,
-    LogLevels,
-    FINE_GRID_ADD,
-    COARSE_GRID_FACTOR,
-    GRID_SPACING,
+    AtomType,
     BYTES_PER_GRID,
-    MEMORY_CEILING_MB,
-    PARTITION_OVERLAP,
-    FOCUS_FACTOR,
-    MIN_MOL_LENGTH,
-    MIN_GRID_POINTS,
-    PREFIX_CONVERT,
-    MAX_PDB_ACCURACY,
     BYTES_STORED,
+    COARSE_GRID_FACTOR,
+    FINE_GRID_ADD,
+    FOCUS_FACTOR,
+    GRID_SPACING,
+    LogLevels,
+    MAX_PDB_ACCURACY,
+    MEMORY_CEILING_MB,
+    MIN_GRID_POINTS,
+    MIN_MOL_LENGTH,
+    PARTITION_OVERLAP,
+    PREFIX_CONVERT,
+    TITLE_STR,
 )
 
 
@@ -82,15 +86,15 @@ class Psize:
         self.minlen = [None, None, None]
         self.maxlen = [None, None, None]
         self.cfac = cfac
-        self.fadd = FINE_GRID_ADD
+        self.fadd = fadd
         self.space = space
         self.gmemfac = gmemfac
         self.gmemceil = gmemceil
         self.ofrac = ofrac
         self.redfac = redfac
         self.charge = 0.0
-        self.gotatom = 0
-        self.gothet = 0
+        self.num_atom = 0
+        self.num_hetatm = 0
         self.mol_length = [0.0, 0.0, 0.0]
         self.center = [0.0, 0.0, 0.0]
         self.coarse_length = [0.0, 0.0, 0.0]
@@ -100,84 +104,36 @@ class Psize:
         self.nsmall = [0, 0, 0]
         self.nfocus = 0
 
-    def _parse_string(self, structure):
-        """Parse the input structure as a string in PDB or PQR format.
+    def _parse_input_for_grid_lengths(self, filename: str):
+        """Parse a PQR file to set minimum/maximum grid lengths
 
-        :param structure:  input structure as string in PDB or PQR format.
-        :type structure:  str
+        :param filename: path the PQR file to read
+        :type filename: str
         """
-        lines = structure.split("\n")
-        self._parse_lines(lines)
+        with open(filename, "r", encoding="utf-8") as fin:
+            atoms: List[Atom] = read_pqr(fin)
+            center = ndarray(shape=(3, len(atoms)))
+            rad = ndarray(shape=(len(atoms)))
 
-    def _parse_input(self, filename):
-        """Parse input structure file in PDB or PQR format.
+            for idx, atom in enumerate(atoms):
+                if atom.type == str(AtomType.ATOM):
+                    self.num_atom += 1
+                else:
+                    self.num_hetatm += 1
 
-        :param filename:  string with path to PDB- or PQR-format file.
-        :type filename:  str
-        """
-        with open(filename, "rt", encoding="utf-8") as file_:
-            self._parse_lines(file_.readlines())
+                x_axis, y_axis, z_axis = 0, 1, 2
+                center[x_axis][idx] = atom.x
+                center[y_axis][idx] = atom.y
+                center[z_axis][idx] = atom.z
 
-    def _parse_lines(self, lines):
-        """Parse the PQR/PDB lines.
+                rad[idx] = atom.radius
+                self.charge += atom.charge
 
-        .. todo::
-           This is messed up. Why are we parsing the PQR manually here when
-           we already have other routines to do that?  This function should
-           be replaced by a call to existing routines.
+            self.minlen = ndarray.min(center - rad, 1)
+            self.maxlen = ndarray.max(center + rad, 1)
 
-        :param lines:  PDB/PQR lines to parse
-        :type lines:  [str]
-        """
-        for line in lines:
-            if line.find("ATOM") == 0:
-                subline = line[30:].replace("-", " -")
-                words = subline.split()
-                if len(words) < 5:
-                    continue
-                self.gotatom += 1
-                self.charge = self.charge + float(words[3])
-                rad = float(words[4])
-                center = [float(word) for word in words[0:3]]
-                for i in range(3):
-                    if (
-                        self.minlen[i] is None
-                        or center[i] - rad < self.minlen[i]
-                    ):
-                        self.minlen[i] = center[i] - rad
-                    if (
-                        self.maxlen[i] is None
-                        or center[i] + rad > self.maxlen[i]
-                    ):
-                        self.maxlen[i] = center[i] + rad
-            elif line.find("HETATM") == 0:
-                self.gothet = self.gothet + 1
-                # Special handling for no ATOM entries in the pqr file, only
-                # HETATM entries
-                if self.gotatom == 0:
-                    subline = line[30:].replace("-", " -")
-                    words = subline.split()
-                    if len(words) < 5:
-                        continue
-                    self.charge = self.charge + float(words[3])
-                    rad = float(words[4])
-                    center = [float(word) for word in words[0:3]]
-                    for i in range(3):
-                        if (
-                            self.minlen[i] is None
-                            or center[i] - rad < self.minlen[i]
-                        ):
-                            self.minlen[i] = center[i] - rad
-                        if (
-                            self.maxlen[i] is None
-                            or center[i] + rad > self.maxlen[i]
-                        ):
-                            self.maxlen[i] = center[i] + rad
-
-    def _set_length(self, maxlen, minlen):
+    def _set_length(self, maxlen, minlen) -> List[float]:
         """Compute molecular dimensions, adjusting for zero-length values.
-
-        .. todo:: Replace hard-coded values in this function.
 
         :param maxlen:  maximum dimensions from molecule
         :type maxlen:  [float, float, float]
@@ -192,7 +148,7 @@ class Psize:
                 self.mol_length[i] = MIN_MOL_LENGTH
         return self.mol_length
 
-    def _set_coarse_grid_dims(self, mol_length):
+    def _set_coarse_grid_dims(self, mol_length) -> List[float]:
         """Compute coarse mesh lengths.
 
         :param mol_length:  input molecule lengths
@@ -204,7 +160,7 @@ class Psize:
             self.coarse_length[i] = self.cfac * mol_length[i]
         return self.coarse_length
 
-    def _set_fine_grid_dims(self, mol_length, coarse_length):
+    def _set_fine_grid_dims(self, mol_length, coarse_length) -> List[float]:
         """Compute fine mesh lengths.
 
         :param mol_length:  input molecule lengths
@@ -220,7 +176,7 @@ class Psize:
                 self.fine_length[i] = coarse_length[i]
         return self.fine_length
 
-    def _set_center(self, maxlen, minlen):
+    def _set_center(self, maxlen, minlen) -> List[float]:
         """Compute molecular center.
 
         :param maxlen:  maximum molecule lengths
@@ -234,10 +190,8 @@ class Psize:
             self.center[i] = (maxlen[i] + minlen[i]) / 2
         return self.center
 
-    def _set_fine_grid_points(self, fine_length):
+    def _set_fine_grid_points(self, fine_length) -> List[int]:
         """Compute mesh grid points, assuming 4 levels in multigrid hierarchy.
-
-        .. todo:: remove hard-coded values from this function.
 
         :param fine_length:  lengths of the fine grid
         :type fine_length:  [float, float, float]
@@ -254,7 +208,7 @@ class Psize:
                 self.ngrid[i] = MIN_GRID_POINTS
         return self.ngrid
 
-    def _set_smallest(self, ngrid):
+    def _set_smallest(self, ngrid) -> List[int]:
         """Set smallest dimensions.
 
         Compute parallel division of domain in case the memory requirements
@@ -262,8 +216,6 @@ class Psize:
         dimension and see if the number of grid points in that dimension will
         fit below the memory ceiling Reduce nsmall until an nsmall^3 domain
         will fit into memory.
-
-        .. todo:: Remove hard-coded values from this function.
 
         :param ngrid:  number of grid points
         :type ngrid:  [int, int, int]
@@ -293,7 +245,7 @@ class Psize:
         self.nsmall = nsmall
         return nsmall
 
-    def _set_proc_grid(self, ngrid, nsmall):
+    def _set_proc_grid(self, ngrid, nsmall) -> List[int]:
         """Calculate the number of processors required in a parallel focusing
         calculation to span each dimension of the grid given the grid size
         suitable for memory constraints.
@@ -358,7 +310,7 @@ class Psize:
         nproc = self.proc_grid
         self._set_focus(fine_length, nproc, coarse_length)
 
-    def get_smallest(self):
+    def get_smallest(self) -> List[int]:
         """Get Smallest"""
         return self.nsmall
 
@@ -368,17 +320,17 @@ class Psize:
         :param filename:  path of PQR file
         :type filename:  str
         """
-        self._parse_input(filename)
+        self._parse_input_for_grid_lengths(filename)
         self._set_all()
 
-    def __str__(self):
+    def __str__(self) -> str:
         """Return a string with the formatted results.
 
         :return:  string with formatted results
         :rtype:  str
         """
         str_ = "\n"
-        if self.gotatom > 0:
+        if self.num_atom > 0:
             maxlen = self.maxlen
             minlen = self.minlen
             charge = self.charge
@@ -409,8 +361,8 @@ class Psize:
             )
             # Print the calculated entries
             str_ += "######## MOLECULE INFO ########\n"
-            str_ += f"Number of ATOM entries = {self.gotatom}\n"
-            str_ += f"Number of HETATM entries (ignored) = {self.gothet}\n"
+            str_ += f"Number of ATOM entries = {self.num_atom}\n"
+            str_ += f"Number of HETATM entries (ignored) = {self.num_hetatm}\n"
             str_ += f"Total charge = {charge:.3f} e\n"
             str_ += f"Dimensions = {mol_length[0]:.3f} Å x "
             str_ += f"{mol_length[1]:.3f} Å x {mol_length[2]:.3f} Å\n"
@@ -597,7 +549,11 @@ def main():
         ofrac=args.ofrac,
         redfac=args.redfac,
     )
-    print(psize)  # TODO: should we be logging this instead?
+
+    check_file(args.mol_path)
+    psize.run_psize(args.mol_path)
+
+    print(psize)
 
 
 if __name__ == "__main__":
