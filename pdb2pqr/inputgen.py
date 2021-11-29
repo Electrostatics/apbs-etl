@@ -15,8 +15,20 @@ from pathlib import Path
 from typing import List
 
 from pdb2pqr.process_cli import check_file
-from .psize import Psize, CFAC, FADD, SPACE, GMEMFAC, GMEMCEIL, OFRAC, REDFAC
-from .config import ApbsCalcType, FilePermission, LogLevels, TITLE_STR
+from .psize import Psize
+from .config import (
+    ApbsCalcType,
+    FilePermission,
+    LogLevels,
+    COARSE_GRID_FACTOR,
+    FINE_GRID_ADD,
+    GRID_SPACING,
+    BYTES_PER_GRID,
+    MEMORY_CEILING_MB,
+    PARTITION_OVERLAP,
+    FOCUS_FACTOR,
+    TITLE_STR,
+)
 from .elec import Elec
 
 _LOGGER = logging.getLogger(__name__)
@@ -208,7 +220,7 @@ def get_cli_args(args_str: str = None) -> Namespace:
     parser.add_argument(
         "--cfac",
         type=float,
-        default=CFAC,
+        default=COARSE_GRID_FACTOR,
         help=(
             "factor by which to expand molecular dimensions to "
             "get coarse grid dimensions."
@@ -217,7 +229,7 @@ def get_cli_args(args_str: str = None) -> Namespace:
     parser.add_argument(
         "--fadd",
         type=float,
-        default=FADD,
+        default=FINE_GRID_ADD,
         help=(
             "amount to add to molecular dimensions to get fine "
             "grid dimensions."
@@ -226,13 +238,13 @@ def get_cli_args(args_str: str = None) -> Namespace:
     parser.add_argument(
         "--space",
         type=float,
-        default=SPACE,
+        default=GRID_SPACING,
         help="desired fine mesh resolution",
     )
     parser.add_argument(
         "--gmemfac",
         type=int,
-        default=GMEMFAC,
+        default=BYTES_PER_GRID,
         help=(
             "number of bytes per grid point required for sequential "
             "MG calculation"
@@ -241,7 +253,7 @@ def get_cli_args(args_str: str = None) -> Namespace:
     parser.add_argument(
         "--gmemceil",
         type=int,
-        default=GMEMCEIL,
+        default=MEMORY_CEILING_MB,
         help=(
             "max MB allowed for sequential MG calculation; adjust "
             "this to force the script to perform faster calculations "
@@ -251,13 +263,13 @@ def get_cli_args(args_str: str = None) -> Namespace:
     parser.add_argument(
         "--ofrac",
         type=float,
-        default=OFRAC,
+        default=PARTITION_OVERLAP,
         help="overlap factor between mesh partitions (parallel)",
     )
     parser.add_argument(
         "--redfac",
         type=float,
-        default=REDFAC,
+        default=FOCUS_FACTOR,
         help=(
             "the maximum factor by which a domain dimension can "
             "be reduced during focusing"
