@@ -1,8 +1,6 @@
 #!/usr/bin/python
 """Get dimensions and other information from a PQR file.
 
-.. todo:: This code could be combined with :mod:`inputgen`.
-
 .. todo:: This code should be moved to the APBS code base.
 
 .. codeauthor:: Dave Sept
@@ -137,8 +135,6 @@ class Psize:
     def _set_length(self, maxlen, minlen) -> List[float]:
         """Compute molecular dimensions, adjusting for zero-length values.
 
-        .. todo:: Replace hard-coded values in this function.
-
         :param maxlen:  maximum dimensions from molecule
         :type maxlen:  [float, float, float]
         :param minlen:  minimum dimensions from molecule
@@ -220,8 +216,6 @@ class Psize:
         dimension and see if the number of grid points in that dimension will
         fit below the memory ceiling Reduce nsmall until an nsmall^3 domain
         will fit into memory.
-
-        .. todo:: Remove hard-coded values from this function.
 
         :param ngrid:  number of grid points
         :type ngrid:  [int, int, int]
