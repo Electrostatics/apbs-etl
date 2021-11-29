@@ -9,6 +9,61 @@ _LOGGER = logging.getLogger(__name__)
 
 #: How to format PDB2PQR title in output
 TITLE_STR = f"PDB2PQR v{VERSION}: biomolecular structure conversion software."
+#: The number of Ångströms added to the molecular dimensions to determine the
+#: find grid dimensions
+FINE_GRID_ADD = 20.0
+#: The fine grid dimensions are multiplied by this constant to calculate the
+#: coarse grid dimensions
+COARSE_GRID_FACTOR = 1.7
+#: Desired fine grid spacing (in Ångströms)
+GRID_SPACING = 0.50
+#: Approximate memory usage (in bytes) can be estimated by multiplying the
+#: number of grid points by this constant
+BYTES_PER_GRID = 200
+#: Maxmimum memory (in MB) to be used for a calculation
+MEMORY_CEILING_MB = 400
+#: The fractional overlap between grid partitions in a parallel focusing
+#: calculation
+PARTITION_OVERLAP = 0.1
+#: The maximum factor by which a domain can be "shrunk" during a focusing
+#: calculation
+FOCUS_FACTOR = 0.25
+#: The minimum length of a molecule (in Ångströms) in any direction
+MIN_MOL_LENGTH = 0.1
+#: The minimum number of points in a grid
+MIN_GRID_POINTS = 33
+#: Byte prefix conversion factor
+PREFIX_CONVERT = 1024.0
+#: The maximum accuracy of old PDB coordinates (no atom left behind when
+#: partitioning).
+MAX_PDB_ACCURACY = 0.001
+#: Number of bytes for stored representation of floating point values
+BYTES_STORED = 8.0 * 12.0
+#:  Minimum number of multigrid levels
+MIN_LEVELS = 4
+#:  Charge of a chloride ion
+CL_CHARGE = -1
+#:  Solvated chloride radius (in ångströms)
+CL_RADIUS = 1.815
+#:  Charge of a sodium ion
+NA_CHARGE = -1
+#:  Solvated sodium radius (in ångströms)
+NA_RADIUS = 1.875
+#:  Dielectric of a solute due to only molecular polarizability
+SOLUTE_DIELECTRIC = 2.0
+#:  One potential value for the dielectric constant of water under standard
+#:  conditions
+SOLVENT_DIELECTRIC = 78.54
+#:  Number of grid points per squared Ångström for dielectric surfaces
+SURFACE_DENSITY = 10.0
+#:  Solvent (water) molecule radius in Ångströms
+SOLVENT_RADIUS = 1.4
+#:  Window (in Ångströms) for spline-based dielectric surface definitions
+SPLINE_WINDOW = 0.3
+#:  Room temperature (in Kelvin)
+ROOM_TEMPERATURE = 298.15
+#:  Surface tension (in kJ mol^{-1} Å^{-2})
+SURFACE_TENSION = 0.105
 
 
 class BaseEnum(Enum):

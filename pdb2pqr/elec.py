@@ -1,10 +1,22 @@
 """This is used to create the ELEC section of an APBS input file."""
-
-
 from pathlib import Path
-
 from pdb2pqr.config import ApbsCalcType
 from pdb2pqr.psize import Psize
+from .config import (
+    MIN_LEVELS,
+    PARTITION_OVERLAP,
+    CL_CHARGE,
+    CL_RADIUS,
+    NA_CHARGE,
+    NA_RADIUS,
+    SOLUTE_DIELECTRIC,
+    SOLVENT_DIELECTRIC,
+    SURFACE_DENSITY,
+    SOLVENT_RADIUS,
+    SPLINE_WINDOW,
+    ROOM_TEMPERATURE,
+    SURFACE_TENSION,
+)
 
 
 class Elec:
@@ -56,28 +68,30 @@ class Elec:
         self.pdime = size.proc_grid
         # TODO: self.label can never be set. Should it be deleted?
         self.label = ""
-        self.nlev = 4
-        self.ofrac = 0.1
+        self.nlev = MIN_LEVELS
+        self.ofrac = PARTITION_OVERLAP
         self.async_ = 0
         self.asyncflag = asyncflag
         self.cgcent = "mol 1"
         self.fgcent = "mol 1"
         self.gcent = "mol 1"
         self.mol = 1
-        self.lpbe = 1
-        self.npbe = 0
+        self.lpbe = True
+        self.npbe = False
         self.bcfl = "sdh"
-        # TODO - where did these very arbitrary numbers come from?
-        self.ion = [[-1, 1.815], [1, 1.875]]  # Multiple ions possible
-        self.pdie = 2.0
-        self.sdie = 78.54
+        self.ion = [
+            [CL_CHARGE, CL_RADIUS],
+            [NA_CHARGE, NA_RADIUS],
+        ]  # Multiple ions possible
+        self.pdie = SOLUTE_DIELECTRIC
+        self.sdie = SOLVENT_DIELECTRIC
         self.srfm = "smol"
         self.chgm = "spl2"
-        self.sdens = 10.0
-        self.srad = 1.4
-        self.swin = 0.3
-        self.temp = 298.15
-        self.gamma = 0.105
+        self.sdens = SURFACE_DENSITY
+        self.srad = SOLVENT_RADIUS
+        self.swin = SPLINE_WINDOW
+        self.temp = ROOM_TEMPERATURE
+        self.gamma = SURFACE_TENSION
         self.calcenergy = "total"
         self.calcforce = "no"
         if potdx:

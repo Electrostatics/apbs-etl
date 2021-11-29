@@ -26,28 +26,25 @@ from numpy import ndarray
 from .chemistry.structures import Atom
 from .io import read_pqr
 from .process_cli import check_file
-from .config import TITLE_STR, AtomType, LogLevels
+from .config import (
+    AtomType,
+    BYTES_PER_GRID,
+    BYTES_STORED,
+    COARSE_GRID_FACTOR,
+    FINE_GRID_ADD,
+    FOCUS_FACTOR,
+    GRID_SPACING,
+    LogLevels,
+    MAX_PDB_ACCURACY,
+    MEMORY_CEILING_MB,
+    MIN_GRID_POINTS,
+    MIN_MOL_LENGTH,
+    PARTITION_OVERLAP,
+    PREFIX_CONVERT,
+    TITLE_STR,
+)
 
 
-#: The number of Angstroms added to the molecular dimensions to determine the
-#: find grid dimensions
-FADD = 20.0
-#: The fine grid dimensions are multiplied by this constant to calculate the
-#: coarse grid dimensions
-CFAC = 1.7
-#: Desired fine grid spacing (in Angstroms)
-SPACE = 0.50
-#: Approximate memory usage (in bytes) can be estimated by multiplying the
-#: number of grid points by this constant
-GMEMFAC = 200
-#: Maxmimum memory (in MB) to be used for a calculation
-GMEMCEIL = 400
-#: The fractional overlap between grid partitions in a parallel focusing
-#: calculation
-OFRAC = 0.1
-#: The maximum factor by which a domain can be "shrunk" during a focusing
-#: calculation
-REDFAC = 0.25
 _LOGGER = logging.getLogger(__name__)
 
 
@@ -56,13 +53,13 @@ class Psize:
 
     def __init__(
         self,
-        cfac=CFAC,
-        fadd=FADD,
-        space=SPACE,
-        gmemfac=GMEMFAC,
-        gmemceil=GMEMCEIL,
-        ofrac=OFRAC,
-        redfac=REDFAC,
+        cfac=COARSE_GRID_FACTOR,
+        fadd=FINE_GRID_ADD,
+        space=GRID_SPACING,
+        gmemfac=BYTES_PER_GRID,
+        gmemceil=MEMORY_CEILING_MB,
+        ofrac=PARTITION_OVERLAP,
+        redfac=FOCUS_FACTOR,
     ):
         """Initialize.
 
@@ -91,7 +88,7 @@ class Psize:
         self.minlen = [None, None, None]
         self.maxlen = [None, None, None]
         self.cfac = cfac
-        self.fadd = fadd
+        self.fadd = FINE_GRID_ADD
         self.space = space
         self.gmemfac = gmemfac
         self.gmemceil = gmemceil
@@ -216,8 +213,8 @@ class Psize:
         """
         for i in range(3):
             self.mol_length[i] = maxlen[i] - minlen[i]
-            if self.mol_length[i] < 0.1:
-                self.mol_length[i] = 0.1
+            if self.mol_length[i] < MIN_MOL_LENGTH:
+                self.mol_length[i] = MIN_MOL_LENGTH
         return self.mol_length
 
     def _set_coarse_grid_dims(self, mol_length):
@@ -275,9 +272,11 @@ class Psize:
         temp_num = [0, 0, 0]
         for i in range(3):
             temp_num[i] = int(fine_length[i] / self.space + 0.5)
-            self.ngrid[i] = 32 * (int((temp_num[i] - 1) / 32.0 + 0.5)) + 1
-            if self.ngrid[i] < 33:
-                self.ngrid[i] = 33
+            self.ngrid[i] = (MIN_GRID_POINTS - 1) * (
+                int((temp_num[i] - 1) / (MIN_GRID_POINTS - 1.0) + 0.5)
+            ) + 1
+            if self.ngrid[i] < MIN_GRID_POINTS:
+                self.ngrid[i] = MIN_GRID_POINTS
         return self.ngrid
 
     def _set_smallest(self, ngrid):
@@ -299,11 +298,20 @@ class Psize:
         """
         nsmall = [ngrid[i] for i in range(3)]
         while 1:
-            nsmem = 200.0 * nsmall[0] * nsmall[1] * nsmall[2] / 1024 / 1024
+            nsmem = (
+                BYTES_PER_GRID
+                * nsmall[0]
+                * nsmall[1]
+                * nsmall[2]
+                / PREFIX_CONVERT
+                / PREFIX_CONVERT
+            )
             if nsmem < self.gmemceil:
                 break
             i = nsmall.index(max(nsmall))
-            nsmall[i] = 32 * ((nsmall[i] - 1) / 32 - 1) + 1
+            nsmall[i] = (MIN_GRID_POINTS - 1) * (
+                (nsmall[i] - 1) / (MIN_GRID_POINTS - 1) - 1
+            ) + 1
             if nsmall[i] <= 0:
                 _LOGGER.error("You picked a memory ceiling that is too small")
                 raise ValueError(nsmall[i])
@@ -409,8 +417,22 @@ class Psize:
             nproc = self.proc_grid
             nfocus = self.nfocus
             # Compute memory requirements
-            nsmem = 200.0 * nsmall[0] * nsmall[1] * nsmall[2] / 1024 / 1024
-            gmem = 200.0 * ngrid[0] * ngrid[1] * ngrid[2] / 1024 / 1024
+            nsmem = (
+                BYTES_PER_GRID
+                * nsmall[0]
+                * nsmall[1]
+                * nsmall[2]
+                / PREFIX_CONVERT
+                / PREFIX_CONVERT
+            )
+            gmem = (
+                BYTES_PER_GRID
+                * ngrid[0]
+                * ngrid[1]
+                * ngrid[2]
+                / PREFIX_CONVERT
+                / PREFIX_CONVERT
+            )
             # Print the calculated entries
             str_ += "######## MOLECULE INFO ########\n"
             str_ += f"Number of ATOM entries = {self.gotatom}\n"
@@ -446,13 +468,13 @@ class Psize:
                 str_ += f"Grid pts. on each proc. = {nsmall[0]:d} x "
                 str_ += f"{nsmall[1]:d} x {nsmall[2]:d}\n"
                 xglob = nproc[0] * round(
-                    nsmall[0] / (1 + 2 * self.ofrac - 0.001)
+                    nsmall[0] / (1 + 2 * self.ofrac - MAX_PDB_ACCURACY)
                 )
                 yglob = nproc[1] * round(
-                    nsmall[1] / (1 + 2 * self.ofrac - 0.001)
+                    nsmall[1] / (1 + 2 * self.ofrac - MAX_PDB_ACCURACY)
                 )
                 zglob = nproc[2] * round(
-                    nsmall[2] / (1 + 2 * self.ofrac - 0.001)
+                    nsmall[2] / (1 + 2 * self.ofrac - MAX_PDB_ACCURACY)
                 )
                 if nproc[0] == 1:
                     xglob = nsmall[0]
@@ -479,10 +501,16 @@ class Psize:
             str_ += "\n"
             str_ += "######## ESTIMATED REQUIREMENTS ########\n"
             str_ += "Memory per processor = "
-            str_ += f"{200.0 * ntot / 1024 / 1024:.3f} MB\n"
+            str_ += f"{BYTES_PER_GRID * ntot / PREFIX_CONVERT / PREFIX_CONVERT:.3f} MB\n"
             str_ += "Grid storage requirements (ASCII) = "
             grid_storage_req = (
-                8.0 * 12 * nproc[0] * nproc[1] * nproc[2] * ntot / 1024 / 1024
+                BYTES_STORED
+                * nproc[0]
+                * nproc[1]
+                * nproc[2]
+                * ntot
+                / PREFIX_CONVERT
+                / PREFIX_CONVERT
             )
             str_ += f"{grid_storage_req:.3f} MB\n"
             str_ += "\n"
@@ -516,7 +544,7 @@ def get_cli_args(args_str: str = None) -> Namespace:
 
     parser.add_argument(
         "--cfac",
-        default=CFAC,
+        default=COARSE_GRID_FACTOR,
         type=float,
         help=(
             "Factor by which to expand molecular dimensions to "
@@ -525,19 +553,19 @@ def get_cli_args(args_str: str = None) -> Namespace:
     )
     parser.add_argument(
         "--fadd",
-        default=FADD,
+        default=FINE_GRID_ADD,
         type=float,
         help="Amount to add to mol dims to get fine grid dims",
     )
     parser.add_argument(
         "--space",
-        default=SPACE,
+        default=GRID_SPACING,
         type=float,
         help="Desired fine mesh resolution",
     )
     parser.add_argument(
         "--gmemfac",
-        default=GMEMFAC,
+        default=BYTES_PER_GRID,
         type=int,
         help=(
             "Number of bytes per grid point required for "
@@ -546,7 +574,7 @@ def get_cli_args(args_str: str = None) -> Namespace:
     )
     parser.add_argument(
         "--gmemceil",
-        default=GMEMCEIL,
+        default=MEMORY_CEILING_MB,
         type=int,
         help=(
             "Max MB allowed for sequential MG calculation. "
@@ -556,13 +584,13 @@ def get_cli_args(args_str: str = None) -> Namespace:
     )
     parser.add_argument(
         "--ofrac",
-        default=OFRAC,
+        default=PARTITION_OVERLAP,
         type=float,
         help="Overlap factor between mesh partitions",
     )
     parser.add_argument(
         "--redfac",
-        default=REDFAC,
+        default=FOCUS_FACTOR,
         type=float,
         help=(
             "The maximum factor by which a domain dimension "
