@@ -106,17 +106,8 @@ class Psize:
         self.nsmall = [0, 0, 0]
         self.nfocus = 0
 
-    def _parse_input(self, filename):
-        """Parse input structure file in PDB or PQR format.
-
-        :param filename:  string with path to PDB- or PQR-format file.
-        :type filename:  str
-        """
-        with open(filename, "rt", encoding="utf-8") as file_:
-            self._parse_lines(file_.readlines())
-
-    def _parse_input_for_dimensions(self, filename: str):
-        """Parse PQR file for minimum/maximum grid dimensions
+    def _parse_input_for_grid_lengths(self, filename: str):
+        """Parse PQR file for minimum/maximum grid lengths
 
         :param filename: path the PQR file to read
         :type filename: str
@@ -142,62 +133,6 @@ class Psize:
 
             self.minlen = ndarray.min(center - rad, 1)
             self.maxlen = ndarray.max(center + rad, 1)
-
-    def _parse_lines(self, lines):
-        """Parse the PQR/PDB lines.
-
-        .. todo::
-           This is messed up. Why are we parsing the PQR manually here when
-           we already have other routines to do that?  This function should
-           be replaced by a call to existing routines.
-
-        :param lines:  PDB/PQR lines to parse
-        :type lines:  [str]
-        """
-        for line in lines:
-            if line.find("ATOM") == 0:
-                subline = line[30:].replace("-", " -")
-                words = subline.split()
-                if len(words) < 5:
-                    continue
-                self.gotatom += 1
-                self.charge = self.charge + float(words[3])
-                rad = float(words[4])
-                center = [float(word) for word in words[0:3]]
-                for i in range(3):
-                    if (
-                        self.minlen[i] is None
-                        or center[i] - rad < self.minlen[i]
-                    ):
-                        self.minlen[i] = center[i] - rad
-                    if (
-                        self.maxlen[i] is None
-                        or center[i] + rad > self.maxlen[i]
-                    ):
-                        self.maxlen[i] = center[i] + rad
-            elif line.find("HETATM") == 0:
-                self.gothet = self.gothet + 1
-                # Special handling for no ATOM entries in the pqr file, only
-                # HETATM entries
-                if self.gotatom == 0:
-                    subline = line[30:].replace("-", " -")
-                    words = subline.split()
-                    if len(words) < 5:
-                        continue
-                    self.charge = self.charge + float(words[3])
-                    rad = float(words[4])
-                    center = [float(word) for word in words[0:3]]
-                    for i in range(3):
-                        if (
-                            self.minlen[i] is None
-                            or center[i] - rad < self.minlen[i]
-                        ):
-                            self.minlen[i] = center[i] - rad
-                        if (
-                            self.maxlen[i] is None
-                            or center[i] + rad > self.maxlen[i]
-                        ):
-                            self.maxlen[i] = center[i] + rad
 
     def _set_length(self, maxlen, minlen):
         """Compute molecular dimensions, adjusting for zero-length values.
@@ -393,8 +328,7 @@ class Psize:
         :param filename:  path of PQR file
         :type filename:  str
         """
-        # self._parse_input(filename)
-        self._parse_input_for_dimensions(filename)
+        self._parse_input_for_grid_lengths(filename)
         self._set_all()
 
     def __str__(self):
