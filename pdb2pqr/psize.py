@@ -88,7 +88,7 @@ class Psize:
         self.minlen = [None, None, None]
         self.maxlen = [None, None, None]
         self.cfac = cfac
-        self.fadd = FINE_GRID_ADD
+        self.fadd = fadd
         self.space = space
         self.gmemfac = gmemfac
         self.gmemceil = gmemceil
