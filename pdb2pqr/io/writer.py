@@ -10,6 +10,10 @@ class Writer(ABC):
     """Abstract base class for writer."""
 
     @abstractmethod
+    def __init_(self):
+        """Initialize Writer object"""
+
+    @abstractmethod
     def write(self, file_path: Path, records: List[BaseRecord]):
         """Write an output using data from list of BaseRecord objects
 
