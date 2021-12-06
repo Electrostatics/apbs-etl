@@ -505,98 +505,6 @@ class SIGATM(BaseRecord):
 
 
 @register_line_parser
-class HETATM(BaseRecord):
-    """HETATM class
-
-    The HETATM records present the atomic coordinate records for atoms
-    within "non-standard" groups. These records are used for water
-    molecules and atoms presented in HET groups.
-    """
-
-    def __init__(
-        self, line, sybyl_type="A.aaa", l_bonds=[], l_bonded_atoms=[]
-    ):
-        """Initialize by parsing line
-
-        +---------+--------+-------------+-----------------------------------+
-        | COLUMNS | TYPE   | FIELD       | DEFINITION                        |
-        +=========+========+=============+===================================+
-        | 7-11    | int    | serial      | Atom serial number.               |
-        +---------+--------+-------------+-----------------------------------+
-        | 13-16   | string | name        | Atom name.                        |
-        +---------+--------+-------------+-----------------------------------+
-        | 17      | string | alt_loc     | Alternate location indicator.     |
-        +---------+--------+-------------+-----------------------------------+
-        | 18-20   | string | res_name    | Residue name.                     |
-        +---------+--------+-------------+-----------------------------------+
-        | 22      | string | chain_id    | Chain identifier.                 |
-        +---------+--------+-------------+-----------------------------------+
-        | 23-26   | int    | res_seq     | Residue sequence number.          |
-        +---------+--------+-------------+-----------------------------------+
-        | 27      | string | ins_code    | Code for insertion of residues.   |
-        +---------+--------+-------------+-----------------------------------+
-        | 31-38   | float  | x           | Orthogonal coordinates for X in   |
-        |         |        |             | Angstroms.                        |
-        +---------+--------+-------------+-----------------------------------+
-        | 39-46   | float  | y           | Orthogonal coordinates for Y in   |
-        |         |        |             | Angstroms.                        |
-        +---------+--------+-------------+-----------------------------------+
-        | 47-54   | float  | z           | Orthogonal coordinates for Z in   |
-        |         |        |             | Angstroms.                        |
-        +---------+--------+-------------+-----------------------------------+
-        | 55-60   | float  | occupancy   | Occupancy.                        |
-        +---------+--------+-------------+-----------------------------------+
-        | 61-66   | float  | temp_factor | Temperature factor.               |
-        +---------+--------+-------------+-----------------------------------+
-        | 73-76   | string | seg_id      | Segment identifier, left-         |
-        |         |        |             | justified.                        |
-        +---------+--------+-------------+-----------------------------------+
-        | 77-78   | string | element     | Element symbol, right-justified.  |
-        +---------+--------+-------------+-----------------------------------+
-        | 79-80   | string | charge      | Charge on the atom.               |
-        +---------+--------+-------------+-----------------------------------+
-
-        :param line:  line with PDB class
-        :type line:  str
-        """
-        super().__init__(line)
-        self.serial = int(line[6:11].strip())
-        self.name = line[12:16].strip()
-        self.alt_loc = line[16].strip()
-        try:
-            self.res_name = line[17:20].strip()
-            self.chain_id = line[21].strip()
-            self.res_seq = int(line[22:26].strip())
-            self.ins_code = line[26].strip()
-        except IndexError:
-            raise ValueError("Residue name must be less than 4 characters!")
-        self.x = float(line[30:38].strip())
-        self.y = float(line[38:46].strip())
-        self.z = float(line[46:54].strip())
-
-        self.sybyl_type = sybyl_type
-        self.l_bonded_atoms = l_bonded_atoms
-        self.l_bonds = l_bonds
-        self.radius = 1.0
-        self.is_c_term = 0
-        self.is_n_term = 0
-        self.mol2charge = None
-
-        try:
-            self.occupancy = float(line[54:60].strip())
-            self.temp_factor = float(line[60:66].strip())
-            self.seg_id = line[72:76].strip()
-            self.element = line[76:78].strip()
-            self.charge = line[78:80].strip()
-        except (ValueError, IndexError):
-            self.occupancy = 0.00
-            self.temp_factor = 0.00
-            self.seg_id = ""
-            self.element = ""
-            self.charge = ""
-
-
-@register_line_parser
 class ATOM(BaseRecord):
     """ATOM class
 
@@ -655,13 +563,17 @@ class ATOM(BaseRecord):
         self.serial = int(line[6:11].strip())
         self.name = line[12:16].strip()
         self.alt_loc = line[16].strip()
-        self.res_name = line[17:20].strip()
-        self.chain_id = line[21].strip()
-        self.res_seq = int(line[22:26].strip())
-        self.ins_code = line[26].strip()
+        try:
+            self.res_name = line[17:20].strip()
+            self.chain_id = line[21].strip()
+            self.res_seq = int(line[22:26].strip())
+            self.ins_code = line[26].strip()
+        except IndexError:
+            raise ValueError("Residue name must be less than 4 characters!")
         self.x = float(line[30:38].strip())
         self.y = float(line[38:46].strip())
         self.z = float(line[46:54].strip())
+
         try:
             self.occupancy = float(line[54:60].strip())
             self.temp_factor = float(line[60:66].strip())
@@ -674,6 +586,77 @@ class ATOM(BaseRecord):
             self.seg_id = ""
             self.element = ""
             self.charge = ""
+
+
+@register_line_parser
+class HETATM(ATOM):
+    """HETATM class
+
+    The HETATM records present the atomic coordinate records for atoms
+    within "non-standard" groups. These records are used for water
+    molecules and atoms presented in HET groups.
+    """
+
+    def __init__(self, line):
+        """Initialize by parsing line
+
+        +---------+--------+-------------+-----------------------------------+
+        | COLUMNS | TYPE   | FIELD       | DEFINITION                        |
+        +=========+========+=============+===================================+
+        | 7-11    | int    | serial      | Atom serial number.               |
+        +---------+--------+-------------+-----------------------------------+
+        | 13-16   | string | name        | Atom name.                        |
+        +---------+--------+-------------+-----------------------------------+
+        | 17      | string | alt_loc     | Alternate location indicator.     |
+        +---------+--------+-------------+-----------------------------------+
+        | 18-20   | string | res_name    | Residue name.                     |
+        +---------+--------+-------------+-----------------------------------+
+        | 22      | string | chain_id    | Chain identifier.                 |
+        +---------+--------+-------------+-----------------------------------+
+        | 23-26   | int    | res_seq     | Residue sequence number.          |
+        +---------+--------+-------------+-----------------------------------+
+        | 27      | string | ins_code    | Code for insertion of residues.   |
+        +---------+--------+-------------+-----------------------------------+
+        | 31-38   | float  | x           | Orthogonal coordinates for X in   |
+        |         |        |             | Angstroms.                        |
+        +---------+--------+-------------+-----------------------------------+
+        | 39-46   | float  | y           | Orthogonal coordinates for Y in   |
+        |         |        |             | Angstroms.                        |
+        +---------+--------+-------------+-----------------------------------+
+        | 47-54   | float  | z           | Orthogonal coordinates for Z in   |
+        |         |        |             | Angstroms.                        |
+        +---------+--------+-------------+-----------------------------------+
+        | 55-60   | float  | occupancy   | Occupancy.                        |
+        +---------+--------+-------------+-----------------------------------+
+        | 61-66   | float  | temp_factor | Temperature factor.               |
+        +---------+--------+-------------+-----------------------------------+
+        | 73-76   | string | seg_id      | Segment identifier, left-         |
+        |         |        |             | justified.                        |
+        +---------+--------+-------------+-----------------------------------+
+        | 77-78   | string | element     | Element symbol, right-justified.  |
+        +---------+--------+-------------+-----------------------------------+
+        | 79-80   | string | charge      | Charge on the atom.               |
+        +---------+--------+-------------+-----------------------------------+
+
+        :param line:  line with PDB class
+        :type line:  str
+        """
+        super().__init__(line)
+        self.__sybyl_type = "A.aaa"
+        # self.__l_bonded_atoms = []
+        # self.__l_bonds = []
+        self.radius = 1.0
+        self.is_c_term = 0
+        self.is_n_term = 0
+        self.mol2charge = None
+
+    @property
+    def sybyl_type(self):
+        return self.__sybyl_type
+
+    @sybyl_type.setter
+    def sybyl_type(self, value):
+        self.__sybyl_type = value
 
 
 @register_line_parser
