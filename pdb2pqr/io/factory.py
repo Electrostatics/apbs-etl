@@ -14,6 +14,8 @@ def input_factory(reader_type: str = "pdb") -> Reader:
     :rtype:  Reader
     """
     reader_type = reader_type.replace(".", "", 1).lower()
+
+    # KeyError will kill process here
     readers = {
         "pdb": PDBReader,
         "cif": CIFReader,

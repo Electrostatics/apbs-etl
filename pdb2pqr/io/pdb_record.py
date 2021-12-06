@@ -948,7 +948,7 @@ class SITE(BaseRecord):
     important sites in the macromolecule.
     """
 
-    def __init__(self, line):
+    def __init__(self, line: str):
         """Initialize by parsing the line
 
         +---------+--------+-----------+-------------------------------------+
@@ -1012,28 +1012,47 @@ class SITE(BaseRecord):
         :type line:  str
         """
         super().__init__(line)
+        line = line.rstrip()
         self.seq_num = int(line[7:10].strip())
         self.site_id = line[11:14].strip()
         self.num_res = int(line[15:17].strip())
+
         self.res_name1 = line[18:21].strip()
         self.chain_id1 = line[22].strip()
         self.seq1 = int(line[23:27].strip())
         self.ins_code1 = line[27].strip()
-        self.res_name2 = line[29:32].strip()
-        self.chain_id2 = line[33].strip()
-        self.seq2 = int(line[34:38].strip())
-        self.ins_code2 = line[38].strip()
-        self.res_name3 = line[40:43].strip()
-        self.chain_id3 = line[44].strip()
-        self.seq3 = int(line[45:49].strip())
-        self.ins_code3 = line[49].strip()
-        self.res_name4 = line[51:54].strip()
-        self.chain_id4 = line[55].strip()
-        self.seq4 = int(line[56:60].strip())
-        try:
-            self.ins_code4 = line[60].strip()
-        except IndexError:
-            self.ins_code4 = None
+        if self.num_res == 6:
+            print()
+            print(f"LINE: {line}")
+
+        if len(line) > 34:
+            self.res_name2 = line[29:32].strip()
+            self.chain_id2 = line[33].strip()
+            self.seq2 = int(line[34:38].strip())
+            try:
+                self.ins_code2 = line[38].strip()
+            except IndexError:
+                self.ins_code2 = None
+
+        if len(line) > 45:
+            self.res_name3 = line[40:43].strip()
+            self.chain_id3 = line[44].strip()
+            self.seq3 = int(line[45:49].strip())
+            try:
+                self.ins_code3 = line[49].strip()
+            except IndexError:
+                self.ins_code3 = None
+
+        if len(line) > 56:
+            self.res_name4 = line[51:54].strip()
+            self.chain_id4 = line[55].strip()
+            self.seq4 = int(line[56:60].strip())
+            try:
+                self.ins_code4 = line[60].strip()
+            except IndexError:
+                self.ins_code4 = None
+        if self.num_res == 6:
+            print(f"SELF: {self}")
 
 
 @register_line_parser
@@ -2562,6 +2581,7 @@ def read_pdb(file_) -> Tuple[List[BaseRecord], List[str]]:
     """
     pdblist = []  # Array of parsed lines (as objects)
     errlist = []  # List of records we can't parse
+    parse_error_message: str = "Unable to parse line"
 
     # We can come up with nothing if can't get our file off the web.
     if file_ is None:
@@ -2577,16 +2597,20 @@ def read_pdb(file_) -> Tuple[List[BaseRecord], List[str]]:
         record = ""
         try:
             record = line[0:6].strip()
-            if record not in errlist:
-                klass = LINE_PARSERS[record]
-                obj = klass(line)
-                pdblist.append(obj)
+            if record in LINE_PARSERS:
+                if record not in errlist:
+                    klass = LINE_PARSERS[record]
+                    obj = klass(line)
+                    pdblist.append(obj)
+            else:
+                _LOGGER.warning("Unsupported record type: %s", record)
+                _LOGGER.warning("<%s>", line)
         except (KeyError, ValueError) as details:
             if record in AtomType.values():
                 raise details
             errlist.append(record)
-            _LOGGER.error("Error parsing line: %s", details)
-            _LOGGER.error("<%s>", line.strip())
+            _LOGGER.error("%s: %s,", parse_error_message, details)
+            _LOGGER.error("<%s>", line)
             _LOGGER.error(
                 "Truncating remaining errors for record type: %s", record
             )
@@ -2596,14 +2620,12 @@ def read_pdb(file_) -> Tuple[List[BaseRecord], List[str]]:
                     obj = read_atom(line)
                     pdblist.append(obj)
                 except IndexError as details:
-                    _LOGGER.error("Error parsing line: %s,", details)
-                    _LOGGER.error("<%s>", line.strip())
-            elif record in ["SITE", "TURN"]:
-                pass
-            elif record in ["SSBOND", "LINK"]:
-                _LOGGER.error("Warning -- ignoring record:")
-                _LOGGER.error("<%s>", line.strip())
+                    _LOGGER.error("%s: %s,", parse_error_message, details)
+                    _LOGGER.error("<%s>", line)
+            elif record in ["SSBOND", "LINK", "TURN"]:
+                _LOGGER.warning("Ignoring record:")
+                _LOGGER.warning("<%s>", line)
             else:
-                _LOGGER.error("Error parsing line: %s,", details)
-                _LOGGER.error("<%s>", line.strip())
+                _LOGGER.error("%s: %s,", parse_error_message, details)
+                _LOGGER.error("<%s>", line)
     return pdblist, errlist

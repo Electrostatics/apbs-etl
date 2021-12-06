@@ -5,7 +5,7 @@ TODO:   No tests for inputgen.py in old repo. Current coverage is
 
 from pathlib import Path
 import pytest
-from .common import INPUT_DIR, get_ref_output
+from .common import INPUT_DIR, get_ref_output, REF_DIR
 from pdb2pqr.config import FilePermission
 from pdb2pqr.inputgen import Input, get_cli_args, split_input
 from pdb2pqr.process_cli import check_file
@@ -19,7 +19,7 @@ from pdb2pqr.psize import Psize
             f"{INPUT_DIR}/dx2cube.pqr", "inputgen_1.in", "mg-auto", id="1"
         ),
         pytest.param(
-            f"{INPUT_DIR}/1AFS_ff=AMBER.pqr --asynch",
+            f"{REF_DIR}/1AFS_ff=AMBER.pqr --asynch",
             "inputgen_2-para.in",
             "mg-para",
             id="2",
