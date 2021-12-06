@@ -17,7 +17,8 @@ def postprocessor(path, key, value):
 
 
 def read_xml_write_json(filestem: str, suffix: str):
-    # open the input xml file and read data in form of python dictionary using xmltodict module
+    # open the input xml file and read data in form of python
+    #   dictionary using xmltodict module
     with open(f"{filestem}.{suffix}") as xml_file:
         data_dict = parse(xml_file.read(), postprocessor=postprocessor)
 

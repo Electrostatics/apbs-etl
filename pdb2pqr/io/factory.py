@@ -2,6 +2,9 @@
 from .reader_cif import CIFReader
 from .reader_pdb import PDBReader
 from .reader import Reader
+from .writer_pdb import PDBWriter
+from .writer_pqr import PQRWriter
+from .writer import Writer
 
 
 def input_factory(reader_type: str = "pdb") -> Reader:
@@ -14,6 +17,8 @@ def input_factory(reader_type: str = "pdb") -> Reader:
     :rtype:  Reader
     """
     reader_type = reader_type.replace(".", "", 1).lower()
+
+    # KeyError will kill process here
     readers = {
         "pdb": PDBReader,
         "cif": CIFReader,
@@ -22,7 +27,7 @@ def input_factory(reader_type: str = "pdb") -> Reader:
     return readers[reader_type]()
 
 
-def output_factory(writer_format="pqr"):
+def output_factory(writer_format: str = "pqr") -> Writer:
     """Provides the writer based on the output format.
 
     :param writer_format: Format indicating with writer to use
@@ -31,9 +36,13 @@ def output_factory(writer_format="pqr"):
     :return:  Writer object for a given output factory
     :rtype:  Writer
     """
+    writer_type = writer_format.replace(".", "", 1).lower()
+
+    # KeyError will kill process here
     writers = {
-        # "pdb": PDBWriter,
+        "pdb": PDBWriter,
+        "pqr": PQRWriter,
         # "cif": CIFWriter,
     }
 
-    return writers[writer_format]()
+    return writers[writer_type]()

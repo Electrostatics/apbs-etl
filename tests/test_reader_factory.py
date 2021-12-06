@@ -13,10 +13,10 @@ from .common import INPUT_DIR
     [
         pytest.param("1FAS.cif", NotImplementedError, None, id="1FAS.cif"),
         pytest.param("3U7T.cif", NotImplementedError, None, id="3U7T.cif"),
-        pytest.param("1AFS.pdb", None, 5949, id="1AFS.pdb"),
+        pytest.param("1AFS.pdb", None, 5951, id="1AFS.pdb"),
     ],
 )
-def test_data_file(input_file, expected_error, expected_record_count):
+def test_data_file_read(input_file, expected_error, expected_record_count):
     """Test data file input."""
 
     input_path = INPUT_DIR / Path(input_file)
