@@ -8,7 +8,7 @@ from .pdb_record import BaseRecord
 from .writer import Writer
 
 
-class PQRWriter(Writer):
+class PDBWriter(Writer):
     """Factory class to handle reading PDB input files."""
 
     def __init__(self):
@@ -17,17 +17,11 @@ class PQRWriter(Writer):
     def write(self, file_path: Path, records: List[BaseRecord]):
         """Read a PDB file into lists of PDB record and error objects
 
-        :param file_path:  path to PQR file
+        :param file_path:  path to PDB file
         :type file_path:  str
         :param records:  List of PDB records
         :type records:  List[BaseRecord]
         """
-
-        raise NotImplementedError
-
         with open(file_path, "w", encoding="utf-8") as fin:
             for record in records:
-                # if record in AtomType.values():
                 fin.write(f"{record}\n")
-
-        # TODO: Need to figure out how to handle this later due to Atom class

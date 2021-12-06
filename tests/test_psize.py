@@ -12,7 +12,7 @@ from .common import INPUT_DIR, get_ref_output
     "arguments, output_file",
     [
         pytest.param(f"{INPUT_DIR}/dx2cube.pqr", "psize_1.out", id="1"),
-        # pytest.param(f"{INPUT_DIR}/1AFS_ff=AMBER.pqr", "psize_2.out", id="2"),
+        # pytest.param(f"{INPUT_DIR}/1AFS_ff=AMBER.pqr", "psize_2.out", id="2")
     ],
 )
 def test_psize(arguments: str, output_file: str):

@@ -24,7 +24,6 @@ from pdb2pqr.psize import Psize
             "mg-para",
             id="2",
         ),
-        # pytest.param(f"{DATA_DIR}/1AFS_ff=AMBER.pqr", "intputgen_2.out", id="2"),
     ],
 )
 def test_inputgen(tmp_path, arguments: str, output_file: str, method):
