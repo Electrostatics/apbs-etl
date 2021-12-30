@@ -249,7 +249,7 @@ def get_cli_args(args_str: str = None) -> Namespace:
             return parser.parse_args(args_str.split())
         args = parser.parse_args()
     except ArgumentError as err:
-        _LOGGER.error("ERROR in cli parsing: %s", err)
+        _LOGGER.error("Cannot parse CLI: %s", err)
         sys.exit(1)
     return args
 
