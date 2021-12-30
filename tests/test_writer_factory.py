@@ -48,10 +48,10 @@ def test_data_file_write(
         pdblist, errlist = reader.read(input_path)
         writer.write(output_path, pdblist)
 
-        _LOGGER.info(f"Reading output file: {output_path}...")
+        _LOGGER.info("Reading output file: %s...", output_path)
         output_lines = [line.strip() for line in open(str(output_path), "rt")]
 
-        _LOGGER.info(f"Reading reference file: {reference_path}...")
+        _LOGGER.info("Reading reference file: %s...", reference_path)
         reference_lines = [
             line.strip() for line in open(str(reference_path), "rt")
         ]
@@ -65,7 +65,7 @@ def test_data_file_write(
 
         if differences:
             for diff in differences:
-                _LOGGER.error(f"Found difference:  {diff}")
+                _LOGGER.error("Found difference:  %s", diff)
             # raise ValueError()
         assert not differences
 
