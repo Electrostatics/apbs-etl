@@ -1,0 +1,20 @@
+# This workflow will create a new issue whenever a PDB2PQR/APBS release is made
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
+
+name: Create Issue on Release (PLAYGROUND)
+on: workflow_dispatch
+  # release:
+  #   types:
+  #     - released
+
+jobs:
+  Create-Release-Issue:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+
+      - name: Create issue using GitHub CLI
+        run: |
+          # gh
+          echo "hello world"
