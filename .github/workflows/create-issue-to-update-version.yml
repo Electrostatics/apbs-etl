@@ -23,7 +23,7 @@ jobs:
       - name: Create issue using GitHub CLI
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          TARGET_REPOSITORY: electrostatics/apbs-aws
+          TARGET_REPOSITORY: electrostatics/apbs-etl
         run: |
           echo "Creating new issue in $TARGET_REPOSITORY"
           gh issue create \
